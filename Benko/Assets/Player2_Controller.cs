@@ -23,8 +23,19 @@ public class Player2_Controller : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        float jump = 0;
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            jump = 10;
+        }
+
+        Vector3 move = new Vector3(Input.GetAxis("HorizontalPlayer2"), playerVelocity.y + jump, Input.GetAxis("VerticalPlayer2"));
+
         controller.Move(move * Time.deltaTime * playerSpeed);
+
+        
 
         if (move != Vector3.zero)
         {
