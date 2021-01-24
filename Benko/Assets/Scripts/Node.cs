@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node
+public class Node : MonoBehaviour
 {
-
+    public int[] iii = new int[5];
     public float x;
     public float z;
     public bool selected = false;
-    public Node[] adjacents = new Node[4];
+    public GameObject[] adjacents;
 
     public GameObject nodeObject;
-    public GameObject gameObject;
-    AStar aStar;
+    public AStar aStar;
+    public bool isObstacle = false;
 
     public Node(AStar aStar, GameObject nodeObject, float x, float z)
 
@@ -22,8 +22,9 @@ public class Node
         this.nodeObject = nodeObject;
         this.aStar = aStar;
 
-        gameObject = MonoBehaviour.Instantiate(nodeObject, new Vector3(x,0,z), Quaternion.identity);
         gameObject.GetComponent<ObjectVariables>().node = this;
+        adjacents = new GameObject[4];
+        adjacents[1] = gameObject;
     }
 
     void Start()
@@ -34,10 +35,13 @@ public class Node
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.GetComponent<Renderer>().material.color = isObstacle ? aStar.colorSelected : aStar.colorOriginal;
     }
     void OnMouseDown() {
-        selected = !selected;
+
+        // print("This: "+"\n");
+        isObstacle = !isObstacle;
+        print(adjacents.Length);
     }
     public GameObject getGameObject() {
         return gameObject;

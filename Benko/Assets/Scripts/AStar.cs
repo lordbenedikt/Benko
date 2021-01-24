@@ -15,60 +15,65 @@ public class AStar : MonoBehaviour
     public Color colorOriginal;
     public Color colorSelected;
 
-    Node[] nodes;
+    GameObject[] nodes;
     Ray ray;
     RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
     {
-        nodes = new Node[width * height];
+        nodes = new GameObject[width * height];
         for (int i = 0; i < nodes.Length; i++)
         {
-            nodes[i] = new Node(this, nodeObject, minX + (i % width + ((width % 2 == 0) ? 0.5f : 0f)) * s, minZ + (i / width) * s);
+            Vector3 position = new Vector3(minX + (i % width + ((width % 2 == 0) ? 0.5f : 0f)) * s, 0, minZ + (i / width) * s);
+            nodes[i] = Instantiate(nodeObject, position, Quaternion.identity);
+            Node node = nodes[i].GetComponent<Node>();
+            node.transform.parent = gameObject.transform; 
+            node.aStar = this;
+            node.nodeObject = nodeObject;
         }
         for (int i = 0; i < nodes.Length; i++)
         {
+            Node node = nodes[i].GetComponent<Node>();
 
-            if (i / width == 0)
-            {
-                nodes[i].selected = true;
-                nodes[i].adjacents[0] = null;
-            }
-            else
-            {
-                nodes[i].adjacents[0] = nodes[i - width];
-            }
-            if (i % width == 0)
-            {
-                nodes[i].selected = true;
-                nodes[i].adjacents[1] = null;
-            }
-            else
-            {
-                nodes[i].adjacents[1] = nodes[i - 1];
-            }
-            if (i / width == height - 1
-            )
-            {
-                nodes[i].selected = true;
-                nodes[i].adjacents[2] = null;
-            }
-            else
-            {
-                nodes[i].adjacents[2] = nodes[i + width];
-            }
-            if (i % width == width - 1)
-            {
-                nodes[i].selected = true;
-                nodes[i].adjacents[3] = null;
-            }
-            else
-            {
-                nodes[i].adjacents[3] = nodes[i + 1];
-            }
+            // if (i / width == 0)
+            // {
+            //     node.selected = true;
+            //     node.adjacents[0] = null;
+            // }
+            // else
+            // {
+            //     // node.adjacents[0] = nodes[i - width];
+            // }
+            // if (i % width == 0)
+            // {
+            //     node.selected = true;
+            //     node.adjacents[1] = nodes[1];
+            // }
+            // else
+            // {
+            //     node.adjacents[1] = nodes[1];
+            // }
+            // if (i / width == height - 1)
+            // {
+            //     node.selected = true;
+            //     node.adjacents[2] = null;
+            // }
+            // else
+            // {
+            //     node.adjacents[2] = nodes[i + width];
+            // }
+            // if ((i+1) % width == 0)
+            // {
+            //     node.selected = true;
+            //     node.adjacents[3] = null;
+            // }
+            // else
+            // {
+            //     node.adjacents[3] = nodes[i + 1];
+            // }
 
-            Vector3 position = new Vector3(nodes[i].x, 0, nodes[i].z);
+            Vector3 position = new Vector3(node.x, 0, node.z);
 
         }
     }
@@ -89,10 +94,10 @@ public class AStar : MonoBehaviour
         //     //         objVars.node.selected = true;
         //     // }
         // }
-        for (int i = 0; i < nodes.Length; i++)
-        {
-            nodes[i].gameObject.GetComponent<Renderer>().material.color = nodes[i].selected ? colorSelected : colorOriginal;
-        }
+        // for (int i = 0; i < nodes.Length; i++)
+        // {
+        //     nodes[i].
+        // }
     }
 
     void aStar(Node s, Node z)
