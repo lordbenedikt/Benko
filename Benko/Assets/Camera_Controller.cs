@@ -23,7 +23,7 @@ public class Camera_Controller : MonoBehaviour
         cam = GetComponent<Camera>();
 
     }
-
+    
     private void LateUpdate()
     {
 
