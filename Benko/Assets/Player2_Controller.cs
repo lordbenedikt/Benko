@@ -23,6 +23,7 @@ public class Player2_Controller : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+
         float jump = 0;
 
         if (Input.GetKey(KeyCode.Space))
