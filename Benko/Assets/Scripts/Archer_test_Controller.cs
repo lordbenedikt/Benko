@@ -1,24 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Archer_test_Controller : MonoBehaviour
 {
     private Animator ShootAnim;
-    [Header ("Atribudes")]
-    
+    [Header ("Basic Atribudes")]
+    public float MaxHealth;
+    public float CurrentHealt;
     public float range;
     public Transform target;
+    public Slider Healthbar;
+    public float Health;
 
     [Header("Attack")]
     public float FireRate;
     public float FireCountdwon = 0.0f;
+    public float Damage;
     public GameObject Arrow;
     public Transform ArrowStartPoint;
 
     private void Awake()
     {
+        Health = Healthbar.GetComponent<Slider>().value;
         ShootAnim = GetComponent<Animator>();
+        CurrentHealt = MaxHealth;
     }
 
     void Start()
@@ -27,6 +34,7 @@ public class Archer_test_Controller : MonoBehaviour
     }
     void Update()
     {
+        Health = CurrentHealt;
         if(target == null)
         {
             ShootAnim.SetBool("Shoot", false);  
