@@ -6,12 +6,17 @@ public class CustomGrid : MonoBehaviour
 {
 
     public float xOffset;
-    public float yOffset;
+    public float zOffset;
     public GameObject target;
     public GameObject structure;
     Vector3 truePos;
     public float gridSize;
 
+    public int indexFromPos(float x, float z) {
+        x += xOffset;
+        z += zOffset;
+        return -1;
+    }
     void Start()
     {
         
@@ -21,7 +26,7 @@ public class CustomGrid : MonoBehaviour
     void LateUpdate()
     {
         truePos.x = xOffset + Mathf.Floor((target.transform.position.x+0.5f-xOffset) / gridSize) * gridSize;
-        truePos.z = yOffset + Mathf.Floor((target.transform.position.z+0.5f-yOffset) / gridSize) * gridSize;
+        truePos.z = zOffset + Mathf.Floor((target.transform.position.z+0.5f-zOffset) / gridSize) * gridSize;
         truePos.y = 0;
 
         structure.transform.position = truePos;

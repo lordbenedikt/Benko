@@ -24,6 +24,14 @@ public class Wall : MonoBehaviour
     void Update()
     {
     }
+
+    // void LateUpdate() {
+    //     snapToGrid();
+    // }
+
+    // void snapToGrid() {
+        
+    // }
 }
 
 

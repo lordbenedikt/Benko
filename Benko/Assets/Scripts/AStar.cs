@@ -17,6 +17,7 @@ public class AStar : MonoBehaviour
     public Material material;
     public Color colorOriginal;
     public Color colorSelected;
+    public Color colorPath;
 
     public List<GameObject> walls;
 
@@ -49,7 +50,6 @@ public class AStar : MonoBehaviour
             Node node = nodes[i].GetComponent<Node>();
             node.transform.parent = gameObject.transform; 
             node.aStar = this;
-            node.nodeObject = nodeObject;
             node.adjacents = new GameObject[4];
         }
         for (int i = 0; i < nodes.Length; i++)
@@ -95,7 +95,7 @@ public class AStar : MonoBehaviour
 
         }
 
-        // buildWallEvent.Invoke();
+        buildWall();
     }
 
     // Update is called once per frame
@@ -105,7 +105,7 @@ public class AStar : MonoBehaviour
             Destroy(wall);
         }
         
-        buildWallEvent.Invoke();
+        buildWall();
     }
 
     void buildWall() {
@@ -123,23 +123,28 @@ public class AStar : MonoBehaviour
                 }
             }
         }
+        foreach (GameObject go in nodes)
+            {
+                Node n = go.GetComponent<Node>();
+                int[] isWall = new int[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    if (n.adjacents[i] != null && n.adjacents[i].GetComponent<Node>().isObstacle) isWall[i] = 1;
+                }
+                if (((isWall[0] == 1 && isWall[2] == 1) && (isWall[1] == 0 && isWall[3] == 0)) || ((isWall[0] == 0 && isWall[2] == 0) && (isWall[1] == 1 && isWall[3] == 1)))
+                {
+                    Destroy(n.cornerStone);
+                }
+                else
+                {
+                    if (n.isObstacle && n.cornerStone == null) n.cornerStone = MonoBehaviour.Instantiate(wallObject, new Vector3(go.transform.position.x, 0, go.transform.position.z), Quaternion.identity);
+                }
+            }
     }
-
-    // public class Tracker {
-    //     public Tracker prevNode;
-    //     public GameObject node;
-    //     // public int ID;
-    //     // public static int serialNumber = 0;
-    //     public Tracker(Tracker prevNode, GameObject node) {
-    //         this.prevNode = prevNode;
-    //         this.node = node;
-    //         // ID = serialNumber;
-    //         // serialNumber++;
-    //     }
-    // }
 
     public float aStar(GameObject s, GameObject z, List<GameObject> shortestPath)
     {
+        shortestPath.Clear();
         SortedDictionary<int, float> D = new SortedDictionary<int, float>();
         D[s.GetInstanceID()] = 0;
 
@@ -150,6 +155,7 @@ public class AStar : MonoBehaviour
         while(Todo.Count > 0) {
             GameObject v = minimalScore(D, Todo, z);
             if(v==z) {
+                shortestPath.Add(z);
                 GameObject advancedNode = z;
                 GameObject bestChoice = null;
                 float minScore = 100000;

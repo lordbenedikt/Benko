@@ -81,12 +81,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9595eccf1c22a144193a0a7063efe89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iii: 
+  enemy: {fileID: 5398723299708044077, guid: f999469f34a8d7b4cbad40a6b8a10279, type: 3}
+  cornerStone: {fileID: 0}
+  aStar: {fileID: 0}
   selected: 0
   adjacents: []
-  nodeObject: {fileID: 0}
-  aStar: {fileID: 0}
   isObstacle: 0
+  inPath: 0
 --- !u!23 &8898098031309722631
 MeshRenderer:
   m_ObjectHideFlags: 0

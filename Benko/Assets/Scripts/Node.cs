@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public int[] iii = new int[5];
-    public bool selected = false;
-    public GameObject[] adjacents;
+    public GameObject enemy;
+    [HideInInspector]
+    public GameObject cornerStone;
 
-    public GameObject nodeObject;
-    GameObject cornerStone;
+    [HideInInspector]
     public AStar aStar;
+    [HideInInspector]
+    public bool selected = false;
+    [HideInInspector]
+    public GameObject[] adjacents;
+    [HideInInspector]
     public bool isObstacle = false;
+    [HideInInspector]
     public bool inPath = false;
 
 
@@ -27,10 +32,11 @@ public class Node : MonoBehaviour
     {
         if (gameObject.GetComponent<Renderer>() != null)
             gameObject.GetComponent<Renderer>().material.color = isObstacle ? aStar.colorSelected : aStar.colorOriginal;
-        if (inPath) gameObject.GetComponent<Renderer>().material.color = Color.red;
+        if (inPath) gameObject.GetComponent<Renderer>().material.color = aStar.colorPath;
     }
     void OnMouseOver()
     {
+        // left button
         if (Input.GetMouseButtonDown(0))
         {
             if (isObstacle)
@@ -42,25 +48,8 @@ public class Node : MonoBehaviour
             {
                 isObstacle = true;
             }
-
-            foreach (GameObject go in aStar.nodes)
-            {
-                Node n = go.GetComponent<Node>();
-                int[] isWall = new int[4];
-                for (int i = 0; i < 4; i++)
-                {
-                    if (n.adjacents[i] != null && n.adjacents[i].GetComponent<Node>().isObstacle) isWall[i] = 1;
-                }
-                if (((isWall[0] == 1 && isWall[2] == 1) && (isWall[1] == 0 && isWall[3] == 0)) || ((isWall[0] == 0 && isWall[2] == 0) && (isWall[1] == 1 && isWall[3] == 1)))
-                {
-                    Destroy(n.cornerStone);
-                }
-                else
-                {
-                    if (n.isObstacle && n.cornerStone == null) n.cornerStone = MonoBehaviour.Instantiate(aStar.wallObject, new Vector3(go.transform.position.x, 0, go.transform.position.z), Quaternion.identity);
-                }
-            }
         }
+        // right button
         if (Input.GetMouseButtonDown(1))
         {
             foreach (GameObject go in aStar.nodes)
@@ -69,9 +58,10 @@ public class Node : MonoBehaviour
             }
             print(aStar.aStar(gameObject, aStar.nodes[aStar.nodes.Length - 1], shortestPath));
         }
-    }
-    public GameObject getGameObject()
-    {
-        return gameObject;
+        // middle button
+        if (Input.GetMouseButtonDown(2))
+        {
+            GameObject go = Instantiate(enemy, transform.position,Quaternion.identity);
+        }
     }
 }

@@ -52,6 +52,9 @@ MonoBehaviour:
     type: 3}
   wallObject: {fileID: 2427924800882001508, guid: 98647d82f2b084b4b93efa6e0d3c1ceb,
     type: 3}
+  wallFillerObject: {fileID: 0}
   material: {fileID: 2100000, guid: 182169482c7386149adecdf4b7b8bb04, type: 2}
-  colorOriginal: {r: 0.98765564, g: 1, b: 0, a: 0}
-  colorSelected: {r: 0.8584906, g: 0.5375383, b: 0, a: 0}
+  colorOriginal: {r: 0.49056602, g: 0.48326766, b: 0.45122817, a: 0}
+  colorSelected: {r: 0.745283, g: 0.6888432, b: 0.36912602, a: 0}
+  walls: []
+  nodes: []
