@@ -29,6 +29,11 @@ public class AStar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // SortedDictionary<float, float> hoho = new SortedDictionary<float, float>();
+        // hoho[5f] = 7;
+        // print(hoho[5f]);
+
+
         buildWallEvent.AddListener(buildWall);
 
         walls = new List<GameObject>();
@@ -120,25 +125,64 @@ public class AStar : MonoBehaviour
         }
     }
 
-    void aStar(Node s, Node z)
-    {
-
+    public class Tracker {
+        public Tracker prevNode;
+        public GameObject node;
+        // public int ID;
+        // public static int serialNumber = 0;
+        public Tracker(Tracker prevNode, GameObject node) {
+            this.prevNode = prevNode;
+            this.node = node;
+            // ID = serialNumber;
+            // serialNumber++;
+        }
     }
-    // algorithm A*(s, z)
-    // D sei eine Map von Knoten zu Weglängen
-    // D[s] ← 0
-    // Todo ← { s }
-    // while Todo ist nicht leer
-    // v ← Knoten in Todo mit minimalem Score(v) = D[v] + Rest(v)
-    // if v = z
-    // return D[z] ⇦ Abkürzung
-    // en'erne v aus Todo
-    // for each u ∈ Neighbours(v)
-    // if ( ) or ( )
-    // D[u] ← D[v] + Len(v, u)
-    // Todo ← Todo ∪ { u }
-    // report "kann z von s aus nicht erreichen "
 
+    public float aStar(GameObject s, GameObject z, List<Node> path)
+    {
+        SortedDictionary<int, float> D = new SortedDictionary<int, float>();
+        D[s.GetInstanceID()] = 0;
 
+        List<Tracker> path = new List<Tracker>();
+        List<GameObject> Todo = new List<GameObject>();
+        Todo.Add(s);
+        // path.Add(new Tracker(null, s));
+        while(Todo.Count > 0) {
+            GameObject v = minimalScore(D, Todo, z);
+            if(v==z) return D[z.GetInstanceID()];
+            Todo.Remove(v);
+            foreach(GameObject u in v.GetComponent<Node>().adjacents) {
+                if (u==null || u.GetComponent<Node>().isObstacle) continue;
+                Debug.Log(D.ContainsKey(u.GetInstanceID()));
+                if(!D.ContainsKey(u.GetInstanceID()) || D[u.GetInstanceID()] > D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
+                    D[u.GetInstanceID()] = D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude;
+                    Todo.Add(u);
+                    // path.Add(new Tracker(v, u));
+                }
+            }
+        }
+    return -1;
+    }
 
+    GameObject minimalScore(SortedDictionary<int, float> D, List<GameObject> Todo, GameObject z) {
+        GameObject res = Todo[0];
+        
+        foreach(GameObject n in Todo) {
+            float minScore = nodeScore(D[n.GetInstanceID()], res, z);
+            for(int i = 0; i<Todo.Count; i++) {
+                float score = nodeScore(D[n.GetInstanceID()], Todo[i], z);
+                if(score<minScore) {
+                    res = Todo[i];
+                    minScore = score;
+                }
+            }
+        }
+        return res;
+    }
+    float nodeScore(float currentScore, GameObject n, GameObject z) {
+        if(n==null || z==null) return -1;
+        float distNZ = (z.transform.position-n.transform.position).magnitude;
+        float res = currentScore + distNZ;
+        return res;
+    }
 }
