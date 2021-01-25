@@ -29,7 +29,7 @@ public class Archer_test_Controller : MonoBehaviour
     {
         if(target == null)
         {
-            ShootAnim.SetBool("Shoot", false);
+            ShootAnim.SetBool("Shoot", false);  
             return;
         }
 
