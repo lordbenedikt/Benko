@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45125788, g: 0.5009538, b: 0.5734601, a: 1}
+  m_IndirectSpecularColor: {r: 0.45125777, g: 0.50095326, b: 0.57345986, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6179,6 +6179,7 @@ GameObject:
   - component: {fileID: 543450652671966354}
   - component: {fileID: 1828178951}
   - component: {fileID: 919132149016634921}
+  - component: {fileID: 919132149016634922}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -6204,11 +6205,31 @@ MonoBehaviour:
   target: {fileID: 0}
   Healthbar: {fileID: 120209022}
   Health: 0
+  walkSpeed: 7
+  controller: {fileID: 919132149016634922}
   FireRate: 0.5
   FireCountdwon: 0
   Damage: 0
   Arrow: {fileID: 1992071922080826269, guid: 3eb57cf6b7c903e449b6da9fcc604ac3, type: 3}
   ArrowStartPoint: {fileID: 238538000}
+--- !u!143 &919132149016634922
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149016634920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 11.14
+  m_Radius: 2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 5.2, z: 0}
 --- !u!1 &1082271957743224179
 GameObject:
   m_ObjectHideFlags: 0
@@ -6870,7 +6891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7523237451827146310}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 543450652671966354}

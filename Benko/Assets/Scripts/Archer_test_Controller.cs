@@ -13,6 +13,8 @@ public class Archer_test_Controller : MonoBehaviour
     public Transform target;
     public Slider Healthbar;
     public float Health;
+    public float walkSpeed = 10;
+    public CharacterController controller;
 
     [Header("Attack")]
     public float FireRate;
@@ -34,6 +36,36 @@ public class Archer_test_Controller : MonoBehaviour
     }
     void Update()
     {
+        // Vector2 prevPos = new Vector2(transform.position.x,transform.position.z);
+        Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+        
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.Move(move * Time.deltaTime*walkSpeed);
+
+        // if(Input.GetKey("a")) {
+        //     transform.position = new Vector3(transform.position.x-walkSpeed,transform.position.y,transform.position.z);
+        // }
+        // if(Input.GetKey("d")) {
+        //     transform.position = new Vector3(transform.position.x+walkSpeed,transform.position.y,transform.position.z);
+        // }
+        // if(Input.GetKey("w")) {
+        //     transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z+walkSpeed);
+        // }
+        // if(Input.GetKey("s")) {
+        //     transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z-walkSpeed);
+        // }
+
+        Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
+        
+        if(face.sqrMagnitude != 0) {
+            
+            float damping = 20f;
+    
+            face.y = 0;
+            var targetRotation = Quaternion.LookRotation(face);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
+        }
+
         Health = CurrentHealt;
         if(target == null)
         {
@@ -53,12 +85,6 @@ public class Archer_test_Controller : MonoBehaviour
         }
 
         FireCountdwon -= Time.deltaTime;
-
-        
-        
-
-        
-
     }
 
     void UpdateTarget()
