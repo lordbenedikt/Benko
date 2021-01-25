@@ -24,6 +24,8 @@ public class Archer_test_Controller : MonoBehaviour
     public Transform ArrowStartPoint;
     Animator animator;
 
+    
+
     private void Awake()
     {
         Health = Healthbar.GetComponent<Slider>().value;
