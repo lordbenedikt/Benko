@@ -11,7 +11,6 @@ public class Wall : MonoBehaviour
     
     void Start()
     {
-        print("Hello");
         meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = corner;
     }

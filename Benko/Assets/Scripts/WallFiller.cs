@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fields : MonoBehaviour
+public class WallFiller : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

@@ -9,43 +9,40 @@ public class Node : MonoBehaviour
     public GameObject[] adjacents;
 
     public GameObject nodeObject;
+    GameObject cornerStone;
     public AStar aStar;
     public bool isObstacle = false;
 
-    // public Node(AStar aStar, GameObject nodeObject, float x, float z)
-
-    // {
-    //     this.x = x;
-    //     this.z = z;
-    //     this.nodeObject = nodeObject;
-    //     this.aStar = aStar;
-
-    //     gameObject.GetComponent<ObjectVariables>().node = this;
-    //     adjacents = new GameObject[4];
-    //     adjacents[1] = gameObject;
-    // }
 
     void Start()
     {
-        // adjacents[0] = gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<Renderer>().material.color = isObstacle ? aStar.colorSelected : aStar.colorOriginal;
+        if(gameObject.GetComponent<Renderer>()!=null)
+            gameObject.GetComponent<Renderer>().material.color = isObstacle ? aStar.colorSelected : aStar.colorOriginal;
     }
     void OnMouseDown() {
+        if(isObstacle) {
+            isObstacle = false;
+            Destroy(cornerStone);
+        } else {
+            isObstacle = true;
+        }
 
-        GameObject newWall = MonoBehaviour.Instantiate(aStar.wallObject, new Vector3(gameObject.transform.position.x,0,gameObject.transform.position.z), Quaternion.identity);
-        aStar.walls.Add(newWall);
-
-        // print("This: "+"\n");
-        isObstacle = !isObstacle;
-        foreach (GameObject go in adjacents) 
-        {
-            if (go != null)
-                go.GetComponent<Node>().isObstacle = !go.GetComponent<Node>().isObstacle;
+        foreach(GameObject go in aStar.nodes) {
+            Node n = go.GetComponent<Node>();
+            int[] isWall = new int[4];
+            for(int i = 0; i<4; i++) {
+                if(n.adjacents[i]!=null && n.adjacents[i].GetComponent<Node>().isObstacle) isWall[i] = 1;
+            }
+            if(((isWall[0]==1 && isWall[2]==1) && (isWall[1]==0 && isWall[3]==0)) || ((isWall[0]==0 && isWall[2]==0) && (isWall[1]==1 && isWall[3]==1))) {
+                Destroy(n.cornerStone);
+            } else {
+                if (n.isObstacle && n.cornerStone==null) n.cornerStone = MonoBehaviour.Instantiate(aStar.wallObject, new Vector3(go.transform.position.x,0,go.transform.position.z), Quaternion.identity);
+            }
         }
     }
     public GameObject getGameObject() {

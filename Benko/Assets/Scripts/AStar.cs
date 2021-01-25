@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AStar : MonoBehaviour
 {
@@ -12,24 +13,34 @@ public class AStar : MonoBehaviour
 
     public GameObject nodeObject;
     public GameObject wallObject;
+    public GameObject wallFillerObject;
     public Material material;
     public Color colorOriginal;
     public Color colorSelected;
 
     public List<GameObject> walls;
-    GameObject[] nodes;
+
+    public GameObject[] nodes;
     Ray ray;
     RaycastHit hit;
+
+    UnityEvent buildWallEvent = new UnityEvent();
 
     // Start is called before the first frame update
     void Start()
     {
+        buildWallEvent.AddListener(buildWall);
+
+        walls = new List<GameObject>();
         nodes = new GameObject[width * height];
-        print(nodes.Length);
+
         for (int i = 0; i < nodes.Length; i++)
         {
             Vector3 position = new Vector3(minX + (i % width + ((width % 2 == 0) ? 0.5f : 0f)) * s, 0, minZ + (i / width+ ((width % 2 == 0) ? 0.5f : 0f)) * s);
-            nodes[i] = Instantiate(nodeObject, position, Quaternion.identity);
+            
+            GameObject go = Instantiate(nodeObject, position, Quaternion.identity);
+            nodes[i] = go;
+
             Node node = nodes[i].GetComponent<Node>();
             node.transform.parent = gameObject.transform; 
             node.aStar = this;
@@ -78,28 +89,35 @@ public class AStar : MonoBehaviour
             }
 
         }
+
+        // buildWallEvent.Invoke();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // if (Physics.Raycast(ray, out hit))
-        // {
-        //     // if (Input.GetMouseButtonUp(0))
-        //     // {
-        //     //     print(1);
-        //     //     ObjectVariables objVars = hit.collider.gameObject.GetComponent<ObjectVariables>();
-        //     //     if (objVars.node.selected)
-        //     //         objVars.node.selected = false;
-        //     //     else
-        //     //         objVars.node.selected = true;
-        //     // }
-        // }
-        // for (int i = 0; i < nodes.Length; i++)
-        // {
-        //     nodes[i].
-        // }
+        foreach (GameObject wall in walls) {
+            Destroy(wall);
+        }
+        
+        buildWallEvent.Invoke();
+    }
+
+    void buildWall() {
+        walls.Clear();
+        for(int i = 0; i<nodes.Length; i++) {
+            GameObject n = nodes[i];
+            Node node = n.GetComponent<Node>();
+            for(int j = 1; j<=2; j++) {
+                if(node.adjacents[j] != null) {
+                    if(node.isObstacle && node.adjacents[j].GetComponent<Node>().isObstacle) {
+                        GameObject go = Instantiate(wallFillerObject, (node.transform.position + node.adjacents[j].transform.position)/2, Quaternion.identity);
+                        if(j%2 == 0) go.transform.Rotate(0, 90, 0, Space.Self);
+                        walls.Add(go);
+                    }
+                }
+            }
+        }
     }
 
     void aStar(Node s, Node z)
