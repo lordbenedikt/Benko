@@ -75,8 +75,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea87d3a855bca6499a1a10da515ffe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xOffset: 0.5
-  zOffset: 0.5
+  minX: -4.5
+  minZ: -4.5
+  s: 1
+  cols: 10
+  rows: 10
   target: {fileID: 2267989764998409409}
   structure: {fileID: 4111247189815993293}
   gridSize: 1

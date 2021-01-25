@@ -8,9 +8,12 @@ public class Wall : MonoBehaviour
     MeshFilter meshFilter;
     public Mesh corner;
     public GameObject adjacents;
-    
+    GameController gameController;
+    public GameObject target;
+
     void Start()
     {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = corner;
     }
@@ -25,13 +28,9 @@ public class Wall : MonoBehaviour
     {
     }
 
-    // void LateUpdate() {
-    //     snapToGrid();
-    // }
-
-    // void snapToGrid() {
-        
-    // }
+    void LateUpdate() {
+        // gameObject.transform.position = gameController.customGrid.snapToGrid(gameObject, target);
+    }
 }
 
 
