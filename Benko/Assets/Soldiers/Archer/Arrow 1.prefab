@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 10
+  speed: 20
   start: {x: 0, y: 0, z: 0}
 --- !u!1 &9024612999162871432
 GameObject:
