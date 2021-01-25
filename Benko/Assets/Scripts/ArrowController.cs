@@ -19,7 +19,6 @@ public class ArrowController : MonoBehaviour
     }
     void Update()
     {
-        print(start);
         if(target == null)
         {
             Destroy(gameObject);
@@ -55,6 +54,6 @@ public class ArrowController : MonoBehaviour
     {
         //Particle
         Destroy(gameObject);
-        Debug.Log("Error");
+        // Debug.Log("Error");
     }
 }

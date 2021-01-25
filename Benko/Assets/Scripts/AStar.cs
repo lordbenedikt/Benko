@@ -125,20 +125,20 @@ public class AStar : MonoBehaviour
         }
     }
 
-    public class Tracker {
-        public Tracker prevNode;
-        public GameObject node;
-        // public int ID;
-        // public static int serialNumber = 0;
-        public Tracker(Tracker prevNode, GameObject node) {
-            this.prevNode = prevNode;
-            this.node = node;
-            // ID = serialNumber;
-            // serialNumber++;
-        }
-    }
+    // public class Tracker {
+    //     public Tracker prevNode;
+    //     public GameObject node;
+    //     // public int ID;
+    //     // public static int serialNumber = 0;
+    //     public Tracker(Tracker prevNode, GameObject node) {
+    //         this.prevNode = prevNode;
+    //         this.node = node;
+    //         // ID = serialNumber;
+    //         // serialNumber++;
+    //     }
+    // }
 
-    public float aStar(GameObject s, GameObject z, List<Node> shortestPath)
+    public float aStar(GameObject s, GameObject z, List<GameObject> shortestPath)
     {
         SortedDictionary<int, float> D = new SortedDictionary<int, float>();
         D[s.GetInstanceID()] = 0;
@@ -149,15 +149,34 @@ public class AStar : MonoBehaviour
         // path.Add(new Tracker(null, s));
         while(Todo.Count > 0) {
             GameObject v = minimalScore(D, Todo, z);
-            if(v==z) return D[z.GetInstanceID()];
+            if(v==z) {
+                GameObject advancedNode = z;
+                GameObject bestChoice = null;
+                float minScore = 100000;
+                print("Hello");
+                do {
+                    foreach(GameObject go in advancedNode.GetComponent<Node>().adjacents) {
+                        if (go==null || !D.ContainsKey(go.GetInstanceID())) continue;
+                        if(D[go.GetInstanceID()]<minScore) bestChoice = go;
+                        minScore = D[go.GetInstanceID()];
+                    }
+                    advancedNode = bestChoice;
+                    shortestPath.Add(advancedNode);
+                } while(advancedNode != s);
+
+                print(shortestPath.Count);
+                foreach(GameObject n in shortestPath) {
+                    n.GetComponent<Node>().inPath = true;
+                }
+
+                return D[z.GetInstanceID()];
+            }
             Todo.Remove(v);
             foreach(GameObject u in v.GetComponent<Node>().adjacents) {
                 if (u==null || u.GetComponent<Node>().isObstacle) continue;
-                Debug.Log(D.ContainsKey(u.GetInstanceID()));
                 if(!D.ContainsKey(u.GetInstanceID()) || D[u.GetInstanceID()] > D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
                     D[u.GetInstanceID()] = D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude;
                     Todo.Add(u);
-                    // path.Add(new Tracker(v, u));
                 }
             }
         }

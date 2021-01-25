@@ -81,7 +81,7 @@ public class Archer_test_Controller : MonoBehaviour
     public void Shoot()
     {
         ShootAnim.SetBool("Shoot", true);
-        Debug.Log("shoot");
+        // Debug.Log("shoot");
         GameObject go = (GameObject)Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         ArrowController ArrowScript = go.GetComponent<ArrowController>();
         //Debug.Log(ArrowScript.speed);

@@ -12,9 +12,10 @@ public class Node : MonoBehaviour
     GameObject cornerStone;
     public AStar aStar;
     public bool isObstacle = false;
+    public bool inPath = false;
 
 
-    List<Node> shortestPath = new List<Node>();
+    List<GameObject> shortestPath = new List<GameObject>();
 
 
     void Start()
@@ -26,8 +27,9 @@ public class Node : MonoBehaviour
     {
         if(gameObject.GetComponent<Renderer>()!=null)
             gameObject.GetComponent<Renderer>().material.color = isObstacle ? aStar.colorSelected : aStar.colorOriginal;
+            if(inPath) gameObject.GetComponent<Renderer>().material.color = Color.red;
     }
-    void OnMouseDown() {
+    void OnMouseOver() {
         if(isObstacle) {
             isObstacle = false;
             Destroy(cornerStone);
