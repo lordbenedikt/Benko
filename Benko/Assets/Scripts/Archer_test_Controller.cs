@@ -22,6 +22,7 @@ public class Archer_test_Controller : MonoBehaviour
     public float Damage;
     public GameObject Arrow;
     public Transform ArrowStartPoint;
+    Animator animator;
 
     private void Awake()
     {
@@ -58,12 +59,14 @@ public class Archer_test_Controller : MonoBehaviour
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
         
         if(face.sqrMagnitude != 0) {
-            
+            ShootAnim.SetBool("Running", true);
             float damping = 20f;
     
             face.y = 0;
             var targetRotation = Quaternion.LookRotation(face);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
+        } else {
+            ShootAnim.SetBool("Running", false);
         }
 
         Health = CurrentHealt;
