@@ -6145,12 +6145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52f85ef339181d48b534b761444a04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  CurrentHealt: 0
-  range: 70
+  range: 10
   target: {fileID: 0}
-  Healthbar: {fileID: 0}
-  Health: 0
   walkSpeed: 7
   controller: {fileID: 919132149016634922}
   FireRate: 0.5

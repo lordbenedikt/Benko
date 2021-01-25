@@ -7,12 +7,8 @@ public class Archer_test_Controller : MonoBehaviour
 {
     private Animator ShootAnim;
     [Header ("Basic Atribudes")]
-    public float MaxHealth;
-    public float CurrentHealt;
     public float range;
     public Transform target;
-    public Slider Healthbar;
-    public float Health;
     public float walkSpeed = 10;
     public CharacterController controller;
 
@@ -28,9 +24,7 @@ public class Archer_test_Controller : MonoBehaviour
 
     private void Awake()
     {
-        Health = Healthbar.GetComponent<Slider>().value;
         ShootAnim = GetComponent<Animator>();
-        CurrentHealt = MaxHealth;
     }
 
     void Start()
@@ -71,7 +65,6 @@ public class Archer_test_Controller : MonoBehaviour
             ShootAnim.SetBool("Running", false);
         }
 
-        Health = CurrentHealt;
         if(target == null)
         {
             ShootAnim.SetBool("Shoot", false);  
