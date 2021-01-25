@@ -19,6 +19,8 @@ public class ArrowController : MonoBehaviour
     }
     void Update()
     {
+        Vector3 prevPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+
         if(target == null)
         {
             Destroy(gameObject);
@@ -48,14 +50,13 @@ public class ArrowController : MonoBehaviour
         }
         float arrowHeight = origTargetDistance*0.3f;
         
-        Vector3 prevPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         transform.position = new Vector3(transform.position.x, -Mathf.Pow((travelledDistance*2-1),2)*arrowHeight + (arrowHeight) + target.position.y, transform.position.z);
         Vector3 face = new Vector3(transform.position.x-prevPos.x,transform.position.y-prevPos.y,transform.position.z-prevPos.z);
         
         if(face.sqrMagnitude != 0) {
-            float damping = 20f;
+            float damping = 50f;
     
-            face.y = 0;
+            // face.y = 0;
             var targetRotation = Quaternion.LookRotation(face);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
         }

@@ -45,14 +45,14 @@ public class CustomGrid : MonoBehaviour
 
     public Vector3 snapToGrid(GameObject o, GameObject target) {
         Vector3 truePos = new Vector3(0,0,0);
-        // print("Grid: " + minX%gridSize + " " + minX + " " + minZ);
-        // float xOffset = minX%gridSize;
-        // float zOffset = minZ%gridSize;
-        // if (xOffset<0) xOffset += gridSize;
-        // if (zOffset<0) zOffset += gridSize;
-        // truePos.x = Mathf.Floor((target.transform.position.x) / gridSize) * gridSize + xOffset;
-        // truePos.z = Mathf.Floor((target.transform.position.z) / gridSize) * gridSize + zOffset;
-        // truePos.y = 0;
+        print("Grid: " + minX%gridSize + " " + minX + " " + minZ);
+        float xOffset = minX%gridSize;
+        float zOffset = minZ%gridSize;
+        if (xOffset<0) xOffset += gridSize;
+        if (zOffset<0) zOffset += gridSize;
+        truePos.x = Mathf.Floor((target.transform.position.x) / gridSize) * gridSize + xOffset;
+        truePos.z = Mathf.Floor((target.transform.position.z) / gridSize) * gridSize + zOffset;
+        truePos.y = 0;
 
         return truePos;
     }
