@@ -11,10 +11,12 @@ public class AStar : MonoBehaviour
     public int height;
 
     public GameObject nodeObject;
+    public GameObject wallObject;
     public Material material;
     public Color colorOriginal;
     public Color colorSelected;
 
+    public List<GameObject> walls;
     GameObject[] nodes;
     Ray ray;
     RaycastHit hit;
@@ -23,57 +25,57 @@ public class AStar : MonoBehaviour
     void Start()
     {
         nodes = new GameObject[width * height];
+        print(nodes.Length);
         for (int i = 0; i < nodes.Length; i++)
         {
-            Vector3 position = new Vector3(minX + (i % width + ((width % 2 == 0) ? 0.5f : 0f)) * s, 0, minZ + (i / width) * s);
+            Vector3 position = new Vector3(minX + (i % width + ((width % 2 == 0) ? 0.5f : 0f)) * s, 0, minZ + (i / width+ ((width % 2 == 0) ? 0.5f : 0f)) * s);
             nodes[i] = Instantiate(nodeObject, position, Quaternion.identity);
             Node node = nodes[i].GetComponent<Node>();
             node.transform.parent = gameObject.transform; 
             node.aStar = this;
             node.nodeObject = nodeObject;
+            node.adjacents = new GameObject[4];
         }
         for (int i = 0; i < nodes.Length; i++)
         {
             Node node = nodes[i].GetComponent<Node>();
 
-            // if (i / width == 0)
-            // {
-            //     node.selected = true;
-            //     node.adjacents[0] = null;
-            // }
-            // else
-            // {
-            //     // node.adjacents[0] = nodes[i - width];
-            // }
-            // if (i % width == 0)
-            // {
-            //     node.selected = true;
-            //     node.adjacents[1] = nodes[1];
-            // }
-            // else
-            // {
-            //     node.adjacents[1] = nodes[1];
-            // }
-            // if (i / width == height - 1)
-            // {
-            //     node.selected = true;
-            //     node.adjacents[2] = null;
-            // }
-            // else
-            // {
-            //     node.adjacents[2] = nodes[i + width];
-            // }
-            // if ((i+1) % width == 0)
-            // {
-            //     node.selected = true;
-            //     node.adjacents[3] = null;
-            // }
-            // else
-            // {
-            //     node.adjacents[3] = nodes[i + 1];
-            // }
-
-            Vector3 position = new Vector3(node.x, 0, node.z);
+            if (i / width == 0)
+            {
+                node.isObstacle = true;
+                node.adjacents[0] = null;
+            }
+            else
+            {
+                node.adjacents[0] = nodes[i - width];
+            }
+            if ((i+1) % width == 0)
+            {
+                node.isObstacle = true;
+                node.adjacents[1] = null;
+            }
+            else
+            {
+                node.adjacents[1] = nodes[i + 1];
+            }
+            if (i / width == height - 1)
+            {
+                node.isObstacle = true;
+                node.adjacents[2] = null;
+            }
+            else
+            {
+                node.adjacents[2] = nodes[i + width];
+            }
+            if (i % width == 0)
+            {
+                node.isObstacle = true;
+                node.adjacents[3] = null;
+            }
+            else
+            {
+                node.adjacents[3] = nodes[i -1];
+            }
 
         }
     }
