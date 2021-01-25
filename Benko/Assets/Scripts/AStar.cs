@@ -138,12 +138,12 @@ public class AStar : MonoBehaviour
         }
     }
 
-    public float aStar(GameObject s, GameObject z, List<Node> path)
+    public float aStar(GameObject s, GameObject z, List<Node> shortestPath)
     {
         SortedDictionary<int, float> D = new SortedDictionary<int, float>();
         D[s.GetInstanceID()] = 0;
 
-        List<Tracker> path = new List<Tracker>();
+        // List<Tracker> shortestPath = new List<Tracker>();
         List<GameObject> Todo = new List<GameObject>();
         Todo.Add(s);
         // path.Add(new Tracker(null, s));

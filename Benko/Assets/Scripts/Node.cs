@@ -14,12 +14,11 @@ public class Node : MonoBehaviour
     public bool isObstacle = false;
 
 
-    List<Node> shortestPath;
+    List<Node> shortestPath = new List<Node>();
 
 
     void Start()
     {
-        shortestPath = new List<Node>();
     }
 
     // Update is called once per frame
@@ -48,7 +47,7 @@ public class Node : MonoBehaviour
                 if (n.isObstacle && n.cornerStone==null) n.cornerStone = MonoBehaviour.Instantiate(aStar.wallObject, new Vector3(go.transform.position.x,0,go.transform.position.z), Quaternion.identity);
             }
         }
-        print(aStar.aStar(gameObject, aStar.nodes[aStar.nodes.Length-1]), shortestPath);
+        print(aStar.aStar(gameObject, aStar.nodes[aStar.nodes.Length-1], shortestPath));
     }
     public GameObject getGameObject() {
         return gameObject;
