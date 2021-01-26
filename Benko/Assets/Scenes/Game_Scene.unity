@@ -204,6 +204,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6164964718215977528, guid: ce542dbcd22ba214594b07fa887dbd59,
+        type: 3}
+      propertyPath: minX
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164964718215977528, guid: ce542dbcd22ba214594b07fa887dbd59,
+        type: 3}
+      propertyPath: minZ
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6164964718215977528, guid: ce542dbcd22ba214594b07fa887dbd59,
+        type: 3}
+      propertyPath: gridSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8236050572400770572, guid: ce542dbcd22ba214594b07fa887dbd59,
         type: 3}
       propertyPath: width
@@ -6165,7 +6180,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 11.14
+  m_Height: 9.62
   m_Radius: 2
   m_SlopeLimit: 45
   m_StepOffset: 0.3

@@ -16,4 +16,8 @@ public class GameController : MonoBehaviour
     {
         
     }
+
+    public int gridIndexFromPos(float x, float z) {
+        return customGrid.gridIndexFromPos(x,z);
+    }
 }

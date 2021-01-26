@@ -6,19 +6,42 @@ using UnityEngine;
 public class Enemy_Controller : MonoBehaviour
 {
     private GameObject player;
-    public float speed = 1.0f;
-    GameObject controller;
+    public float speed;
+    List<GameObject> path = new List<GameObject>();
+    GameController controller;
+    AStar aStar;
+    GameObject nextNode;
 
     // private Transform target;
     
 
     void Start() {
-        controller = GameObject.FindGameObjectWithTag("GameController");
+        controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        aStar = controller.gameObject.GetComponent<AStar>();
     }
     
+    void findPath() {
+        if(player==null) return;
+        int start = controller.gridIndexFromPos(transform.position.x,transform.position.z);
+        int ziel = controller.gridIndexFromPos(player.transform.position.x,player.transform.position.z);
+        if(start==-1 || ziel==-1) return;
+        aStar.aStar(aStar.nodes[start], aStar.nodes[ziel], path);
+        if(path.Count>1) {
+            nextNode = path[path.Count-2].gameObject;
+        }
+    }
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        findPath();
+        // print(nextNode);
+        if(nextNode != null) {
+            // print("find path\n");
+            transform.position += (nextNode.transform.position-transform.position).normalized*speed;
+            if((nextNode.transform.position-transform.position).magnitude<0.1) {
+                nextNode = null;
+            }
+        }
 
         // Vector3 targetDirection = Player.transform.position;
 

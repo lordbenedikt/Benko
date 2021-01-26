@@ -159,20 +159,22 @@ public class AStar : MonoBehaviour
                 GameObject advancedNode = z;
                 GameObject bestChoice = null;
                 float minScore = 100000;
-                print("Hello");
+
                 do {
+                    print(advancedNode);
                     foreach(GameObject go in advancedNode.GetComponent<Node>().adjacents) {
                         if (go==null || !D.ContainsKey(go.GetInstanceID())) continue;
                         if(D[go.GetInstanceID()]<minScore) bestChoice = go;
                         minScore = D[go.GetInstanceID()];
                     }
+                    if(bestChoice==null) continue;
                     advancedNode = bestChoice;
                     shortestPath.Add(advancedNode);
                 } while(advancedNode != s);
 
-                print(shortestPath.Count);
+                // print(shortestPath.Count);
                 foreach(GameObject n in shortestPath) {
-                    n.GetComponent<Node>().inPath = true;
+                    // n.GetComponent<Node>().inPath = true;
                 }
 
                 return D[z.GetInstanceID()];

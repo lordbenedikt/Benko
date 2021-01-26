@@ -18,12 +18,14 @@ public class Archer_test_Controller : MonoBehaviour
     public float Damage;
     public GameObject Arrow;
     public Transform ArrowStartPoint;
+    
     Animator animator;
-
+    GameController gameController;
     
 
     private void Awake()
     {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         ShootAnim = GetComponent<Animator>();
     }
 
