@@ -35,9 +35,12 @@ public class Node : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.GetComponent<Renderer>() != null)
-            gameObject.GetComponent<Renderer>().material.color = isObstacle ? customGrid.colorSelected : customGrid.colorOriginal;
-        if (inPath) gameObject.GetComponent<Renderer>().material.color = customGrid.colorPath;
+        if (gameObject.GetComponent<Renderer>() != null) {
+            Material objMaterial = gameObject.GetComponent<Renderer>().material;
+            objMaterial.color = customGrid.colorOriginal;
+            if (isObstacle && customGrid.highlightObstacle) objMaterial.color = customGrid.colorSelected;
+            if (inPath) objMaterial.color = customGrid.colorPath;
+        }
     }
     void OnMouseOver()
     {

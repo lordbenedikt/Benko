@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 10
   target: {fileID: 0}
-  walkSpeed: 0.2
+  walkSpeed: 5
   controller: {fileID: 0}
   FireRate: 0.5
   FireCountdwon: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   image: {fileID: 0}
   yOffset: 3
   hpBarScale: 1
-  DiePX: {fileID: 0}
+  DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
 --- !u!1 &860632189253769406
 GameObject:
   m_ObjectHideFlags: 0

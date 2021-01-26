@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     [HideInInspector]
     public CustomGrid customGrid;
+    public Canvas canvas;
 
     void Start()
     {

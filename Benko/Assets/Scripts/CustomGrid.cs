@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class CustomGrid : MonoBehaviour
 {
-    public float minX;
-    public float minZ;
+    float minX;
+    float minZ;
     public float gridSize;
     public int cols;
     public int rows;
@@ -18,6 +18,7 @@ public class CustomGrid : MonoBehaviour
     public Color colorOriginal;
     public Color colorSelected;
     public Color colorPath;
+    public bool highlightObstacle;
 
     public List<GameObject> walls;
     public GameController controller;
@@ -30,6 +31,8 @@ public class CustomGrid : MonoBehaviour
 
     void Awake() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        minX = transform.position.x - (gridSize*cols/2);
+        minZ = transform.position.z - (gridSize*rows/2);
     }
     // Start is called before the first frame update
     void Start()

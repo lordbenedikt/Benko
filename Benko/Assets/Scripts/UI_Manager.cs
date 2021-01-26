@@ -64,7 +64,6 @@ public class UI_Manager : MonoBehaviour
             ActivateBuildMode = false;
             BuildModeText.SetText("BuildMode: OFF");
 
-            AddGold(50);
             return;
         }
         ActivateBuildMode = true;

@@ -18,6 +18,7 @@ public class Enemy_Controller : MonoBehaviour
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
+        InvokeRepeating("findPath", 0f, 0.5f);
     }
     
     void findPath() {
@@ -42,7 +43,7 @@ public class Enemy_Controller : MonoBehaviour
             player.GetComponent<Health>().Currenthealth -= 40;
             return;
         }
-        findPath();
+        // findPath();
         // print(nextNode);
         if(nextNode != null) {
             // print("find path\n");
