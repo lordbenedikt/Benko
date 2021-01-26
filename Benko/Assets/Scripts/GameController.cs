@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
+    [HideInInspector]
     public CustomGrid customGrid;
 
     void Start()
     {
-        customGrid = GameObject.FindGameObjectWithTag("CustomGrid").GetComponent<CustomGrid>();
+        customGrid = gameObject.GetComponent<CustomGrid>();
     }
 
     void Update()

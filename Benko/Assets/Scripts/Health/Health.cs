@@ -38,8 +38,8 @@ public class Health : MonoBehaviour
         go.transform.localScale = new Vector3(ls.x*hpBarScale,ls.x*hpBarScale,ls.x*hpBarScale);
         go.transform.SetParent(this.transform);
         healthDisplay = go.GetComponent<HealthBar>().healthDisplay.GetComponent<Image>();
-        print("healthDisplay: " + healthDisplay);
-        print("fill: " + healthDisplay.fillAmount);
+        // print("healthDisplay: " + healthDisplay);
+        // print("fill: " + healthDisplay.fillAmount);
 
         //_healthbar = this.transform.Find("Health_Current").gameObject;
        // _healthbar = GameObject.Find("Health_Current");
