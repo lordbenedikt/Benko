@@ -11,15 +11,26 @@ public class Camera_Controller : MonoBehaviour
     
     void Update()
     {
-        if (!Input.GetKey("q"))
+        float MouseScrollInput = Input.mouseScrollDelta.y;
+        float Current_y = this.transform.eulerAngles.y;
+
+        if (!Input.GetKey("q") ) //-15 48
         {
-            this.transform.Rotate(0, Input.mouseScrollDelta.y * scale, 0);
+            this.transform.Rotate(0, MouseScrollInput * scale, 0);
+            if(Current_y > 48)
+            {
+                this.transform.Rotate(0, -2 * scale, 0);
+            }
+            if (Current_y < -15)
+            {
+                this.transform.Rotate(0, 2 * scale, 0);
+            }
         }
 
         if (Input.GetKey("q"))
         {
             float Size = GameObject.Find("_camera").GetComponent<Camera>().orthographicSize;
-            print(Size);
+            //print(Size);
             GameObject.Find("_camera").GetComponent<Camera>().orthographicSize = GameObject.Find("_camera").GetComponent<Camera>().orthographicSize - Input.mouseScrollDelta.y * 2;
         }
     }

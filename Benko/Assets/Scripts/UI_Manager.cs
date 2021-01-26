@@ -83,7 +83,12 @@ public class UI_Manager : MonoBehaviour
 
     public void BuildArcher()
     {
-        Instantiate(archerprefab, spawn_pos, Quaternion.identity);
+        if(GoldAmount >= 50)
+        {
+            Instantiate(archerprefab, spawn_pos, Quaternion.identity);
+            AddGold(-50);
+        }
+       
     }
 
 
