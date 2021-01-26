@@ -9,7 +9,7 @@ public class Archer_test_Controller : MonoBehaviour
     [Header ("Basic Atribudes")]
     public float range;
     public Transform target;
-    public float walkSpeed = 10;
+    public float walkSpeed = 0.2f;
     public CharacterController controller;
 
     [Header("Attack")]
@@ -35,30 +35,45 @@ public class Archer_test_Controller : MonoBehaviour
     }
     void Update()
     {
-        int posIndex = gameController.gridIndexFromPos(transform.position.x,transform.position.y);
-        if(posIndex != -1) {
-            GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
-            if (currentNode.GetComponent<Node>().isObstacle) {
-                transform.position += (currentNode.transform.position - transform.position).normalized;
-            }
-        }
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime*walkSpeed);
+        // Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        // controller.Move(move * Time.deltaTime*walkSpeed);
 
-        // if(Input.GetKey("a")) {
-        //     transform.position = new Vector3(transform.position.x-walkSpeed,transform.position.y,transform.position.z);
-        // }
-        // if(Input.GetKey("d")) {
-        //     transform.position = new Vector3(transform.position.x+walkSpeed,transform.position.y,transform.position.z);
-        // }
-        // if(Input.GetKey("w")) {
-        //     transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z+walkSpeed);
-        // }
-        // if(Input.GetKey("s")) {
-        //     transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z-walkSpeed);
-        // }
+        Vector3 move = new Vector3(0,0,0);
+        if(Input.GetKey("a")) {
+            move.x -= walkSpeed;
+        }
+        if(Input.GetKey("d")) {
+            move.x = walkSpeed;
+        }
+        if(Input.GetKey("w")) {
+            move.z = walkSpeed;
+        }
+        if(Input.GetKey("s")) {
+            move.z = -walkSpeed;
+        }
+        
+        Vector3 nextPos = transform.position;
+        int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
+        // print("pIndex: " + posIndex);
+        if(posIndex != -1) {
+            GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
+            // if target pos is free
+            if (!currentNode.GetComponent<Node>().isObstacle) {
+                nextPos.x += move.x;
+            }
+        }
+        posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z+move.z);
+        // print("pIndex: " + posIndex);
+        if(posIndex != -1) {
+            GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
+            // if target pos is free
+            if (!currentNode.GetComponent<Node>().isObstacle) {
+                nextPos.z += move.z;
+            }
+        }
+        transform.position = nextPos;
 
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
         
