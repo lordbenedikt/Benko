@@ -19,6 +19,7 @@ public class UI_Manager : MonoBehaviour
 
     void Start(){
         //White_Fade = GameObject.Find("AlphaFade").GetComponent<Animator>();
+        SetGold(300);
     }
     
     void Update()

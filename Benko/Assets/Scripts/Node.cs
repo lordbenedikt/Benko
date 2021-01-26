@@ -47,9 +47,9 @@ public class Node : MonoBehaviour
         // left button
         if (Input.GetMouseButton(0))
         {
-            if (!isObstacle && gameController.UI.ActivateBuildMode)
+            if (!isObstacle && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
-                // -money
+                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
                 isObstacle = true;
             }
         }
@@ -58,7 +58,7 @@ public class Node : MonoBehaviour
         {
             if (isObstacle && gameController.UI.ActivateBuildMode)
             {
-                // destroy wall
+                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(1);
                 isObstacle = false;
                 Destroy(cornerStone);
             } else {
