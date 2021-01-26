@@ -63,8 +63,8 @@ public class UI_Manager : MonoBehaviour
         {
             ActivateBuildMode = false;
             BuildModeText.SetText("BuildMode: OFF");
-            
-            AddCoins(50);
+
+            AddGold(50);
             return;
         }
         ActivateBuildMode = true;
@@ -72,12 +72,12 @@ public class UI_Manager : MonoBehaviour
         
     }
 
-    public void SetCoins(int _amount)
+    public void SetGold(int _amount)
     {
         GoldAmount = _amount;
     }
 
-    public void AddCoins(int _amount)
+    public void AddGold(int _amount)
     {
         GoldAmount = GoldAmount + _amount;
     }
