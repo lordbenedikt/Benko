@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45125777, g: 0.50095326, b: 0.57345986, a: 1}
+  m_IndirectSpecularColor: {r: 0.44654542, g: 0.49637747, b: 0.5747998, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,7 +155,7 @@ Transform:
   - {fileID: 922506171}
   - {fileID: 863386546}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &176516057
 GameObject:
@@ -186,7 +186,7 @@ Transform:
   m_Children:
   - {fileID: 1213247870}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &358374103
 GameObject:
@@ -549,7 +549,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 49af93f8f33680945958b2b2f5e9362a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 49af93f8f33680945958b2b2f5e9362a,
         type: 3}
@@ -766,7 +766,7 @@ MonoBehaviour:
   ActivateBuildMode: 0
   archerprefab: {fileID: 591657273485245413, guid: 5aada6410c335cd4bbd33a0cb479f019,
     type: 3}
-  spawn_pos: {x: 0, y: 0, z: 0}
+  spawn_pos: {x: -8, y: 0, z: 4}
   BuildModeText: {fileID: 1340281829}
 --- !u!114 &964992052
 MonoBehaviour:
@@ -936,13 +936,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113678804}
-  m_LocalRotation: {x: 0.8143181, y: -0.35359347, z: 0.44043306, w: 0.13370262}
-  m_LocalPosition: {x: -2.2350354, y: 7.618316, z: 2.9102485}
+  m_LocalRotation: {x: 0.31033912, y: -0.5307476, z: 0.29496887, w: 0.73143005}
+  m_LocalPosition: {x: 0.95, y: 10.28, z: 1.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 159980796}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 31.953001, y: -227.219, z: -147.32301}
+  m_LocalEulerAnglesHint: {x: 50.093002, y: -67.646, z: 9.155001}
 --- !u!4 &1213247870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 251688705619485023, guid: 5aada6410c335cd4bbd33a0cb479f019,
@@ -1476,7 +1476,7 @@ Transform:
   - {fileID: 1509389085}
   - {fileID: 923712606}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1842200829
 PrefabInstance:
@@ -1991,3 +1991,116 @@ PrefabInstance:
       objectReference: {fileID: 964992054}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ad0724eef9a4a4288655059bb77abf, type: 3}
+--- !u!4 &543450652233104160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148516954522}
+  m_LocalRotation: {x: -0, y: -0.89651334, z: -0, w: -0.4430167}
+  m_LocalPosition: {x: -9.812783, y: 0, z: 4.308814}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4683129892927770082}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -232.59299, z: 0}
+--- !u!1 &644938411751427644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4683129892927770082}
+  - component: {fileID: 8672297612804898411}
+  - component: {fileID: 791055250149484017}
+  m_Layer: 0
+  m_Name: House
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &791055250149484017
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644938411751427644}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -2310514774154243031, guid: 28f838f5b3e11704eb66596973389fb7, type: 3}
+  - {fileID: 5200753494579969130, guid: 28f838f5b3e11704eb66596973389fb7, type: 3}
+  - {fileID: -749338713933554755, guid: 28f838f5b3e11704eb66596973389fb7, type: 3}
+  - {fileID: 7209514650377959485, guid: 28f838f5b3e11704eb66596973389fb7, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!1 &919132148516954522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450652233104160}
+  m_Layer: 0
+  m_Name: House (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4683129892927770082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644938411751427644}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 543450652233104160}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8672297612804898411
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644938411751427644}
+  m_Mesh: {fileID: 4887216478360415443, guid: 28f838f5b3e11704eb66596973389fb7, type: 3}
