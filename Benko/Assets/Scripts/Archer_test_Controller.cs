@@ -18,7 +18,7 @@ public class Archer_test_Controller : MonoBehaviour
     public float Damage;
     public GameObject Arrow;
     public Transform ArrowStartPoint;
-    
+    public bool selected;
     Animator animator;
     GameController gameController;
     
@@ -39,19 +39,20 @@ public class Archer_test_Controller : MonoBehaviour
         
         // Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         // controller.Move(move * Time.deltaTime*walkSpeed);
-
         Vector3 move = new Vector3(0,0,0);
-        if(Input.GetKey("a")) {
-            move.x -= walkSpeed * Time.deltaTime;
-        }
-        if(Input.GetKey("d")) {
-            move.x = walkSpeed* Time.deltaTime;
-        }
-        if(Input.GetKey("w")) {
-            move.z = walkSpeed* Time.deltaTime;
-        }
-        if(Input.GetKey("s")) {
-            move.z = -walkSpeed* Time.deltaTime;
+        if(selected) {   
+            if(Input.GetKey("a")) {
+                move.x -= walkSpeed * Time.deltaTime;
+            }
+            if(Input.GetKey("d")) {
+                move.x = walkSpeed* Time.deltaTime;
+            }
+            if(Input.GetKey("w")) {
+                move.z = walkSpeed* Time.deltaTime;
+            }
+            if(Input.GetKey("s")) {
+                move.z = -walkSpeed* Time.deltaTime;
+            }
         }
         
         Vector3 nextPos = transform.position;
