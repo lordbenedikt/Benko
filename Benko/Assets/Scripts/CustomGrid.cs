@@ -240,14 +240,16 @@ public class CustomGrid : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            // Debug.Log(hit.point);
+            Debug.Log(hit.point);
             
             Vector2 clickPos = new Vector2(hit.point.x,hit.point.z);
-            float maxDist = 3;
+            float maxDist = 1;
             GameObject player = null;
             foreach(GameObject ply in players) {
+                print(players.Length);
                 Vector2 playerPos = new Vector2(ply.transform.position.x, ply.transform.position.z);
-                float distance = Vector2.Distance(playerPos, hit.point);
+                float distance = Vector2.Distance(playerPos, clickPos);
+                print("distance: " + distance);
                 if(distance<maxDist) {
                     maxDist = distance;
                     player = ply;
