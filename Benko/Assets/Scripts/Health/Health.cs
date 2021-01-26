@@ -14,6 +14,9 @@ public class Health : MonoBehaviour
     public Image healthDisplay;
     public Image image;
 
+    public float yOffset = 2;
+    public float hpBarScale = 1;
+
     public GameObject DiePX;
 
     void Awake(){
@@ -30,7 +33,9 @@ public class Health : MonoBehaviour
      }
     void Start()
     {
-        GameObject go = Instantiate(HealthBar, this.transform.position + new Vector3(0,1,0), Quaternion.identity);
+        GameObject go = Instantiate(HealthBar, this.transform.position + new Vector3(0,yOffset,0), Quaternion.identity);
+        Vector3 ls = go.transform.localScale;
+        go.transform.localScale = new Vector3(ls.x*hpBarScale,ls.x*hpBarScale,ls.x*hpBarScale);
         go.transform.SetParent(this.transform);
         healthDisplay = go.GetComponent<HealthBar>().healthDisplay.GetComponent<Image>();
         print("healthDisplay: " + healthDisplay);

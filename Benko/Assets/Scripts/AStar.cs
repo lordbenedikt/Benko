@@ -145,22 +145,24 @@ public class AStar : MonoBehaviour
     public float aStar(GameObject s, GameObject z, List<GameObject> shortestPath)
     {
         shortestPath.Clear();
+        if(s==z) {
+            shortestPath.Add(z);
+            return 0;
+        }
         SortedDictionary<int, float> D = new SortedDictionary<int, float>();
         D[s.GetInstanceID()] = 0;
-
-        // List<Tracker> shortestPath = new List<Tracker>();
         List<GameObject> Todo = new List<GameObject>();
         Todo.Add(s);
-        // path.Add(new Tracker(null, s));
+
         while(Todo.Count > 0) {
             GameObject v = minimalScore(D, Todo, z);
 
-            // if found path
+            // if found path 
             if(v==z) {
                 shortestPath.Add(z);
                 GameObject advancedNode = z;
                 GameObject bestChoice = null;
-                float minScore = 100000;
+                float minScore = 10000000;
 
                 do {
                     // print(advancedNode);
@@ -170,23 +172,25 @@ public class AStar : MonoBehaviour
                             bestChoice = go;
                         minScore = D[bestChoice.GetInstanceID()];
                     }
-                    if(bestChoice==null) continue;
+                    // if(bestChoice==null) break;
                     advancedNode = bestChoice;
                     shortestPath.Add(advancedNode);
                 } while(advancedNode != s);
 
                 // print(shortestPath.Count);
                 foreach(GameObject n in shortestPath) {
-                    n.GetComponent<Node>().inPath = true;
+                    // n.GetComponent<Node>().inPath = true;
                 }
                 return D[z.GetInstanceID()];
             }
-
 
             Todo.Remove(v);
             foreach(GameObject u in v.GetComponent<Node>().adjacents) {
                 if (u==null || u.GetComponent<Node>().isObstacle) continue;
                 if(!D.ContainsKey(u.GetInstanceID()) || D[u.GetInstanceID()] > D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
+                    if(D.ContainsKey(u.GetInstanceID())) {
+                        print("found shorter path");
+                    }
                     D[u.GetInstanceID()] = D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude;
                     Todo.Add(u);
                 }
@@ -197,17 +201,15 @@ public class AStar : MonoBehaviour
 
     GameObject minimalScore(SortedDictionary<int, float> D, List<GameObject> Todo, GameObject z) {
         GameObject res = Todo[0];
-        
-        foreach(GameObject n in Todo) {
-            float minScore = nodeScore(D[n.GetInstanceID()], res, z);
-            for(int i = 1; i<Todo.Count; i++) {
-                float score = nodeScore(D[n.GetInstanceID()], Todo[i], z);
-                if(score<minScore) {
-                    res = Todo[i];
-                    minScore = score;
-                }
+        float minScore = nodeScore(D[Todo[0].GetInstanceID()], res, z);
+        for(int i = 1; i<Todo.Count; i++) {    
+            float score = nodeScore(D[Todo[i].GetInstanceID()], Todo[i], z);
+            if(score<minScore) {
+                res = Todo[i];
+                minScore = score;
             }
         }
+
         return res;
     }
     float nodeScore(float currentScore, GameObject n, GameObject z) {

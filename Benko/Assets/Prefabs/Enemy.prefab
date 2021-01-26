@@ -144,4 +144,7 @@ MonoBehaviour:
   _healthbar: {fileID: 0}
   healthDisplay: {fileID: 0}
   image: {fileID: 0}
+  yOffset: 2
+  widht: 2
+  height: 0.2
   DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}

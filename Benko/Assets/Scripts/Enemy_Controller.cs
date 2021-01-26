@@ -32,7 +32,14 @@ public class Enemy_Controller : MonoBehaviour
     }
     void Update()
     {
+
         player = GameObject.FindGameObjectWithTag("Player");
+        // if hit Player
+        if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {
+            Destroy(gameObject);
+            player.GetComponent<Health>().Currenthealth -= 40;
+            return;
+        }
         findPath();
         // print(nextNode);
         if(nextNode != null) {
@@ -44,13 +51,9 @@ public class Enemy_Controller : MonoBehaviour
         }
 
         // Vector3 targetDirection = Player.transform.position;
-
         // float singleStep = speed * Time.deltaTime;
-
         // Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
-
         // Debug.DrawRay(transform.position, newDirection, Color.red);
-
         // // Calculate a rotation a step closer to the target and applies rotation to this object
         // transform.rotation = Quaternion.LookRotation(newDirection);
     }

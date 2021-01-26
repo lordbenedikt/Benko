@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
         customGrid = GameObject.FindGameObjectWithTag("CustomGrid").GetComponent<CustomGrid>();
     }
 
-
     void Update()
     {
         
