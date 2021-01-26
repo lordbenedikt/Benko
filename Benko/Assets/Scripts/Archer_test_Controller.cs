@@ -58,8 +58,6 @@ public class Archer_test_Controller : MonoBehaviour
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
         // print("pIndex: " + posIndex);
         print(posIndex);
-        print(gameController.gameObject.GetComponent<CustomGrid>());
-        print("custGrid: "+gameController.gameObject.GetComponent<CustomGrid>());
         print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
             GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];

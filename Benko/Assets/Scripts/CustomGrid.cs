@@ -53,7 +53,6 @@ public class CustomGrid : MonoBehaviour
 
             Node node = nodes[i].GetComponent<Node>();
             node.transform.parent = gameObject.transform; 
-            node.customGrid = this;
             node.adjacents = new GameObject[4];
         }
         for (int i = 0; i < nodes.Length; i++)

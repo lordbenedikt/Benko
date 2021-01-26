@@ -7,9 +7,9 @@ public class Wall : MonoBehaviour
 
     MeshFilter meshFilter;
     public Mesh corner;
+    [HideInInspector]
     public GameObject adjacents;
     GameController gameController;
-    public GameObject target;
 
     void Start()
     {

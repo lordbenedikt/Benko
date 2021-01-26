@@ -71,7 +71,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4111247189815993293}
-  m_Mesh: {fileID: 6375708778553226300, guid: 492c417fd18eb7f4fb86a65c42c1ae88, type: 3}
+  m_Mesh: {fileID: 4300000, guid: d850dfdeaf5820e4caa65b59e42dadde, type: 2}
 --- !u!23 &7668432765118047814
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -123,6 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97abdf9427533440bab115476035209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corner: {fileID: -5221963080773851136, guid: 67f6046d75443a146a9245528e7ac3c5, type: 3}
+  corner: {fileID: 4300000, guid: d850dfdeaf5820e4caa65b59e42dadde, type: 2}
   adjacents: {fileID: 0}
-  target: {fileID: 0}

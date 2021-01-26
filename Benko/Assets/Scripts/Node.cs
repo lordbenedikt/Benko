@@ -8,8 +8,7 @@ public class Node : MonoBehaviour
     [HideInInspector]
     public GameObject cornerStone;
 
-    [HideInInspector]
-    public CustomGrid customGrid;
+
     [HideInInspector]
     public bool selected = false;
     [HideInInspector]
@@ -19,10 +18,16 @@ public class Node : MonoBehaviour
     [HideInInspector]
     public bool inPath = false;
 
+    GameController gameController;
+    CustomGrid customGrid;
+
 
     List<GameObject> shortestPath = new List<GameObject>();
 
-
+    void Awake() {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        customGrid = gameController.gameObject.GetComponent<CustomGrid>();
+    }
     void Start()
     {
     }
