@@ -186,7 +186,7 @@ public class AStar : MonoBehaviour
             Todo.Remove(v);
             foreach(GameObject u in v.GetComponent<Node>().adjacents) {
                 if (u==null || u.GetComponent<Node>().isObstacle) continue;
-                if(!D.ContainsKey(u.GetInstanceID()) || D[v.GetInstanceID()] > D[u.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
+                if(!D.ContainsKey(u.GetInstanceID()) || D[u.GetInstanceID()] > D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
                     D[u.GetInstanceID()] = D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude;
                     Todo.Add(u);
                 }
