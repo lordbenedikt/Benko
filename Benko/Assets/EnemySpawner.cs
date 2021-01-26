@@ -4,34 +4,55 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemy;
+    public GameObject enemy_prefab;
+    public float MaxRange = 2.5f;
 
-    public float MinX;
-    public float MaxX;
+    private float MinX;
+    private float MaxX;
 
-    public float MinZ;
-    public float MaxZ;
+    private float MinZ;
+    private float MaxZ;
 
-    public Vector3 RandomVector;
-    float MaxRange = 2.5f;
+    private Vector3 RandomVector;
+    
+
+    private void Start()
+    {
+        MinX = transform.position.x - MaxRange;
+        MaxX = transform.position.x + MaxRange;
+
+        MinZ = transform.position.z - MaxRange;
+        MaxZ = transform.position.z + MaxRange;
+    }
 
     public void GetRandomPos()
     {
         float Random_x = Random.Range(MinX, MaxX);
-        float Random_y = Random.Range(MinZ, MaxZ);
+        float Random_z = Random.Range(MinZ, MaxZ);
 
-        RandomVector = new Vector3(Random_x, 0, Random_y);
+        RandomVector = new Vector3(Random_x, 0, Random_z);
     }
 
-    public void SetRandomPos()
+    public void SpawnEnemy()
     {
         GetRandomPos();
         print(RandomVector);
-        while(MaxRange <= RandomVector.magnitude)
+        if (MaxRange <= RandomVector.magnitude)
         {
-            GetRandomPos();
-            
+            print("Gespawnt");
         }
-        GameObject go =Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere), RandomVector, Quaternion.identity);
+
+        //if (MaxRange > RandomVector.magnitude)
+        //{
+        //    print(RandomVector + "Nope");
+        //}
+
+        //while (MaxRange <= RandomVector.magnitude)
+        //{
+        //    GetRandomPos();
+
+        //}
+
+        GameObject go =Instantiate(enemy_prefab, RandomVector, Quaternion.identity);
     }
 }
