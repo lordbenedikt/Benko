@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45125788, g: 0.5009538, b: 0.5734601, a: 1}
+  m_IndirectSpecularColor: {r: 0.45125777, g: 0.50095326, b: 0.57345986, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1265,7 +1265,7 @@ Camera:
   far clip plane: 1000
   field of view: 26
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7.31
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1292,8 +1292,8 @@ Transform:
   m_LocalPosition: {x: 4.58, y: 15.06, z: -15.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1578525359}
-  m_RootOrder: 1
+  m_Father: {fileID: 1509389085}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40, y: -15, z: 0}
 --- !u!1001 &1492409026
 PrefabInstance:
@@ -1375,6 +1375,7 @@ GameObject:
   - component: {fileID: 1509389085}
   - component: {fileID: 1509389084}
   - component: {fileID: 1509389083}
+  - component: {fileID: 1509389086}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1426,10 +1427,25 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1377437519}
   m_Father: {fileID: 1578525359}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1509389086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509389082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edad7602a64c9de4c8e946bcca0240bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MouseValue: 0
+  scale: 4
 --- !u!1 &1578525358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,7 +1474,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1509389085}
-  - {fileID: 1377437519}
   - {fileID: 923712606}
   m_Father: {fileID: 0}
   m_RootOrder: 3
