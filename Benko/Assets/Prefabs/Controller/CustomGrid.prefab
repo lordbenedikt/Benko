@@ -45,9 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minX: -4.5
   minZ: -5.5
-  s: 1
+  gridSize: 0
   cols: 10
   rows: 10
   target: {fileID: 0}
   structure: {fileID: 0}
-  gridSize: 0

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.31
+  m_FillAmount: 0.252
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 6168797801274107169}
   - component: {fileID: 6168797801274107168}
   - component: {fileID: 6168797801274107171}
+  - component: {fileID: 7819540507304312464}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -248,3 +249,16 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7819540507304312464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6168797801274107170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372bc7bb248747344a1c2cf04b58b7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthDisplay: {fileID: 6168797800697451882}

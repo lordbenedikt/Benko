@@ -77,12 +77,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minX: -4.5
   minZ: -4.5
-  s: 1
+  gridSize: 1
   cols: 10
   rows: 10
   target: {fileID: 2267989764998409409}
   structure: {fileID: 4111247189815993293}
-  gridSize: 1
 --- !u!1 &4111247189815993293
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,3 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corner: {fileID: -5221963080773851136, guid: 67f6046d75443a146a9245528e7ac3c5, type: 3}
   adjacents: {fileID: 0}
+  target: {fileID: 0}

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -154,6 +154,8 @@ public class AStar : MonoBehaviour
         // path.Add(new Tracker(null, s));
         while(Todo.Count > 0) {
             GameObject v = minimalScore(D, Todo, z);
+
+            // if found path
             if(v==z) {
                 shortestPath.Add(z);
                 GameObject advancedNode = z;
@@ -161,11 +163,12 @@ public class AStar : MonoBehaviour
                 float minScore = 100000;
 
                 do {
-                    print(advancedNode);
+                    // print(advancedNode);
                     foreach(GameObject go in advancedNode.GetComponent<Node>().adjacents) {
                         if (go==null || !D.ContainsKey(go.GetInstanceID())) continue;
-                        if(D[go.GetInstanceID()]<minScore) bestChoice = go;
-                        minScore = D[go.GetInstanceID()];
+                        if(D[go.GetInstanceID()]<minScore)
+                            bestChoice = go;
+                        minScore = D[bestChoice.GetInstanceID()];
                     }
                     if(bestChoice==null) continue;
                     advancedNode = bestChoice;
@@ -174,15 +177,16 @@ public class AStar : MonoBehaviour
 
                 // print(shortestPath.Count);
                 foreach(GameObject n in shortestPath) {
-                    // n.GetComponent<Node>().inPath = true;
+                    n.GetComponent<Node>().inPath = true;
                 }
-
                 return D[z.GetInstanceID()];
             }
+
+
             Todo.Remove(v);
             foreach(GameObject u in v.GetComponent<Node>().adjacents) {
                 if (u==null || u.GetComponent<Node>().isObstacle) continue;
-                if(!D.ContainsKey(u.GetInstanceID()) || D[u.GetInstanceID()] > D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
+                if(!D.ContainsKey(u.GetInstanceID()) || D[v.GetInstanceID()] > D[u.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
                     D[u.GetInstanceID()] = D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude;
                     Todo.Add(u);
                 }
@@ -196,7 +200,7 @@ public class AStar : MonoBehaviour
         
         foreach(GameObject n in Todo) {
             float minScore = nodeScore(D[n.GetInstanceID()], res, z);
-            for(int i = 0; i<Todo.Count; i++) {
+            for(int i = 1; i<Todo.Count; i++) {
                 float score = nodeScore(D[n.GetInstanceID()], Todo[i], z);
                 if(score<minScore) {
                     res = Todo[i];

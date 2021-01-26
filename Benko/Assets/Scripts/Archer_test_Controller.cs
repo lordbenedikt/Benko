@@ -31,7 +31,7 @@ public class Archer_test_Controller : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
     void Update()
     {
@@ -80,7 +80,7 @@ public class Archer_test_Controller : MonoBehaviour
 
         if (FireCountdwon <= 1)
         {
-            Shoot();
+            ShootAnim.SetBool("Shoot", true);
             FireCountdwon = 1 / FireRate;
         }
 

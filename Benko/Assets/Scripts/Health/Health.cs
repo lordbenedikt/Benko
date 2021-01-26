@@ -11,16 +11,30 @@ public class Health : MonoBehaviour
 
     public GameObject HealthBar;
     public GameObject _healthbar;
+    public Image healthDisplay;
     public Image image;
+
+    public GameObject DiePX;
 
     void Awake(){
         Currenthealth = MaxHealth;
     }
-
+    GameObject GetChildWithName(GameObject obj, string name) {
+         Transform trans = obj.transform;
+         Transform childTrans = trans. Find(name);
+         if (childTrans != null) {
+             return childTrans.gameObject;
+         } else {
+             return null;
+         }
+     }
     void Start()
     {
         GameObject go = Instantiate(HealthBar, this.transform.position + new Vector3(0,1,0), Quaternion.identity);
         go.transform.SetParent(this.transform);
+        healthDisplay = go.GetComponent<HealthBar>().healthDisplay.GetComponent<Image>();
+        print("healthDisplay: " + healthDisplay);
+        print("fill: " + healthDisplay.fillAmount);
 
         //_healthbar = this.transform.Find("Health_Current").gameObject;
        // _healthbar = GameObject.Find("Health_Current");
@@ -34,15 +48,21 @@ public class Health : MonoBehaviour
             Debug.Log("Found");
         }
 
-        Debug.Log("Error");
-
         //TakeDamage(0.5f);
 
     }
 
     private void Update()
     {
-        GameObject.Find("Health_Current").GetComponent<Image>().fillAmount = Currenthealth / MaxHealth;
+        // if(MaxHealth==100) {
+        //     print("healthDisplay: " + healthDisplay);
+        // print("CurrentHealth: " + Currenthealth);
+        // print("MaxHealth: " + MaxHealth);
+        // print("Health: " + Currenthealth/MaxHealth);
+        // }
+
+        healthDisplay.fillAmount = Currenthealth/MaxHealth;
+        
         //image.fillAmount = Currenthealth / MaxHealth;
         //Currenthealth = image.fillAmount;
 
@@ -59,6 +79,9 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
+        GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity);
+        Destroy(go,1.0f);
+        Destroy(gameObject);
         Debug.Log("Heyy");
     }
 }

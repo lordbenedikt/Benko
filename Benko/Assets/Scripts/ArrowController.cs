@@ -9,13 +9,21 @@ public class ArrowController : MonoBehaviour
     public Vector3 start;
 
     
+    void Awake() {
+        print(target);
+        // if(target==null)
+        //     Destroy(gameObject);
+    }
     void Start() {
         start = transform.position;
+        setStartDir();
     }
     public void Seek(Transform _target)
 
     {
         target = _target;
+        if(target==null)
+        Destroy(gameObject);
     }
     void Update()
     {
@@ -24,7 +32,6 @@ public class ArrowController : MonoBehaviour
         if(target == null)
         {
             Destroy(gameObject);
-            
             return;
         }
         //Debug.Log(target);
@@ -68,9 +75,21 @@ public class ArrowController : MonoBehaviour
 
     }
 
+    void setStartDir() {
+        print("target: " + (target==null?"null":"exists") + "   start: " + start);
+        if(target==null) return;
+        Vector3 v = target.position - start;
+        v.y = 0;
+        v = v.normalized;
+        v.y = 2;
+
+        transform.rotation = Quaternion.LookRotation(v);
+    }
+
     public void HitTarget()
     {
         //Particle
+        target.gameObject.GetComponent<Health>().Currenthealth -= 10;
         Destroy(gameObject);
         // Debug.Log("Error");
     }
