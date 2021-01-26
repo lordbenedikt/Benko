@@ -255,6 +255,7 @@ public class CustomGrid : MonoBehaviour
                     player = ply;
                 }
             }
+            // if click on player unit
             if(player!=null) {
                 foreach(GameObject p in players) {
                     p.GetComponent<Archer_test_Controller>().selected = false;
