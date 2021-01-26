@@ -38,7 +38,6 @@ public class CustomGrid : MonoBehaviour
         // hoho[5f] = 7;
         // print(hoho[5f]);
 
-
         buildWallEvent.AddListener(buildWall);
 
         walls = new List<GameObject>();
@@ -97,7 +96,6 @@ public class CustomGrid : MonoBehaviour
             }
 
         }
-
         buildWall();
     }
 
@@ -107,7 +105,6 @@ public class CustomGrid : MonoBehaviour
         foreach (GameObject wall in walls) {
             Destroy(wall);
         }
-        
         buildWall();
     }
 

@@ -57,8 +57,8 @@ public class Archer_test_Controller : MonoBehaviour
         Vector3 nextPos = transform.position;
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
         // print("pIndex: " + posIndex);
-        print(posIndex);
-        print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
+        // print(posIndex);
+        // print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
             GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
             // if target pos is free
@@ -139,7 +139,7 @@ public class Archer_test_Controller : MonoBehaviour
     {
         ShootAnim.SetBool("Shoot", true);
         // Debug.Log("shoot");
-        GameObject go = (GameObject)Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
+        GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         ArrowController ArrowScript = go.GetComponent<ArrowController>();
         //Debug.Log(ArrowScript.speed);
 
