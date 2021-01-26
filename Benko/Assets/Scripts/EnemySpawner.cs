@@ -23,6 +23,8 @@ public class EnemySpawner : MonoBehaviour
 
         MinZ = transform.position.z - MaxRange;
         MaxZ = transform.position.z + MaxRange;
+
+        InvokeRepeating("OutputTime", 3f, 3f);  //1s delay, repeat every 1s
     }
 
     public void GetRandomPos()
@@ -41,18 +43,14 @@ public class EnemySpawner : MonoBehaviour
         {
             print("Gespawnt");
         }
-
-        //if (MaxRange > RandomVector.magnitude)
-        //{
-        //    print(RandomVector + "Nope");
-        //}
-
-        //while (MaxRange <= RandomVector.magnitude)
-        //{
-        //    GetRandomPos();
-
-        //}
-
         GameObject go =Instantiate(enemy_prefab, RandomVector, Quaternion.identity);
+
+
+    }
+
+    
+    void OutputTime()
+    {
+        SpawnEnemy();
     }
 }
