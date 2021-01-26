@@ -61,7 +61,7 @@ public class Node : MonoBehaviour
             {
                 go.GetComponent<Node>().inPath = false;
             }
-            print(customGrid.aStar(gameObject, customGrid.nodes[customGrid.nodes.Length - 1], shortestPath));
+            // print(customGrid.aStar(gameObject, customGrid.nodes[customGrid.nodes.Length - 1], shortestPath));
         }
         // middle button
         if (Input.GetMouseButtonDown(2))

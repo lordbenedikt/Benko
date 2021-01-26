@@ -75,6 +75,7 @@ public class Archer_test_Controller : MonoBehaviour
                 nextPos.z += move.z;
             }
         }
+        print("mov: " + nextPos);
         transform.position = nextPos;
 
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
