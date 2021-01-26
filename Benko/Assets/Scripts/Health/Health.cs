@@ -85,8 +85,9 @@ public class Health : MonoBehaviour
     public void Die()
     {
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity);
+        GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
         Destroy(go,1.0f);
         Destroy(gameObject);
-        Debug.Log("Heyy");
+        //Debug.Log("Heyy");
     }
 }

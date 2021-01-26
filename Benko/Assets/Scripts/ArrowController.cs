@@ -10,7 +10,7 @@ public class ArrowController : MonoBehaviour
 
     
     void Awake() {
-        print(target);
+        //print(target);
         // if(target==null)
         //     Destroy(gameObject);
     }

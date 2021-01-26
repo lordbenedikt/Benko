@@ -36,6 +36,8 @@ public class Enemy_Controller : MonoBehaviour
         if (player==null) return;
         // if hit Player
         if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {
+            
+            
             Destroy(gameObject);
             player.GetComponent<Health>().Currenthealth -= 40;
             return;
