@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [HideInInspector]
-    public CustomGrid customGrid;
+
     public Canvas canvas;
+    public GameObject selection;
+
     [HideInInspector]
     public UI_Manager UI;
+        [HideInInspector]
+    public CustomGrid customGrid;
 
     void Start()
     {
         UI = canvas.GetComponent<UI_Manager>();
         customGrid = gameObject.GetComponent<CustomGrid>();
+        selection.SetActive(false);
     }
 
     void Update()

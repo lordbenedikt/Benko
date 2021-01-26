@@ -260,6 +260,9 @@ public class CustomGrid : MonoBehaviour
                     p.GetComponent<Archer_test_Controller>().selected = false;
                 }
                 player.GetComponent<Archer_test_Controller>().selected = true;
+                controller.selection.transform.position = player.transform.position;
+                controller.selection.SetActive(true);
+                controller.selection.GetComponent<Selection>().player = player;
             }
         }
 

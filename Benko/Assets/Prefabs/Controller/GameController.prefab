@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd161637e3ca484e8b925bc4fcf8500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customGrid: {fileID: 0}
   canvas: {fileID: 0}
+  selection: {fileID: 5110855421858624693}
   UI: {fileID: 0}
+  customGrid: {fileID: 0}
 --- !u!114 &5110855421183745684
 MonoBehaviour:
   m_ObjectHideFlags: 0

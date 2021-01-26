@@ -24,7 +24,8 @@ public class Node : MonoBehaviour
 
     List<GameObject> shortestPath = new List<GameObject>();
 
-    void Awake() {
+    void Awake()
+    {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = gameController.gameObject.GetComponent<CustomGrid>();
     }
@@ -35,7 +36,8 @@ public class Node : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.GetComponent<Renderer>() != null) {
+        if (gameObject.GetComponent<Renderer>() != null)
+        {
             Material objMaterial = gameObject.GetComponent<Renderer>().material;
             objMaterial.color = customGrid.colorOriginal;
             if (isObstacle && customGrid.highlightObstacle) objMaterial.color = customGrid.colorSelected;
@@ -61,7 +63,9 @@ public class Node : MonoBehaviour
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(1);
                 isObstacle = false;
                 Destroy(cornerStone);
-            } else {
+            }
+            else
+            {
                 foreach (GameObject go in customGrid.nodes)
                 {
                     go.GetComponent<Node>().inPath = false;
@@ -73,7 +77,7 @@ public class Node : MonoBehaviour
         // middle button
         if (Input.GetMouseButtonDown(2))
         {
-            GameObject go = Instantiate(enemy, transform.position,Quaternion.identity);
+            GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }
 }
