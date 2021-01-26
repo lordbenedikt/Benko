@@ -32,8 +32,8 @@ public class Enemy_Controller : MonoBehaviour
     }
     void Update()
     {
-
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player==null) return;
         // if hit Player
         if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {
             Destroy(gameObject);

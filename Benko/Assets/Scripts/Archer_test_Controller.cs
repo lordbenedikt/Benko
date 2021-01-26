@@ -36,11 +36,12 @@ public class Archer_test_Controller : MonoBehaviour
     void Update()
     {
         int posIndex = gameController.gridIndexFromPos(transform.position.x,transform.position.y);
-        GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
-        if (currentNode.GetComponent<Node>().isObstacle) {
-            transform.position += (currentNode.transform.position - transform.position).normalized;
+        if(posIndex != -1) {
+            GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
+            if (currentNode.GetComponent<Node>().isObstacle) {
+                transform.position += (currentNode.transform.position - transform.position).normalized;
+            }
         }
-
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
