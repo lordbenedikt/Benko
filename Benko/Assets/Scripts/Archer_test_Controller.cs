@@ -9,7 +9,7 @@ public class Archer_test_Controller : MonoBehaviour
     [Header ("Basic Atribudes")]
     public float range;
     public Transform target;
-    public float walkSpeed = 0.2f;
+    public float walkSpeed;
     public CharacterController controller;
 
     [Header("Attack")]
@@ -31,7 +31,7 @@ public class Archer_test_Controller : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.1f);
+        InvokeRepeating("UpdateTarget", 0f, 0.01f);
     }
     void Update()
     {
@@ -42,24 +42,27 @@ public class Archer_test_Controller : MonoBehaviour
 
         Vector3 move = new Vector3(0,0,0);
         if(Input.GetKey("a")) {
-            move.x -= walkSpeed;
+            move.x -= walkSpeed * Time.deltaTime;
         }
         if(Input.GetKey("d")) {
-            move.x = walkSpeed;
+            move.x = walkSpeed* Time.deltaTime;
         }
         if(Input.GetKey("w")) {
-            move.z = walkSpeed;
+            move.z = walkSpeed* Time.deltaTime;
         }
         if(Input.GetKey("s")) {
-            move.z = -walkSpeed;
+            move.z = -walkSpeed* Time.deltaTime;
         }
         
         Vector3 nextPos = transform.position;
+        print("mx: "+move.x);
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
         // print("pIndex: " + posIndex);
         // print(posIndex);
         // print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
+        print(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
+            print(posIndex);
             GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
             // if target pos is free
             if (!currentNode.GetComponent<Node>().isObstacle) {
@@ -75,7 +78,7 @@ public class Archer_test_Controller : MonoBehaviour
                 nextPos.z += move.z;
             }
         }
-        print("mov: " + nextPos);
+        print("move: " + nextPos);
         transform.position = nextPos;
 
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);

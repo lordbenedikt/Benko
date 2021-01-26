@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 10
   target: {fileID: 0}
-  walkSpeed: 5
+  walkSpeed: 0.2
   controller: {fileID: 0}
   FireRate: 0.5
   FireCountdwon: 0
