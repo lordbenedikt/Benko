@@ -6,23 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
-    public Animator White_Fade;
+    //public Animator White_Fade;
+    public TextMeshProUGUI GoldText;
+    public int GoldAmount;
+    public bool ActivateBuildMode;
+    public GameObject archerprefab;
+    public Vector3 spawn_pos;
+    public TextMeshProUGUI BuildModeText;
 
-    
+
+
 
     void Start(){
-        White_Fade = GameObject.Find("AlphaFade").GetComponent<Animator>();
+        //White_Fade = GameObject.Find("AlphaFade").GetComponent<Animator>();
     }
     
     void Update()
     {
-        if(Input.GetKeyDown("q")){
-            Escape();
-            FadeToLevel(1);
-        }
+        ShowGold();
+        
+
+
     }
     public void FadeToLevel(int levelIndex){
-        White_Fade.SetTrigger("FadeOut");
+        //White_Fade.SetTrigger("FadeOut");
     }
 
     public void StartGame(){
@@ -45,5 +52,40 @@ public class UI_Manager : MonoBehaviour
 
     }
 
-    
+    public void ShowGold()
+    {
+        GoldText.SetText("Gold: " + GoldAmount);
+    }
+
+    public void BuildModeSet()
+    {
+        if(ActivateBuildMode)
+        {
+            ActivateBuildMode = false;
+            BuildModeText.SetText("BuildMode: OFF");
+            
+            AddCoins(50);
+            return;
+        }
+        ActivateBuildMode = true;
+        BuildModeText.SetText("BuildMode: ON");
+        
+    }
+
+    public void SetCoins(int _amount)
+    {
+        GoldAmount = _amount;
+    }
+
+    public void AddCoins(int _amount)
+    {
+        GoldAmount = GoldAmount + _amount;
+    }
+
+    public void BuildArcher()
+    {
+        Instantiate(archerprefab, spawn_pos, Quaternion.identity);
+    }
+
+
 }
