@@ -1969,5 +1969,10 @@ PrefabInstance:
       propertyPath: highlightObstacle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 285241500641638310, guid: c1ad0724eef9a4a4288655059bb77abf,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 964992054}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ad0724eef9a4a4288655059bb77abf, type: 3}

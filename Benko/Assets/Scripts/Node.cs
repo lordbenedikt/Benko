@@ -45,26 +45,28 @@ public class Node : MonoBehaviour
     void OnMouseOver()
     {
         // left button
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            if (isObstacle)
-            {
-                isObstacle = false;
-                Destroy(cornerStone);
-            }
-            else
+            if (!isObstacle && gameController.UI.ActivateBuildMode)
             {
                 isObstacle = true;
             }
         }
         // right button
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
-            foreach (GameObject go in customGrid.nodes)
+            if (isObstacle && gameController.UI.ActivateBuildMode)
             {
-                go.GetComponent<Node>().inPath = false;
+                isObstacle = false;
+                Destroy(cornerStone);
+            } else {
+                foreach (GameObject go in customGrid.nodes)
+                {
+                    go.GetComponent<Node>().inPath = false;
+                }
+                // print(customGrid.aStar(gameObject, customGrid.nodes[customGrid.nodes.Length - 1], shortestPath));
             }
-            // print(customGrid.aStar(gameObject, customGrid.nodes[customGrid.nodes.Length - 1], shortestPath));
+
         }
         // middle button
         if (Input.GetMouseButtonDown(2))

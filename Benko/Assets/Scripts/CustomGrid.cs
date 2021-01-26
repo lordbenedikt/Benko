@@ -24,8 +24,8 @@ public class CustomGrid : MonoBehaviour
     public GameController controller;
 
     public GameObject[] nodes;
-    Ray ray;
-    RaycastHit hit;
+    // Ray ray;
+    // RaycastHit hit;
 
     UnityEvent buildWallEvent = new UnityEvent();
 
