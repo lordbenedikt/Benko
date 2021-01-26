@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBar : MonoBehaviour
+public class HealthCurrent : MonoBehaviour
 {
     public GameObject healthDisplay;
+    public Transform _camera;
+    public GameObject _camera_obj;
+
+    private void Update()
+    {
+        //transform.LookAt(_camera);
+    }
 }
