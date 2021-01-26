@@ -9,7 +9,7 @@ public class Enemy_Controller : MonoBehaviour
     public float speed;
     List<GameObject> path = new List<GameObject>();
     GameController controller;
-    AStar aStar;
+    CustomGrid customGrid;
     GameObject nextNode;
 
     // private Transform target;
@@ -17,7 +17,7 @@ public class Enemy_Controller : MonoBehaviour
 
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        aStar = controller.gameObject.GetComponent<AStar>();
+        customGrid = controller.gameObject.GetComponent<CustomGrid>();
     }
     
     void findPath() {
@@ -25,7 +25,7 @@ public class Enemy_Controller : MonoBehaviour
         int start = controller.gridIndexFromPos(transform.position.x,transform.position.z);
         int ziel = controller.gridIndexFromPos(player.transform.position.x,player.transform.position.z);
         if(start==-1 || ziel==-1) return;
-        aStar.aStar(aStar.nodes[start], aStar.nodes[ziel], path);
+        customGrid.aStar(customGrid.nodes[start], customGrid.nodes[ziel], path);
         if(path.Count>1) {
             nextNode = path[path.Count-2].gameObject;
         }

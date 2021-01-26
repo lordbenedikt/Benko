@@ -57,8 +57,11 @@ public class Archer_test_Controller : MonoBehaviour
         Vector3 nextPos = transform.position;
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
         // print("pIndex: " + posIndex);
-        if(posIndex != -1) {
-            GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
+        print(posIndex);
+        print(gameController.gameObject.GetComponent<CustomGrid>());
+        print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
+        if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
+            GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
             // if target pos is free
             if (!currentNode.GetComponent<Node>().isObstacle) {
                 nextPos.x += move.x;
@@ -66,8 +69,8 @@ public class Archer_test_Controller : MonoBehaviour
         }
         posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z+move.z);
         // print("pIndex: " + posIndex);
-        if(posIndex != -1) {
-            GameObject currentNode = gameController.gameObject.GetComponent<AStar>().nodes[posIndex];
+        if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
+            GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
             // if target pos is free
             if (!currentNode.GetComponent<Node>().isObstacle) {
                 nextPos.z += move.z;

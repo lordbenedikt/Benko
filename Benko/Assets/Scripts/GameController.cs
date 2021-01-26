@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+
     public CustomGrid customGrid;
 
     void Start()

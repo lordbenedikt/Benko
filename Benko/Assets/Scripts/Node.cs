@@ -9,7 +9,7 @@ public class Node : MonoBehaviour
     public GameObject cornerStone;
 
     [HideInInspector]
-    public AStar aStar;
+    public CustomGrid customGrid;
     [HideInInspector]
     public bool selected = false;
     [HideInInspector]
@@ -31,8 +31,8 @@ public class Node : MonoBehaviour
     void Update()
     {
         if (gameObject.GetComponent<Renderer>() != null)
-            gameObject.GetComponent<Renderer>().material.color = isObstacle ? aStar.colorSelected : aStar.colorOriginal;
-        if (inPath) gameObject.GetComponent<Renderer>().material.color = aStar.colorPath;
+            gameObject.GetComponent<Renderer>().material.color = isObstacle ? customGrid.colorSelected : customGrid.colorOriginal;
+        if (inPath) gameObject.GetComponent<Renderer>().material.color = customGrid.colorPath;
     }
     void OnMouseOver()
     {
@@ -52,11 +52,11 @@ public class Node : MonoBehaviour
         // right button
         if (Input.GetMouseButtonDown(1))
         {
-            foreach (GameObject go in aStar.nodes)
+            foreach (GameObject go in customGrid.nodes)
             {
                 go.GetComponent<Node>().inPath = false;
             }
-            print(aStar.aStar(gameObject, aStar.nodes[aStar.nodes.Length - 1], shortestPath));
+            print(customGrid.aStar(gameObject, customGrid.nodes[customGrid.nodes.Length - 1], shortestPath));
         }
         // middle button
         if (Input.GetMouseButtonDown(2))
