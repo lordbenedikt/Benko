@@ -85,7 +85,15 @@ public class Health : MonoBehaviour
     public void Die()
     {
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity);
-        GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
+        if (this.gameObject.tag == "Enemy")
+        {
+            GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
+        }
+
+        if (this.gameObject.tag == "Player")//sollte eigentlich Archer Tag sein
+        {
+            print("Archer has died");
+        }
         Destroy(go,1.0f);
         Destroy(gameObject);
         //Debug.Log("Heyy");
