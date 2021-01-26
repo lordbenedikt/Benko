@@ -37,9 +37,14 @@ public class Enemy_Controller : MonoBehaviour
         int ziel = controller.gridIndexFromPos(player.transform.position.x,player.transform.position.z);
         if(start==-1 || ziel==-1) return;
         customGrid.aStar(customGrid.nodes[start], customGrid.nodes[ziel], path);
+        shortenPath(path);
         if(path.Count>1) {
             nextNode = path[path.Count-2].gameObject;
         }
+    }
+    
+    void shortenPath() {
+
     }
     void Update()
     {
