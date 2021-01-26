@@ -18,10 +18,20 @@ public class Enemy_Controller : MonoBehaviour
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
-        InvokeRepeating("findPath", 0f, 0.5f);
+        InvokeRepeating("findPath", 0f, 0.2f);
     }
     
     void findPath() {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        float minDistance = Mathf.Infinity;
+        foreach(GameObject ply in players) {
+            float distance = Vector2.Distance(new Vector2(transform.position.x,transform.position.z),new Vector2(ply.transform.position.x,ply.transform.position.z));
+            if(distance<minDistance) {
+                minDistance = distance;
+                player = ply;
+            }
+        }
+
         if(player==null) return;
         int start = controller.gridIndexFromPos(transform.position.x,transform.position.z);
         int ziel = controller.gridIndexFromPos(player.transform.position.x,player.transform.position.z);
@@ -33,7 +43,6 @@ public class Enemy_Controller : MonoBehaviour
     }
     void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         if (player==null) return;
         // if hit Player
         if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {

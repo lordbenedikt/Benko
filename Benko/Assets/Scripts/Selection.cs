@@ -11,6 +11,8 @@ public class Selection : MonoBehaviour
     {
         if(player!=null) {
             transform.position = player.transform.position;
+        } else {
+            gameObject.SetActive(false);
         }
     }
 }

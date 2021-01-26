@@ -168,7 +168,7 @@ public class CustomGrid : MonoBehaviour
                 shortestPath.Add(z);
                 GameObject advancedNode = z;
                 GameObject bestChoice = null;
-                float minScore = 10000000;
+                float minScore = Mathf.Infinity;
 
                 do {
                     // print(advancedNode);
