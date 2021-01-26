@@ -24,6 +24,7 @@ public class CustomGrid : MonoBehaviour
     public GameController controller;
 
     public GameObject[] nodes;
+    GameObject[] players;
 
     UnityEvent buildWallEvent = new UnityEvent();
 
@@ -193,9 +194,6 @@ public class CustomGrid : MonoBehaviour
             foreach(GameObject u in v.GetComponent<Node>().adjacents) {
                 if (u==null || u.GetComponent<Node>().isObstacle) continue;
                 if(!D.ContainsKey(u.GetInstanceID()) || D[u.GetInstanceID()] > D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude) {
-                    if(D.ContainsKey(u.GetInstanceID())) {
-                        print("found shorter path");
-                    }
                     D[u.GetInstanceID()] = D[v.GetInstanceID()] + (v.gameObject.transform.position-u.transform.position).magnitude;
                     Todo.Add(u);
                 }
@@ -234,15 +232,33 @@ public class CustomGrid : MonoBehaviour
     }
 
     public void getMousePosOnGround() {
-        int layerMask = 1 << 8;
+        // int layerMask = 1 << 8;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        players = GameObject.FindGameObjectsWithTag("Player");
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.point);
+            // Debug.Log(hit.point);
             
+            Vector2 clickPos = new Vector2(hit.point.x,hit.point.z);
+            float maxDist = 3;
+            GameObject player = null;
+            foreach(GameObject ply in players) {
+                Vector2 playerPos = new Vector2(ply.transform.position.x, ply.transform.position.z);
+                float distance = Vector2.Distance(playerPos, hit.point);
+                if(distance<maxDist) {
+                    maxDist = distance;
+                    player = ply;
+                }
+            }
+            if(player!=null) {
+                foreach(GameObject p in players) {
+                    p.GetComponent<Archer_test_Controller>().selected = false;
+                }
+                player.GetComponent<Archer_test_Controller>().selected = true;
+            }
         }
 
         // if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition),layerMask)) {
