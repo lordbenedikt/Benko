@@ -55,14 +55,14 @@ public class Archer_test_Controller : MonoBehaviour
         }
         
         Vector3 nextPos = transform.position;
-        print("mx: "+move.x);
+        // print("mx: "+move.x);
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
         // print("pIndex: " + posIndex);
         // print(posIndex);
         // print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
-        print(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
+        // print(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
-            print(posIndex);
+            // print(posIndex);
             GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
             // if target pos is free
             if (!currentNode.GetComponent<Node>().isObstacle) {
@@ -78,7 +78,7 @@ public class Archer_test_Controller : MonoBehaviour
                 nextPos.z += move.z;
             }
         }
-        print("move: " + nextPos);
+        // print("move: " + nextPos);
         transform.position = nextPos;
 
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
