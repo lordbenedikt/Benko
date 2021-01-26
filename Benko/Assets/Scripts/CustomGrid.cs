@@ -24,8 +24,6 @@ public class CustomGrid : MonoBehaviour
     public GameController controller;
 
     public GameObject[] nodes;
-    // Ray ray;
-    // RaycastHit hit;
 
     UnityEvent buildWallEvent = new UnityEvent();
 
@@ -105,6 +103,10 @@ public class CustomGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButton(0)) {
+            getMousePosOnGround();
+        }
+
         foreach (GameObject wall in walls) {
             Destroy(wall);
         }
@@ -229,5 +231,37 @@ public class CustomGrid : MonoBehaviour
         int _row = (int)Mathf.Floor((z + rows*gridSize/2)/gridSize);
         // print("col: "+_col+" row: "+_row+"\n");
         return cols*_row + _col;
+    }
+
+    public void getMousePosOnGround() {
+        int layerMask = 1 << 8;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.Log(hit.point);
+            // if (hit.rigidbody != null)
+            // {
+            //     hit.rigidbody.AddForceAtPosition(ray.direction * pokeForce, hit.point);
+            // }
+        }
+
+        // if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition),layerMask)) {
+        //     agent.destination = hit.point;
+        // }
+
+        // // Does the ray intersect any objects excluding the player layer
+        // if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        // {
+        //     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        //     Debug.Log("Did Hit");
+        // }
+        // else
+        // {
+        //     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+        //     Debug.Log("Did not Hit");
+        // }
     }
 }
