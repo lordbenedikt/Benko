@@ -2315,7 +2315,8 @@ PrefabInstance:
         type: 3}
       propertyPath: DiePX
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b,
+        type: 3}
     - target: {fileID: 591657273485245414, guid: 5aada6410c335cd4bbd33a0cb479f019,
         type: 3}
       propertyPath: MaxHealth
