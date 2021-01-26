@@ -5,33 +5,41 @@ using UnityEngine;
 public class Camera_Controller : MonoBehaviour
 {
     public float MouseValue;
-    public float scale;
-    
-
-    
+    public float speed;
     void Update()
     {
         float MouseScrollInput = Input.mouseScrollDelta.y;
-        float Current_y = this.transform.eulerAngles.y;
+        float Current_y = transform.eulerAngles.y;
+        Debug.Log(Current_y);
 
-        if (!Input.GetKey("q") ) //-15 48
-        {
-            this.transform.Rotate(0, MouseScrollInput * scale, 0);
-            if(Current_y > 48)
-            {
-                this.transform.Rotate(0, -2 * scale, 0);
-            }
-            if (Current_y < -15)
-            {
-                this.transform.Rotate(0, 2 * scale, 0);
-            }
-        }
-
+        //this.transform.Rotate(0, MouseScrollInput * 5, 0);
+GameObject.Find("_camera").GetComponent<Camera>().orthographicSize = GameObject.Find("_camera").GetComponent<Camera>().orthographicSize - Input.mouseScrollDelta.y * 2;
+        
         if (Input.GetKey("q"))
         {
-            float Size = GameObject.Find("_camera").GetComponent<Camera>().orthographicSize;
-            //print(Size);
-            GameObject.Find("_camera").GetComponent<Camera>().orthographicSize = GameObject.Find("_camera").GetComponent<Camera>().orthographicSize - Input.mouseScrollDelta.y * 2;
+            if (Current_y <= 30 || Current_y >= 300)
+            {
+                transform.Rotate(0, speed * Time.deltaTime, 0);
+            }
+            else
+            {
+                transform.Rotate(0, -speed * Time.deltaTime, 0);
+            }
+            
         }
+
+        if (Input.GetKey("e"))
+        {
+            if (Current_y > 310 || Current_y <= 40)
+            {
+                transform.Rotate(0, -speed * Time.deltaTime, 0);
+            }
+            else
+            {
+                transform.Rotate(0, speed * Time.deltaTime, 0);
+            }
+
+        } 
+        
     }
 }
