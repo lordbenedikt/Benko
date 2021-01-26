@@ -5,11 +5,16 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     public GameObject healthDisplay;
-    public Transform _camera;
-    public GameObject _camera_obj;
+    GameObject _camera;
+
+    private void Start()
+    {
+        _camera = GameObject.Find("_camera");
+    }
 
     private void Update()
     {
-        //transform.LookAt(_camera);
+        transform.rotation = _camera.transform.rotation;
+        //transform.LookAt(_camera.transform);
     }
 }
