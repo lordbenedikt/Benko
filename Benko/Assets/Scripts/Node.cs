@@ -49,6 +49,7 @@ public class Node : MonoBehaviour
         {
             if (!isObstacle && gameController.UI.ActivateBuildMode)
             {
+                // -money
                 isObstacle = true;
             }
         }
@@ -57,6 +58,7 @@ public class Node : MonoBehaviour
         {
             if (isObstacle && gameController.UI.ActivateBuildMode)
             {
+                // destroy wall
                 isObstacle = false;
                 Destroy(cornerStone);
             } else {

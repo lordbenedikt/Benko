@@ -242,10 +242,7 @@ public class CustomGrid : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Debug.Log(hit.point);
-            // if (hit.rigidbody != null)
-            // {
-            //     hit.rigidbody.AddForceAtPosition(ray.direction * pokeForce, hit.point);
-            // }
+            
         }
 
         // if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition),layerMask)) {
