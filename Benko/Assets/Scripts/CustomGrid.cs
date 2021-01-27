@@ -30,7 +30,8 @@ public class CustomGrid : MonoBehaviour
     UnityEvent buildWallEvent = new UnityEvent();
 
     void Awake() {
-        controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        controller = gameObject.GetComponent<GameController>();
+        // print(controller);
         minX = transform.position.x - (gridSize*cols/2);
         minZ = transform.position.z - (gridSize*rows/2);
     }
@@ -63,7 +64,7 @@ public class CustomGrid : MonoBehaviour
 
             if (i / cols == 0)
             {
-                node.isObstacle = true;
+                // node.isObstacle = true;
                 node.adjacents[0] = null;
             }
             else
@@ -72,7 +73,7 @@ public class CustomGrid : MonoBehaviour
             }
             if ((i+1) % cols == 0)
             {
-                node.isObstacle = true;
+                // node.isObstacle = true;
                 node.adjacents[1] = null;
             }
             else
@@ -81,7 +82,7 @@ public class CustomGrid : MonoBehaviour
             }
             if (i / cols == rows - 1)
             {
-                node.isObstacle = true;
+                // node.isObstacle = true;
                 node.adjacents[2] = null;
             }
             else
@@ -90,7 +91,7 @@ public class CustomGrid : MonoBehaviour
             }
             if (i % cols == 0)
             {
-                node.isObstacle = true;
+                // node.isObstacle = true;
                 node.adjacents[3] = null;
             }
             else
@@ -100,6 +101,9 @@ public class CustomGrid : MonoBehaviour
 
         }
         buildWall();
+        foreach(Snap snap in FindObjectsOfType<Snap>()) {
+            snap.markAsObstacle();
+        }
     }
 
     // Update is called once per frame
@@ -122,7 +126,7 @@ public class CustomGrid : MonoBehaviour
             Node node = n.GetComponent<Node>();
             for(int j = 1; j<=2; j++) {
                 if(node.adjacents[j] != null) {
-                    if(node.isObstacle && node.adjacents[j].GetComponent<Node>().isObstacle) {
+                    if(node.isWall && node.adjacents[j].GetComponent<Node>().isWall) {
                         GameObject go = Instantiate(wallFillerObject, (node.transform.position + node.adjacents[j].transform.position)/2, Quaternion.identity);
                         if(j%2 == 0) go.transform.Rotate(0, 90, 0, Space.Self);
                         walls.Add(go);
@@ -136,7 +140,7 @@ public class CustomGrid : MonoBehaviour
                 int[] isWall = new int[4];
                 for (int i = 0; i < 4; i++)
                 {
-                    if (n.adjacents[i] != null && n.adjacents[i].GetComponent<Node>().isObstacle) isWall[i] = 1;
+                    if (n.adjacents[i] != null && n.adjacents[i].GetComponent<Node>().isWall) isWall[i] = 1;
                 }
                 if (((isWall[0] == 1 && isWall[2] == 1) && (isWall[1] == 0 && isWall[3] == 0)) || ((isWall[0] == 0 && isWall[2] == 0) && (isWall[1] == 1 && isWall[3] == 1)))
                 {
@@ -144,7 +148,7 @@ public class CustomGrid : MonoBehaviour
                 }
                 else
                 {
-                    if (n.isObstacle && n.cornerStone == null) n.cornerStone = MonoBehaviour.Instantiate(wallObject, new Vector3(go.transform.position.x, 0, go.transform.position.z), Quaternion.identity);
+                    if (n.isWall && n.cornerStone == null) n.cornerStone = MonoBehaviour.Instantiate(wallObject, new Vector3(go.transform.position.x, 0, go.transform.position.z), Quaternion.identity);
                 }
             }
     }
@@ -199,7 +203,7 @@ public class CustomGrid : MonoBehaviour
 
                 shortenPath(shortestPath);
                 pathMap[a] = new List<GameObject>(shortestPath);
-                print("KeyMapSize: " + pathMap.Count);
+                // print("KeyMapSize: " + pathMap.Count);
 
                 return D[z.GetInstanceID()];
             }

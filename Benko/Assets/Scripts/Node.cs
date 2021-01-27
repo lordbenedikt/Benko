@@ -15,6 +15,7 @@ public class Node : MonoBehaviour
     [HideInInspector]
     public GameObject[] adjacents;
     public bool isObstacle = false;
+    public bool isWall = false;
     public bool inPath = false;
 
     GameController gameController;
@@ -48,22 +49,23 @@ public class Node : MonoBehaviour
         // left button
         if (Input.GetMouseButton(0))
         {
-            if (!isObstacle && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
+            if (!isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
                 foreach(long key in customGrid.pathMap.Keys.ToArray()) {
                     if (customGrid.pathMap[key].Contains(gameObject)) {
                         customGrid.pathMap.Remove(key);
                     }
                 }
-                print("siize "+customGrid.pathMap.Count);
+                // print("siize "+customGrid.pathMap.Count);
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
+                isWall = true;
                 isObstacle = true;
             }
         }
         // right button
         if (Input.GetMouseButton(1))
         {
-            if (isObstacle && gameController.UI.ActivateBuildMode)
+            if (isWall && gameController.UI.ActivateBuildMode)
             {
                 customGrid.pathMap.Clear();
                 // foreach(long key in customGrid.pathMap.Keys.ToArray()) {
@@ -73,8 +75,9 @@ public class Node : MonoBehaviour
                 //         pathLength += Vector3.Distance(path[i].gameObject.transform.position, path[i+1].gameObject.transform.position);
                 //     }
                 // }
-                print("siize "+customGrid.pathMap.Count);
+                // print("siize "+customGrid.pathMap.Count);
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(1);
+                isWall = false;
                 isObstacle = false;
                 Destroy(cornerStone);
             }

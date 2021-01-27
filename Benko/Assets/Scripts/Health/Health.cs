@@ -48,7 +48,7 @@ public class Health : MonoBehaviour
         healthDisplay.fillAmount = Currenthealth/MaxHealth;
         if(Currenthealth <= 0)
         {
-            this.gameObject.GetComponent<Archer_test_Controller>().Die();
+            // this.gameObject.GetComponent<Archer_test_Controller>().Die();
             Die();
         }
     }

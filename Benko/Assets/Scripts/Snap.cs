@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Snap : MonoBehaviour
 {
-    public GameController gameController;
+    GameObject gameController;
     CustomGrid customGrid;
 
     private void Start()
     {
-        customGrid = GameObject.Find("GameController").GetComponent<CustomGrid>();
-        customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().isObstacle = true;
+        gameController = GameObject.Find("GameController");
+        customGrid = gameController.GetComponent<CustomGrid>();
+    }
+    public void markAsObstacle() {
+        print(customGrid);
+        int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);
+        if(gridIndex!=-1)
+            customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
     }
     private void Update()
     {
@@ -21,6 +27,13 @@ public class Snap : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        foreach(GameObject go in GameObject.FindGameObjectsWithTag("ObstacleMarker")) {
+            if(go==gameObject) continue;
+            if(Vector3.Distance(go.transform.position,this.transform.position)<0.5f) {
+                DestroyImmediate(gameObject);
+                return;
+            }
+        }
         SnapToGrid();
     }
     private void SnapToGrid()

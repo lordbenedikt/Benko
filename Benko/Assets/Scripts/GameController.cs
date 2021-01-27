@@ -13,10 +13,11 @@ public class GameController : MonoBehaviour
     [HideInInspector]
     public CustomGrid customGrid;
 
-    void Start()
+    void Awake()
     {
         UI = canvas.GetComponent<UI_Manager>();
         customGrid = gameObject.GetComponent<CustomGrid>();
+        // print(customGrid);
         selection.SetActive(false);
     }
 
@@ -26,6 +27,9 @@ public class GameController : MonoBehaviour
     }
 
     public int gridIndexFromPos(float x, float z) {
-        return customGrid.gridIndexFromPos(x,z);
+        // print(customGrid);
+        if (customGrid != null)
+            return customGrid.gridIndexFromPos(x,z);
+        return 0;
     }
 }
