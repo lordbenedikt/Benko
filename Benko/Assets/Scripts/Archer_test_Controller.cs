@@ -147,15 +147,13 @@ public class Archer_test_Controller : MonoBehaviour
     }
 
     public void Die(){
+        archer_anim.SetInteger("current_pos", 3); //Dead Anim
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go,1.0f);
-        if (this.gameObject.tag == "Enemy")
-        {
-            GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
-        }
-            print("Archer has died");
-        
-        Destroy(gameObject);
+        print("Archer has died");
+        gameObject.tag = "Untagged";
+        selected = false;
+        Destroy(gameObject, 5.0f);
     }
 
     

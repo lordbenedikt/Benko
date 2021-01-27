@@ -17,8 +17,10 @@ public class Health : MonoBehaviour
     public float yOffset = 2;
     public float hpBarScale = 1;
     public GameObject DiePX;
+    bool repeatonce;
     void Awake(){
         Currenthealth = MaxHealth;
+        repeatonce = true;
     }
     GameObject GetChildWithName(GameObject obj, string name) {
          Transform trans = obj.transform;
@@ -46,21 +48,22 @@ public class Health : MonoBehaviour
     private void Update()
     {
         healthDisplay.fillAmount = Currenthealth/MaxHealth;
+
         if(Currenthealth <= 0)
         {
-            // this.gameObject.GetComponent<Archer_test_Controller>().Die();
-            Die();
-        }
-    }
-    
+            //bool repeatonce = true;
+            if(repeatonce == true){
+                if(gameObject.GetComponent<Archer_test_Controller>() != null){
+                gameObject.GetComponent<Archer_test_Controller>().Die();
+                repeatonce = false;
+                }
 
-    public void Die() // Nur noch wegen dem Enemy
-    {
-        if (this.gameObject.tag == "Enemy")
-        {
-            GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
-            Destroy(gameObject);
+                if(gameObject.GetComponent<Enemy_Controller>() != null){
+                gameObject.GetComponent<Enemy_Controller>().Die();
+                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
+                repeatonce = false;
+                }
+            }
         }
-        
     }
 }

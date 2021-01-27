@@ -190,14 +190,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 10
-  target: {fileID: 0}
   walkSpeed: 5
-  controller: {fileID: 0}
   FireRate: 0.5
   FireCountdwon: 0
   Damage: 0
   Arrow: {fileID: 1992071922080826269, guid: 3eb57cf6b7c903e449b6da9fcc604ac3, type: 3}
   ArrowStartPoint: {fileID: 357074055207964893}
+  selected: 0
+  DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
 --- !u!114 &591657273485245414
 MonoBehaviour:
   m_ObjectHideFlags: 0

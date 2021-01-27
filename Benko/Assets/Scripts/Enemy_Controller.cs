@@ -13,6 +13,9 @@ public class Enemy_Controller : MonoBehaviour
     CustomGrid customGrid;
     GameObject nextNode;
 
+   
+    public Animator archer_anim;
+
     // private Transform target;
     
 
@@ -20,6 +23,10 @@ public class Enemy_Controller : MonoBehaviour
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
         InvokeRepeating("findPath", 0f, 0.1f);
+         
+        archer_anim = GetComponent<Animator>();
+        
+        archer_anim.SetInteger("Skeleton_Anim", 2);   //Death
     }
     
     void findPath() {
@@ -49,6 +56,7 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
+        
         if(showPath) {
             foreach(GameObject n in customGrid.nodes) {
                 n.GetComponent<Node>().inPath = false;
@@ -62,8 +70,10 @@ public class Enemy_Controller : MonoBehaviour
         // if hit Player
         if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {
             
-            
-            Destroy(gameObject);
+            archer_anim.SetInteger("Skeleton_Anim", 2);   //Death  
+            print("Death");  
+            Destroy(gameObject,5.0f);
+            gameObject.tag = "Untagged";
             player.GetComponent<Health>().Currenthealth -= 40;
             return;
         }
@@ -72,6 +82,8 @@ public class Enemy_Controller : MonoBehaviour
         if(nextNode != null) {
             // print("find path\n");
             transform.position += (nextNode.transform.position-transform.position).normalized*speed;
+            archer_anim.SetInteger("Skeleton_Anim", 0);   //Walking
+            print("is currently walking");  
             if((nextNode.transform.position-transform.position).magnitude<0.1) {
                 nextNode = null;
             }
@@ -83,6 +95,12 @@ public class Enemy_Controller : MonoBehaviour
         // Debug.DrawRay(transform.position, newDirection, Color.red);
         // // Calculate a rotation a step closer to the target and applies rotation to this object
         // transform.rotation = Quaternion.LookRotation(newDirection);
+
+        
+    }
+    public void Die(){
+        print("Die Method");  
+        Destroy(gameObject,5.0f);
     }
 }
 
