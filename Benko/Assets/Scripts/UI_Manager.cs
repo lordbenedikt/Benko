@@ -12,6 +12,7 @@ public class UI_Manager : MonoBehaviour
     public bool ActivateBuildMode;
     public GameObject archerprefab;
     public Vector3 spawn_pos;
+    public GameObject Player_Spawn_PX;
     public TextMeshProUGUI BuildModeText;
 
 
@@ -87,6 +88,8 @@ public class UI_Manager : MonoBehaviour
         if(GoldAmount >= 50)
         {
             Instantiate(archerprefab, spawn_pos, Quaternion.identity);
+            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos, Quaternion.identity);
+            Destroy(go, 5f);
             AddGold(-50);
         }
        
