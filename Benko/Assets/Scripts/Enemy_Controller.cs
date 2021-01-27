@@ -45,11 +45,27 @@ public class Enemy_Controller : MonoBehaviour
     
     void shortenPath() {
         int i = 0;
-        // while(i<path.Count) {
-
-        //     i++;
-        // }
+        while(i<path.Count && path.Count> 2) {
+            shorten(path[path.Count-1], path[path.Count-3]);
+            i++;
+        }
     }
+    void shorten(GameObject origin, GameObject target) {
+        if(visible(new Vector2(origin.transform.position.x,origin.transform.position.z),new Vector2(target.transform.position.x,target.transform.position.z))) {
+            print("shorten");
+            path.RemoveAt(path.Count-2);
+        }
+    }
+    bool visible(Vector2 ownPos, Vector2 target) {
+        Vector2 v = (target-ownPos).normalized*0.2f;
+        Vector2 curPos = ownPos;
+        while(Vector2.Distance(curPos,target) > 0.5f) {
+            if(customGrid.nodes[controller.gridIndexFromPos(curPos.x,curPos.y)].GetComponent<Node>().isObstacle)
+                return false;
+            curPos += v;
+        }
+        return true;
+    } 
     void Update()
     {
         if (player==null) return;
