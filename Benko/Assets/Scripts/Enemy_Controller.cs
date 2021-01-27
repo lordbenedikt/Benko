@@ -56,6 +56,7 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
+        Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         
         if(showPath) {
             foreach(GameObject n in customGrid.nodes) {
@@ -87,6 +88,16 @@ public class Enemy_Controller : MonoBehaviour
             if((nextNode.transform.position-transform.position).magnitude<0.1) {
                 nextNode = null;
             }
+        }
+
+        Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
+        if(face.sqrMagnitude != 0) {
+            //archer_anim.SetBool("Running", true); //Running auf true
+            float damping = 20f;
+    
+            face.y = 0;
+            var targetRotation = Quaternion.LookRotation(face);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
         }
 
         // Vector3 targetDirection = Player.transform.position;
