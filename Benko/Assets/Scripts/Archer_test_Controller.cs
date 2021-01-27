@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Archer_test_Controller : MonoBehaviour
 {
-    private Animator ShootAnim;
+    private Animator anim_controller;
     [Header ("Basic Atribudes")]
     public float range;
     public Transform target;
@@ -21,12 +21,13 @@ public class Archer_test_Controller : MonoBehaviour
     public bool selected;
     Animator animator;
     GameController gameController;
-    
+    public bool isRunning;
+
 
     private void Awake()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        ShootAnim = GetComponent<Animator>();
+        anim_controller = GetComponent<Animator>();
     }
 
     void Start()
@@ -43,15 +44,27 @@ public class Archer_test_Controller : MonoBehaviour
         if(selected) {   
             if(Input.GetKey("a")) {
                 move.x -= walkSpeed * Time.deltaTime;
+                anim_controller.SetBool("Running", true);
+                anim_controller.SetBool("Shoot", false);
+                isRunning = true;
             }
             if(Input.GetKey("d")) {
                 move.x = walkSpeed* Time.deltaTime;
+                anim_controller.SetBool("Running", true);
+                anim_controller.SetBool("Shoot", false);
+                isRunning = true;
             }
             if(Input.GetKey("w")) {
                 move.z = walkSpeed* Time.deltaTime;
+                anim_controller.SetBool("Running", true);
+                anim_controller.SetBool("Shoot", false);
+                isRunning = true;
             }
             if(Input.GetKey("s")) {
                 move.z = -walkSpeed* Time.deltaTime;
+                anim_controller.SetBool("Running", true);
+                anim_controller.SetBool("Shoot", false);
+                isRunning = true;
             }
         }
         
@@ -85,30 +98,35 @@ public class Archer_test_Controller : MonoBehaviour
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
         
         if(face.sqrMagnitude != 0) {
-            ShootAnim.SetBool("Running", true);
+            anim_controller.SetBool("Running", true);
             float damping = 20f;
     
             face.y = 0;
             var targetRotation = Quaternion.LookRotation(face);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
         } else {
-            ShootAnim.SetBool("Running", false);
+            anim_controller.SetBool("Running", false);
         }
 
         if(target == null)
         {
-            ShootAnim.SetBool("Shoot", false);  
+            anim_controller.SetBool("Shoot", false);  
             return;
         }
-
-        Vector3 dir = target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = lookRotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        if (!isRunning)
+        {
+            Vector3 dir = target.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            Vector3 rotation = lookRotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        }
+        
 
         if (FireCountdwon <= 1)
         {
-            ShootAnim.SetBool("Shoot", true);
+            anim_controller.SetBool("Shoot", true);
+            anim_controller.SetBool("Running", true);
+            isRunning = true;
             FireCountdwon = 1 / FireRate;
         }
 
@@ -142,8 +160,14 @@ public class Archer_test_Controller : MonoBehaviour
     
     public void Shoot()
     {
-        ShootAnim.SetBool("Shoot", true);
-        // Debug.Log("shoot");
+        if (!isRunning)
+        {
+            print("is Running is false");
+            anim_controller.SetBool("Shoot", true);
+            anim_controller.SetBool("Running", true);
+            isRunning = true;
+        }
+        print("is Running is true");
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         ArrowController ArrowScript = go.GetComponent<ArrowController>();
         //Debug.Log(ArrowScript.speed);
@@ -153,6 +177,10 @@ public class Archer_test_Controller : MonoBehaviour
             ArrowScript.Seek(target);
         }
     }
+
+    
+
+        
 
     void OnDrawGizmosSelected(){
         //nur zur Übersicht/Darstellung

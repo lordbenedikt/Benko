@@ -13,11 +13,13 @@ public class Health : MonoBehaviour
     public GameObject _healthbar;
     public Image healthDisplay;
     public Image image;
+   
 
     public float yOffset = 2;
     public float hpBarScale = 1;
 
     public GameObject DiePX;
+    private Animator Die_anim;
 
     void Awake(){
         Currenthealth = MaxHealth;
@@ -33,6 +35,7 @@ public class Health : MonoBehaviour
      }
     void Start()
     {
+        
         GameObject go = Instantiate(HealthBar, this.transform.position + new Vector3(0,yOffset,0), Quaternion.identity);
         Vector3 ls = go.transform.localScale;
         go.transform.localScale = new Vector3(ls.x*hpBarScale,ls.x*hpBarScale,ls.x*hpBarScale);
@@ -84,7 +87,9 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
+        
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity);
+       
         if (this.gameObject.tag == "Enemy")
         {
             GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
@@ -96,6 +101,5 @@ public class Health : MonoBehaviour
         }
         Destroy(go,1.0f);
         Destroy(gameObject);
-        //Debug.Log("Heyy");
     }
 }
