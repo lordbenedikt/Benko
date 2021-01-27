@@ -15,6 +15,5 @@ public class HealthBar : MonoBehaviour
     private void Update()
     {
         transform.rotation = _camera.transform.rotation;
-        //transform.LookAt(_camera.transform);
     }
 }
