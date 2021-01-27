@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 
     [HideInInspector]
     public UI_Manager UI;
-        [HideInInspector]
+    [HideInInspector]
     public CustomGrid customGrid;
 
     void Start()
