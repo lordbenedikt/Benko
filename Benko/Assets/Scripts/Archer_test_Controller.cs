@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class Archer_test_Controller : MonoBehaviour
 {
-    private Animator anim_controller;
     [Header ("Basic Atribudes")]
     public float range;
-    public Transform target;
+    private Transform target;
     public float walkSpeed;
-    public CharacterController controller;
+    //public CharacterController controller;
 
     [Header("Attack")]
     public float FireRate;
@@ -19,114 +18,92 @@ public class Archer_test_Controller : MonoBehaviour
     public GameObject Arrow;
     public Transform ArrowStartPoint;
     public bool selected;
-    Animator animator;
+    Animator archer_anim;
     GameController gameController;
-    public bool isRunning;
-
-
-    private void Awake()
-    {
-        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        anim_controller = GetComponent<Animator>();
-    }
-
+   
+    public GameObject DiePX;
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.01f);
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        archer_anim = GetComponent<Animator>();
     }
     void Update()
     {
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
-        
-        // Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        // controller.Move(move * Time.deltaTime*walkSpeed);
         Vector3 move = new Vector3(0,0,0);
-        if(selected) {   
+        if(selected) { 
             if(Input.GetKey("a")) {
-                move.x -= walkSpeed * Time.deltaTime;
-                anim_controller.SetBool("Running", true);
-                anim_controller.SetBool("Shoot", false);
-                isRunning = true;
+                move.x -= walkSpeed * Time.deltaTime; 
+                archer_anim.SetInteger("current_pos", 1);   //Run    
             }
             if(Input.GetKey("d")) {
                 move.x = walkSpeed* Time.deltaTime;
-                anim_controller.SetBool("Running", true);
-                anim_controller.SetBool("Shoot", false);
-                isRunning = true;
+                archer_anim.SetInteger("current_pos", 1);   //Run    
             }
             if(Input.GetKey("w")) {
-                move.z = walkSpeed* Time.deltaTime;
-                anim_controller.SetBool("Running", true);
-                anim_controller.SetBool("Shoot", false);
-                isRunning = true;
+                move.z = walkSpeed* Time.deltaTime;   
+                archer_anim.SetInteger("current_pos", 1);   //Run       
             }
             if(Input.GetKey("s")) {
-                move.z = -walkSpeed* Time.deltaTime;
-                anim_controller.SetBool("Running", true);
-                anim_controller.SetBool("Shoot", false);
-                isRunning = true;
+                move.z = -walkSpeed* Time.deltaTime;     
+                archer_anim.SetInteger("current_pos", 1);   //Run      
             }
+            //bool isrunning = archer_anim.GetCurrentAnimatorStateInfo(0).IsName("Running");
+            //print(isrunning);
         }
         
+        
         Vector3 nextPos = transform.position;
-        // print("mx: "+move.x);
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
-        // print("pIndex: " + posIndex);
-        // print(posIndex);
-        // print(gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
-        // print(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
-            // print(posIndex);
             GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
-            // if target pos is free
             if (!currentNode.GetComponent<Node>().isObstacle) {
                 nextPos.x += move.x;
             }
         }
         posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z+move.z);
-        // print("pIndex: " + posIndex);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
             GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
-            // if target pos is free
             if (!currentNode.GetComponent<Node>().isObstacle) {
                 nextPos.z += move.z;
             }
         }
-        // print("move: " + nextPos);
         transform.position = nextPos;
 
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
         
         if(face.sqrMagnitude != 0) {
-            anim_controller.SetBool("Running", true);
+            //archer_anim.SetBool("Running", true); //Running auf true
             float damping = 20f;
     
             face.y = 0;
             var targetRotation = Quaternion.LookRotation(face);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
         } else {
-            anim_controller.SetBool("Running", false);
+            //archer_anim.SetBool("Running", false); //Running auf false
+        }
+
+        if(target == null && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false)
+        {
+            archer_anim.SetInteger("current_pos", 0); //Idle Anim
         }
 
         if(target == null)
         {
-            anim_controller.SetBool("Shoot", false);  
             return;
         }
-        if (!isRunning)
-        {
+
+        if(Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false){
+            archer_anim.SetInteger("current_pos", 2); //Shoot Anim
             Vector3 dir = target.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = lookRotation.eulerAngles;
             transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
-        
 
         if (FireCountdwon <= 1)
         {
-            anim_controller.SetBool("Shoot", true);
-            anim_controller.SetBool("Running", true);
-            isRunning = true;
             FireCountdwon = 1 / FireRate;
         }
 
@@ -160,22 +137,25 @@ public class Archer_test_Controller : MonoBehaviour
     
     public void Shoot()
     {
-        if (!isRunning)
-        {
-            // print("is Running is false");
-            anim_controller.SetBool("Shoot", true);
-            anim_controller.SetBool("Running", true);
-            isRunning = true;
-        }
-        // print("is Running is true");
+        archer_anim.SetInteger("current_pos", 2); //Shoot Anim
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         ArrowController ArrowScript = go.GetComponent<ArrowController>();
-        //Debug.Log(ArrowScript.speed);
-
         if(ArrowScript != null)
         {
             ArrowScript.Seek(target);
         }
+    }
+
+    public void Die(){
+        GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
+        Destroy(go,1.0f);
+        if (this.gameObject.tag == "Enemy")
+        {
+            GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
+        }
+            print("Archer has died");
+        
+        Destroy(gameObject);
     }
 
     
