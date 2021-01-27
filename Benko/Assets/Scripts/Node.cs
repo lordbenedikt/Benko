@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Node : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class Node : MonoBehaviour
     public GameObject[] adjacents;
     [HideInInspector]
     public bool isObstacle = false;
-    [HideInInspector]
     public bool inPath = false;
 
     GameController gameController;
@@ -51,6 +51,12 @@ public class Node : MonoBehaviour
         {
             if (!isObstacle && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
+                foreach(long key in customGrid.pathMap.Keys.ToArray()) {
+                    if (customGrid.pathMap[key].Contains(gameObject)) {
+                        customGrid.pathMap.Remove(key);
+                    }
+                }
+                print("siize "+customGrid.pathMap.Count);
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
                 isObstacle = true;
             }
@@ -60,6 +66,15 @@ public class Node : MonoBehaviour
         {
             if (isObstacle && gameController.UI.ActivateBuildMode)
             {
+                customGrid.pathMap.Clear();
+                // foreach(long key in customGrid.pathMap.Keys.ToArray()) {
+                //     float pathLength = 0;
+                //     List<GameObject> path = customGrid.pathMap[key];
+                //     for(int i = 0; i<customGrid.pathMap[key].Count-2;i++) {
+                //         pathLength += Vector3.Distance(path[i].gameObject.transform.position, path[i+1].gameObject.transform.position);
+                //     }
+                // }
+                print("siize "+customGrid.pathMap.Count);
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(1);
                 isObstacle = false;
                 Destroy(cornerStone);

@@ -24,6 +24,7 @@ public class CustomGrid : MonoBehaviour
     public GameController controller;
 
     public GameObject[] nodes;
+    public SortedDictionary<long, List<GameObject>> pathMap = new SortedDictionary<long, List<GameObject>>();
     GameObject[] players;
 
     UnityEvent buildWallEvent = new UnityEvent();
@@ -148,9 +149,17 @@ public class CustomGrid : MonoBehaviour
             }
     }
 
-    public float aStar(GameObject s, GameObject z, List<GameObject> shortestPath)
+    public float aStar(int s_index, int z_index, List<GameObject> shortestPath)
     {
         shortestPath.Clear();
+
+        GameObject s = nodes[s_index];
+        GameObject z = nodes[z_index];
+        long a = s_index + (z_index<<10);
+        if(pathMap.ContainsKey(a)) {
+            shortestPath.AddRange(pathMap[a]);
+            return -2;
+        }
         if(s==z) {
             shortestPath.Add(z);
             return 0;
@@ -187,6 +196,11 @@ public class CustomGrid : MonoBehaviour
                 foreach(GameObject n in shortestPath) {
                     // n.GetComponent<Node>().inPath = true;
                 }
+
+                shortenPath(shortestPath);
+                pathMap[a] = new List<GameObject>(shortestPath);
+                print("KeyMapSize: " + pathMap.Count);
+
                 return D[z.GetInstanceID()];
             }
 
@@ -199,9 +213,48 @@ public class CustomGrid : MonoBehaviour
                 }
             }
         }
+    shortestPath.Add(s);
+    pathMap[a] = new List<GameObject>(shortestPath);
     return -1;
     }
 
+    void shortenPath(List<GameObject> path) {
+        int a = 0;
+        int b = 2;
+        while(b<path.Count) {
+            if(!shorten(path[a], path[b], a+1, path)) { 
+                a++;
+                b = a+2;
+            }
+        }
+    }
+    bool shorten(GameObject origin, GameObject target, int removeAt, List<GameObject> path) {
+        if(visible(new Vector2(origin.transform.position.x,origin.transform.position.z),new Vector2(target.transform.position.x,target.transform.position.z),0.25f)) {
+            path.RemoveAt(removeAt);
+            return true;
+        }
+        return false;
+    }
+    bool visible(Vector2 ownPos, Vector2 target, float halfThickness) {
+        Vector2 v = (target-ownPos).normalized*0.2f;
+        Vector2 curPos = ownPos;
+        while(Vector2.Distance(curPos,target) > 0.5f) {
+            if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y)].GetComponent<Node>().isObstacle)
+                return false;
+            if(halfThickness!=0) {
+                if(nodes[controller.gridIndexFromPos(curPos.x+halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
+                return false;
+                if(nodes[controller.gridIndexFromPos(curPos.x-halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
+                return false;
+                if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y+halfThickness)].GetComponent<Node>().isObstacle)
+                return false;
+                if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y-halfThickness)].GetComponent<Node>().isObstacle)
+                return false;
+            }
+            curPos += v;
+        }
+        return true;
+    } 
     GameObject minimalScore(SortedDictionary<int, float> D, List<GameObject> Todo, GameObject z) {
         GameObject res = Todo[0];
         float minScore = nodeScore(D[Todo[0].GetInstanceID()], res, z);
@@ -240,16 +293,15 @@ public class CustomGrid : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.point);
+            // Debug.Log(hit.point);
             
             Vector2 clickPos = new Vector2(hit.point.x,hit.point.z);
             float maxDist = 1;
             GameObject player = null;
             foreach(GameObject ply in players) {
-                print(players.Length);
                 Vector2 playerPos = new Vector2(ply.transform.position.x, ply.transform.position.z);
                 float distance = Vector2.Distance(playerPos, clickPos);
-                print("distance: " + distance);
+                // print("distance: " + distance);
                 if(distance<maxDist) {
                     maxDist = distance;
                     player = ply;

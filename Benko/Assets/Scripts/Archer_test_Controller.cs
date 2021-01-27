@@ -162,12 +162,12 @@ public class Archer_test_Controller : MonoBehaviour
     {
         if (!isRunning)
         {
-            print("is Running is false");
+            // print("is Running is false");
             anim_controller.SetBool("Shoot", true);
             anim_controller.SetBool("Running", true);
             isRunning = true;
         }
-        print("is Running is true");
+        // print("is Running is true");
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         ArrowController ArrowScript = go.GetComponent<ArrowController>();
         //Debug.Log(ArrowScript.speed);

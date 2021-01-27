@@ -76,7 +76,7 @@ public class ArrowController : MonoBehaviour
     }
 
     void setStartDir() {
-        print("target: " + (target==null?"null":"exists") + "   start: " + start);
+        // print("target: " + (target==null?"null":"exists") + "   start: " + start);
         if(target==null) return;
         Vector3 v = target.position - start;
         v.y = 0;

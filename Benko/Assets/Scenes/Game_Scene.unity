@@ -2117,6 +2117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseValue: 0
   speed: 40
+  maxLeft: 50
+  maxRight: 310
 --- !u!1 &1578525358
 GameObject:
   m_ObjectHideFlags: 0

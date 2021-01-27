@@ -7,6 +7,7 @@ public class Enemy_Controller : MonoBehaviour
 {
     private GameObject player;
     public float speed;
+    public bool showPath = false;
     List<GameObject> path = new List<GameObject>();
     GameController controller;
     CustomGrid customGrid;
@@ -18,10 +19,13 @@ public class Enemy_Controller : MonoBehaviour
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
-        InvokeRepeating("findPath", 0f, 0.2f);
+        InvokeRepeating("findPath", 0f, 0.1f);
     }
     
     void findPath() {
+        // don't find path when inside obstacle
+        if(customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x,transform.position.z)].GetComponent<Node>().isObstacle) return;
+
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         float minDistance = Mathf.Infinity;
         foreach(GameObject ply in players) {
@@ -36,38 +40,24 @@ public class Enemy_Controller : MonoBehaviour
         int start = controller.gridIndexFromPos(transform.position.x,transform.position.z);
         int ziel = controller.gridIndexFromPos(player.transform.position.x,player.transform.position.z);
         if(start==-1 || ziel==-1) return;
-        customGrid.aStar(customGrid.nodes[start], customGrid.nodes[ziel], path);
-        shortenPath();
+        customGrid.aStar(start, ziel, path);
+
         if(path.Count>1) {
             nextNode = path[path.Count-2].gameObject;
         }
     }
-    
-    void shortenPath() {
-        int i = 0;
-        while(i<path.Count && path.Count> 2) {
-            shorten(path[path.Count-1], path[path.Count-3]);
-            i++;
-        }
-    }
-    void shorten(GameObject origin, GameObject target) {
-        if(visible(new Vector2(origin.transform.position.x,origin.transform.position.z),new Vector2(target.transform.position.x,target.transform.position.z))) {
-            print("shorten");
-            path.RemoveAt(path.Count-2);
-        }
-    }
-    bool visible(Vector2 ownPos, Vector2 target) {
-        Vector2 v = (target-ownPos).normalized*0.2f;
-        Vector2 curPos = ownPos;
-        while(Vector2.Distance(curPos,target) > 0.5f) {
-            if(customGrid.nodes[controller.gridIndexFromPos(curPos.x,curPos.y)].GetComponent<Node>().isObstacle)
-                return false;
-            curPos += v;
-        }
-        return true;
-    } 
+
     void Update()
     {
+        if(showPath) {
+            foreach(GameObject n in customGrid.nodes) {
+                n.GetComponent<Node>().inPath = false;
+            }
+            foreach(GameObject n in path) {
+                n.GetComponent<Node>().inPath = true;
+            }
+        }
+
         if (player==null) return;
         // if hit Player
         if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {

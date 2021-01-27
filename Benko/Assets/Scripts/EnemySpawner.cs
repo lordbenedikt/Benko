@@ -38,10 +38,10 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy()
     {
         GetRandomPos();
-        print(RandomVector);
+        // print(RandomVector);
         if (MaxRange <= RandomVector.magnitude)
         {
-            print("Gespawnt");
+            // print("Gespawnt");
         }
         GameObject go =Instantiate(enemy_prefab, RandomVector, Quaternion.identity);
 
