@@ -1,12 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class Snap : MonoBehaviour
 {
     GameObject gameController;
     CustomGrid customGrid;
 
+    private void Update()
+    {
+        // print(transform.position.x + "" + transform.position.z);
+        int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);
+        // print(gridIndex);
+        if(gridIndex >= 0 && gridIndex < customGrid.nodes.Length)
+            customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
+
+        print("update");
+        if(Input.GetKey(KeyCode.O)) {
+            print("create");
+            Object go = PrefabUtility.InstantiatePrefab(gameObject);
+            UnityEditor.Selection.activeObject = PrefabUtility.InstantiatePrefab(UnityEditor.Selection.activeObject as GameObject);
+        }
+    }
     private void Start()
     {
         gameController = GameObject.Find("GameController");
@@ -18,22 +35,17 @@ public class Snap : MonoBehaviour
         if(gridIndex!=-1)
             customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
     }
-    private void Update()
-    {
-        print(transform.position.x + "" + transform.position.z);
-        int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);
-        print(gridIndex);
-        customGrid.nodes[31].GetComponent<Node>().isObstacle = true;
-    }
+
     private void OnDrawGizmos()
     {
-        foreach(GameObject go in GameObject.FindGameObjectsWithTag("ObstacleMarker")) {
-            if(go==gameObject) continue;
-            if(Vector3.Distance(go.transform.position,this.transform.position)<0.5f) {
-                DestroyImmediate(gameObject);
-                return;
-            }
-        }
+        // foreach(GameObject go in GameObject.FindGameObjectsWithTag("ObstacleMarker")) {
+        //     if(go==gameObject) continue;
+        //     if(Vector3.Distance(go.transform.position,this.transform.position)<0.5f) {
+        //         DestroyImmediate(gameObject);
+                
+        //         return;
+        //     }
+        // }
         SnapToGrid();
     }
     private void SnapToGrid()
