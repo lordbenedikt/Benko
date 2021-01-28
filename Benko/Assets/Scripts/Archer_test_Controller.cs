@@ -5,31 +5,33 @@ using UnityEngine.UI;
 
 public class Archer_test_Controller : MonoBehaviour
 {
-    [Header ("Basic Atribudes")]
-    public float range;
     private Transform target;
-    public float walkSpeed;
-    //public CharacterController controller;
 
-    [Header("Attack")]
+    [Header ("Basic Setup")]
+    public float range;
+    public float walkSpeed;
     public float FireRate;
     public float FireCountdwon = 0.0f;
     public float Damage;
+
+    [Header("Unresponsable")]
     public GameObject Arrow;
     public Transform ArrowStartPoint;
     public bool selected;
     Animator archer_anim;
     GameController gameController;
-   
     public GameObject DiePX;
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.01f);
+        InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         archer_anim = GetComponent<Animator>();
     }
     void Update()
     {
+        if(gameObject.GetComponent<Health>().Currenthealth <= 0){
+            Die();
+        }
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         Vector3 move = new Vector3(0,0,0);
         if(selected) { 
@@ -49,11 +51,7 @@ public class Archer_test_Controller : MonoBehaviour
                 move.z = -walkSpeed* Time.deltaTime;     
                 archer_anim.SetInteger("current_pos", 1);   //Run      
             }
-            //bool isrunning = archer_anim.GetCurrentAnimatorStateInfo(0).IsName("Running");
-            //print(isrunning);
         }
-        
-        
         Vector3 nextPos = transform.position;
         int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
         if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
@@ -70,30 +68,22 @@ public class Archer_test_Controller : MonoBehaviour
             }
         }
         transform.position = nextPos;
-
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
-        
         if(face.sqrMagnitude != 0) {
-            //archer_anim.SetBool("Running", true); //Running auf true
             float damping = 20f;
-    
             face.y = 0;
             var targetRotation = Quaternion.LookRotation(face);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
         } else {
-            //archer_anim.SetBool("Running", false); //Running auf false
         }
-
         if(target == null && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false)
         {
             archer_anim.SetInteger("current_pos", 0); //Idle Anim
         }
-
         if(target == null)
         {
             return;
         }
-
         if(Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false){
             archer_anim.SetInteger("current_pos", 2); //Shoot Anim
             Vector3 dir = target.position - transform.position;
@@ -101,15 +91,12 @@ public class Archer_test_Controller : MonoBehaviour
             Vector3 rotation = lookRotation.eulerAngles;
             transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
-
         if (FireCountdwon <= 1)
         {
             FireCountdwon = 1 / FireRate;
         }
-
         FireCountdwon -= Time.deltaTime;
     }
-
     void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -133,8 +120,6 @@ public class Archer_test_Controller : MonoBehaviour
             target = null;
         }
     }
-
-    
     public void Shoot()
     {
         archer_anim.SetInteger("current_pos", 2); //Shoot Anim
@@ -150,7 +135,7 @@ public class Archer_test_Controller : MonoBehaviour
         archer_anim.SetInteger("current_pos", 3); //Dead Anim
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go,1.0f);
-        print("Archer has died");
+        //print("Archer has died");
         gameObject.tag = "Untagged";
         selected = false;
         Destroy(gameObject, 5.0f);

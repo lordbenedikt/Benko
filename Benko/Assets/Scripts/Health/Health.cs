@@ -8,19 +8,15 @@ public class Health : MonoBehaviour
     [Header ("Health")]
     public float MaxHealth;
     public float Currenthealth;
-
     public GameObject HealthBar;
-    public GameObject _healthbar;
+    //public GameObject _healthbar;
     public Image healthDisplay;
-    public Image image;
+    //public Image image;
 
     public float yOffset = 2;
     public float hpBarScale = 1;
-    public GameObject DiePX;
-    bool repeatonce;
     void Awake(){
         Currenthealth = MaxHealth;
-        repeatonce = true;
     }
     GameObject GetChildWithName(GameObject obj, string name) {
          Transform trans = obj.transform;
@@ -38,32 +34,10 @@ public class Health : MonoBehaviour
         go.transform.localScale = new Vector3(ls.x*hpBarScale,ls.x*hpBarScale,ls.x*hpBarScale);
         go.transform.SetParent(this.transform);
         healthDisplay = go.GetComponent<HealthBar>().healthDisplay.GetComponent<Image>();
-
-        if (_healthbar != null)
-        {
-            Debug.Log("Found");
-        }
     }
 
     private void Update()
     {
         healthDisplay.fillAmount = Currenthealth/MaxHealth;
-
-        if(Currenthealth <= 0)
-        {
-            //bool repeatonce = true;
-            if(repeatonce == true){
-                if(gameObject.GetComponent<Archer_test_Controller>() != null){
-                gameObject.GetComponent<Archer_test_Controller>().Die();
-                repeatonce = false;
-                }
-
-                if(gameObject.GetComponent<Enemy_Controller>() != null){
-                gameObject.GetComponent<Enemy_Controller>().Die();
-                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
-                repeatonce = false;
-                }
-            }
-        }
     }
 }

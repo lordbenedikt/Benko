@@ -6,38 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class UI_Manager : MonoBehaviour
 {
-    //public Animator White_Fade;
-    public TextMeshProUGUI GoldText;
+    [Header ("Setup")]
     public int GoldAmount;
-    public bool ActivateBuildMode;
-    public GameObject archerprefab;
     public Vector3 spawn_pos;
     public GameObject Player_Spawn_PX;
-    public TextMeshProUGUI BuildModeText;
-
-
-
-
-    void Start(){
-        //White_Fade = GameObject.Find("AlphaFade").GetComponent<Animator>();
-        SetGold(300);
-    }
     
+    [Header ("Ignore")]
+    public TextMeshProUGUI BuildModeText;
+    public GameObject archerprefab;
+    [HideInInspector]
+    public bool ActivateBuildMode;
+    public TextMeshProUGUI GoldText;
+   
     void Update()
     {
         ShowGold();
-        
-
-
+        if(Input.GetKeyDown("r")){
+            BuildModeSet();
+        }
     }
-    public void FadeToLevel(int levelIndex){
-        //White_Fade.SetTrigger("FadeOut");
-    }
-
     public void StartGame(){
         SceneManager.LoadScene("Game_Scene");
     }
-
     public void Options(){
         SceneManager.LoadScene("Options");
     }
@@ -45,15 +35,9 @@ public class UI_Manager : MonoBehaviour
         Debug.Log("Leave Game");
         Application.Quit();
     }
-
     public void Back(){
         SceneManager.LoadScene("TitleScreen");
     }
-
-    public void Escape(){
-
-    }
-
     public void ShowGold()
     {
         GoldText.SetText("Gold: " + GoldAmount);
@@ -92,8 +76,5 @@ public class UI_Manager : MonoBehaviour
             Destroy(go, 5f);
             AddGold(-50);
         }
-       
     }
-
-
 }

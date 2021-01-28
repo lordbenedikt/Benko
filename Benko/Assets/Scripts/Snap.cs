@@ -17,7 +17,7 @@ public class Snap : MonoBehaviour
         if(gridIndex >= 0 && gridIndex < customGrid.nodes.Length)
             customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
 
-        print("update");
+        //print("update");
         if(Input.GetKey(KeyCode.O)) {
             print("create");
             Object go = PrefabUtility.InstantiatePrefab(gameObject);
@@ -30,7 +30,7 @@ public class Snap : MonoBehaviour
         customGrid = gameController.GetComponent<CustomGrid>();
     }
     public void markAsObstacle() {
-        print(customGrid);
+        //print(customGrid);
         int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);
         if(gridIndex!=-1)
             customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;

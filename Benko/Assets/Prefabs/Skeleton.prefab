@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2556144b4e517540819381b8b9c035f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  speed: 1
   showPath: 0
   archer_anim: {fileID: 2247450774356280266}
 --- !u!114 &9020850350150210406
@@ -721,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 30
-  Currenthealth: 50
+  Currenthealth: 0
   HealthBar: {fileID: 6168797801274107170, guid: ce33097c81286124ab72957c8bde1eec,
     type: 3}
   _healthbar: {fileID: 0}
