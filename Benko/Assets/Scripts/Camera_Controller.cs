@@ -27,7 +27,7 @@ public class Camera_Controller : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(xRotation,yRotation,0));
         }
         if(Input.GetMouseButton(2)) {
-            transform.position = new Vector3(transform.position.x + 0.1f*(prevMousePos.x-Input.mousePosition.x),0,transform.position.z + 0.1f*(prevMousePos.y-Input.mousePosition.y));
+            transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,yRotation,0) * new Vector3(0.03f*(prevMousePos.x-Input.mousePosition.x),0,0.03f*(prevMousePos.y-Input.mousePosition.y));
         }
 
         if (Input.GetKey("q") || Input.GetKey("e"))
