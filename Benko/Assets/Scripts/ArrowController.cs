@@ -13,6 +13,8 @@ public class ArrowController : MonoBehaviour
     private TextMeshPro TextMesh;
 
     public GameObject HitFx;
+
+    public Animator anim;
     void Start() {
         start = transform.position;
         setStartDir();
@@ -74,14 +76,17 @@ public class ArrowController : MonoBehaviour
     }
     public void HitTarget()
     {
-        GameObject fx = Instantiate(HitFx, target.transform.position, Quaternion.identity);
-        Destroy(fx,0.9f);
+        GameObject fx = Instantiate(HitFx, target.transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
+        Destroy(fx,2f);
 
         target.gameObject.GetComponent<Health>().Currenthealth -= damage;
         GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,2,0), Quaternion.identity);
+        anim = go.GetComponent<Animator>();
+        anim.SetBool("start", true);
+
         TextMesh = go.GetComponent<TextMeshPro>();
         TextMesh.SetText(damage.ToString());
-        Destroy(go,2f);
+        Destroy(go,1f);
         Destroy(gameObject);
 
         GameObject _camera = GameObject.Find("_camera");

@@ -11,6 +11,9 @@ public class Archer_Controller : MonoBehaviour
     public float walkSpeed;
     public float FireRate;
     public float FireCountdwon = 0.0f;
+
+    public float MinDamage;
+    public float MaxDamage;
     [HideInInspector]
     public int damage;
     [Header("Unresponsable")]
@@ -138,7 +141,7 @@ public class Archer_Controller : MonoBehaviour
         if(!isDead){
         archer_anim.SetInteger("current_pos", 2); //Shoot Anim
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
-        damage = (int)Random.Range(5f,15f);
+        damage = (int)Random.Range(MinDamage,MaxDamage);
         go.GetComponent<ArrowController>().Seek(target, damage);
         }
     }
