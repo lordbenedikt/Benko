@@ -8,12 +8,12 @@ public class Camera_Controller : MonoBehaviour
     public float speed;
     public float maxLeft;
     public float maxRight;
-    Vector2 prevMousePos;
-    float xRotation = 0;
-    float yRotation = 0;
-    float scale = 15;
-
+    public float xRotation = 0;
+    public float yRotation = 20;
+    public float scale = 7;
     public GameObject _camera;
+
+    Vector2 prevMousePos;
 
     void Update()
     {
