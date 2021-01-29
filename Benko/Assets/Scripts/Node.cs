@@ -51,12 +51,15 @@ public class Node : MonoBehaviour
         {
             if (!isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
-                foreach(long key in customGrid.pathMap.Keys.ToArray()) {
-                    if (customGrid.pathMap[key].Contains(gameObject)) {
-                        customGrid.pathMap.Remove(key);
-                    }
-                }
-                // print("siize "+customGrid.pathMap.Count);
+                
+                customGrid.pathMap.Clear();
+                // Unfertige Optimierung
+                // foreach(long key in customGrid.pathMap.Keys.ToArray()) {
+                //     if (customGrid.pathMap[key].Contains(gameObject)) {
+                //         customGrid.pathMap.Remove(key);
+                //     }
+                // }
+
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
                 isWall = true;
                 isObstacle = true;
