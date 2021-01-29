@@ -193,7 +193,7 @@ MonoBehaviour:
   walkSpeed: 3
   FireRate: 0.5
   FireCountdwon: 0
-  damage: 20
+  damage: 10
   Arrow: {fileID: 1992071922080826269, guid: 3eb57cf6b7c903e449b6da9fcc604ac3, type: 3}
   ArrowStartPoint: {fileID: 357074055207964893}
   selected: 0

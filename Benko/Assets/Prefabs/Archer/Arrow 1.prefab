@@ -49,6 +49,7 @@ MonoBehaviour:
   start: {x: 0, y: 0, z: 0}
   PopUpText: {fileID: 3908799315315541399, guid: b7a7f1f9bd8855044b79cdf1d90b1b15,
     type: 3}
+  HitFx: {fileID: 1575731688439659475, guid: f6b9d67dfdb64f9449ad1d4faa24e46a, type: 3}
 --- !u!1 &9024612999162871432
 GameObject:
   m_ObjectHideFlags: 0

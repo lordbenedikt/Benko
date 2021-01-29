@@ -49,7 +49,6 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
-        //Die();
         if(!dead){
         if(gameObject.GetComponent<Health>().Currenthealth <= 0){
             Die();
@@ -100,9 +99,9 @@ public class Enemy_Controller : MonoBehaviour
     public void Die(){
         GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
         gameObject.tag = "Untagged";
-        enemy_main.SetInteger("Current_State", 2);   //Die
+        enemy_main.SetBool("dead", true);   //Die
         dead = true;
-        enemy_main.SetInteger("Current_State", 2);   //Die
+        //enemy_main.SetInteger("Current_State", 2);   //Die
         Destroy(gameObject,3.0f);
     }
 }
