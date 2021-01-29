@@ -7,21 +7,15 @@ public class ArrowController : MonoBehaviour
     public Transform target;
     public float speed;
     public Vector3 start;
-
-    
-    void Awake() {
-        //print(target);
-        // if(target==null)
-        //     Destroy(gameObject);
-    }
+    public float damage;
     void Start() {
         start = transform.position;
         setStartDir();
     }
-    public void Seek(Transform _target)
-
+    public void Seek(Transform _target, float _damage)
     {
         target = _target;
+        damage = _damage;
         if(target==null)
         Destroy(gameObject);
     }
@@ -89,7 +83,7 @@ public class ArrowController : MonoBehaviour
     public void HitTarget()
     {
         //Particle
-        target.gameObject.GetComponent<Health>().Currenthealth -= 10;
+        target.gameObject.GetComponent<Health>().Currenthealth -= damage;
         Destroy(gameObject);
         // Debug.Log("Error");
     }

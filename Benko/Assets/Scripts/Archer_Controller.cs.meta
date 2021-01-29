@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d52f85ef339181d48b534b761444a04e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Arrow: {fileID: 1992071922080826269, guid: 3eb57cf6b7c903e449b6da9fcc604ac3, type: 3}
+  - ArrowStartPoint: {instanceID: 0}
+  - DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

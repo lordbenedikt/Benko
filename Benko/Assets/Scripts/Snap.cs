@@ -31,9 +31,9 @@ public class Snap : MonoBehaviour
     }
     public void markAsObstacle() {
         //print(customGrid);
-        int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);
-        if(gridIndex!=-1)
-            customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
+        //int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);   //changed
+        //if(gridIndex!=-1)
+         //   customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
     }
 
     private void OnDrawGizmos()

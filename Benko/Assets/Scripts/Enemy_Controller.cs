@@ -13,16 +13,19 @@ public class Enemy_Controller : MonoBehaviour
     GameController controller;
     CustomGrid customGrid;
     GameObject nextNode;
-    public Animator archer_anim;
+    Animator enemy_main;
+    private bool dead;
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
         InvokeRepeating("findPath", 0f, 0.1f);
-        archer_anim = GetComponent<Animator>();
-        archer_anim.SetInteger("Skeleton_Anim", 2);   //Death
+        enemy_main = GetComponent<Animator>();
+        dead = false;
+        //archer_anim.SetInteger("Current_State", 0);   //Death
     }
     
     void findPath() {
+        if(!dead){
         // don't find path when inside obstacle
         if(customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x,transform.position.z)].GetComponent<Node>().isObstacle) return;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -42,10 +45,12 @@ public class Enemy_Controller : MonoBehaviour
         if(path.Count>1) {
             nextNode = path[path.Count-2].gameObject;
         }
+        }
     }
 
     void Update()
     {
+        if(!dead){
         if(gameObject.GetComponent<Health>().Currenthealth <= 0){
             Die();
         }
@@ -61,16 +66,16 @@ public class Enemy_Controller : MonoBehaviour
         if (player==null) return;
         // if hit Player
         if(new Vector2(transform.position.x-player.transform.position.x,transform.position.z-player.transform.position.z).magnitude < 0.8) {
-            archer_anim.SetInteger("Skeleton_Anim", 2);   //Death  
+            //archer_anim.SetInteger("Current_State", 2);   //Death  
             //print("Death");  
             Destroy(gameObject,5.0f);
             gameObject.tag = "Untagged";
-            player.GetComponent<Health>().Currenthealth -= 10;
+            player.GetComponent<Health>().Currenthealth -= 3;
             return;
         }
         if(nextNode != null) {
             transform.position += (nextNode.transform.position-transform.position).normalized*speed*Time.deltaTime;
-            archer_anim.SetInteger("Skeleton_Anim", 0);   //Walking
+            enemy_main.SetInteger("Current_State", 0);   //Walking
             //print("is currently walking");  
             if((nextNode.transform.position-transform.position).magnitude<0.1) {
                 nextNode = null;
@@ -78,7 +83,6 @@ public class Enemy_Controller : MonoBehaviour
         }
         Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
         if(face.sqrMagnitude != 0) {
-            //archer_anim.SetBool("Running", true); //Running auf true
             float damping = 20f;
             face.y = 0;
             var targetRotation = Quaternion.LookRotation(face);
@@ -91,11 +95,14 @@ public class Enemy_Controller : MonoBehaviour
         // Debug.DrawRay(transform.position, newDirection, Color.red);
         // // Calculate a rotation a step closer to the target and applies rotation to this object
         // transform.rotation = Quaternion.LookRotation(newDirection);
+        }
     }
     public void Die(){
-        print("Die Method"); 
         GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
-        Destroy(gameObject);
+        gameObject.tag = "Untagged";
+        dead = true;
+        enemy_main.SetInteger("Current_State", 2);   //Die
+        Destroy(gameObject,3.0f);
     }
 }
 

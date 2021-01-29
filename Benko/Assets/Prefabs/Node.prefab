@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c5d0cae296de94690d7b6e405a9ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node: {fileID: 0}
+  node: {fileID: 8814404972295443165}
 --- !u!114 &8814404972295443165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9595eccf1c22a144193a0a7063efe89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5398723299708044077, guid: f999469f34a8d7b4cbad40a6b8a10279, type: 3}
+  enemy: {fileID: 291079356417880372, guid: 9c0b1516cbbab754b8bea3ec56da0416, type: 3}
   cornerStone: {fileID: 0}
   selected: 0
   adjacents: []

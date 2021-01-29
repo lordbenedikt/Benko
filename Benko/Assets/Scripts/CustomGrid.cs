@@ -314,9 +314,9 @@ public class CustomGrid : MonoBehaviour
             // if click on player unit
             if(player!=null) {
                 foreach(GameObject p in players) {
-                    p.GetComponent<Archer_test_Controller>().selected = false;
+                    p.GetComponent<Archer_Controller>().selected = false;
                 }
-                player.GetComponent<Archer_test_Controller>().selected = true;
+                player.GetComponent<Archer_Controller>().selected = true;
                 controller.selection.transform.position = player.transform.position;
                 controller.selection.SetActive(true);
                 controller.selection.GetComponent<Selection>().player = player;

@@ -189,11 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52f85ef339181d48b534b761444a04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  walkSpeed: 5
+  range: 8
+  walkSpeed: 2
   FireRate: 0.5
   FireCountdwon: 0
-  Damage: 0
+  Damage: 10
   Arrow: {fileID: 1992071922080826269, guid: 3eb57cf6b7c903e449b6da9fcc604ac3, type: 3}
   ArrowStartPoint: {fileID: 357074055207964893}
   selected: 0
@@ -214,12 +214,9 @@ MonoBehaviour:
   Currenthealth: 0
   HealthBar: {fileID: 6168797801274107170, guid: ce33097c81286124ab72957c8bde1eec,
     type: 3}
-  _healthbar: {fileID: 0}
   healthDisplay: {fileID: 0}
-  image: {fileID: 0}
   yOffset: 3
   hpBarScale: 1
-  DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
 --- !u!1 &860632189253769406
 GameObject:
   m_ObjectHideFlags: 0

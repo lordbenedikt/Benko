@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class UI_Manager : MonoBehaviour
 {
     [Header ("Setup")]
+    public string BuildModeShortcut;
+    public string BuildArcherShortcut;
+    public string BuildEnemyShortcut;
     public int GoldAmount;
     public Vector3 spawn_pos;
     public GameObject Player_Spawn_PX;
@@ -17,12 +20,20 @@ public class UI_Manager : MonoBehaviour
     [HideInInspector]
     public bool ActivateBuildMode;
     public TextMeshProUGUI GoldText;
+    //public GameObject EnemySpawner;
    
     void Update()
     {
         ShowGold();
-        if(Input.GetKeyDown("r")){
+        if(Input.GetKeyDown(BuildModeShortcut)){
             BuildModeSet();
+        }
+        if(Input.GetKeyDown(BuildArcherShortcut)){
+            BuildArcher();
+        }
+        if(Input.GetKeyDown(BuildEnemyShortcut)){
+            //EnemySpawner.GetComponent<EnemySpawner>().SpawnEnemy();
+            GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>().SpawnEnemy();
         }
     }
     public void StartGame(){
@@ -48,12 +59,12 @@ public class UI_Manager : MonoBehaviour
         if(ActivateBuildMode)
         {
             ActivateBuildMode = false;
-            BuildModeText.SetText("BuildMode: OFF");
+            BuildModeText.SetText("BuildMode: OFF (R)");
 
             return;
         }
         ActivateBuildMode = true;
-        BuildModeText.SetText("BuildMode: ON");
+        BuildModeText.SetText("BuildMode: ON (R)");
         
     }
 

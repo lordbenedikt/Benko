@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Archer_test_Controller : MonoBehaviour
+public class Archer_Controller : MonoBehaviour
 {
     private Transform target;
 
@@ -21,16 +21,23 @@ public class Archer_test_Controller : MonoBehaviour
     Animator archer_anim;
     GameController gameController;
     public GameObject DiePX;
+    private bool isDead;
     void Start()
     {
         InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         archer_anim = GetComponent<Animator>();
+        isDead = false;
     }
     void Update()
     {
+        if(!isDead){
         if(gameObject.GetComponent<Health>().Currenthealth <= 0){
+           
             Die();
+            archer_anim.SetInteger("current_pos", 3); //Dead Anim
+            
+            
         }
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         Vector3 move = new Vector3(0,0,0);
@@ -96,9 +103,11 @@ public class Archer_test_Controller : MonoBehaviour
             FireCountdwon = 1 / FireRate;
         }
         FireCountdwon -= Time.deltaTime;
+        }
     }
     void UpdateTarget()
     {
+        if(!isDead){
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float ShortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -118,16 +127,19 @@ public class Archer_test_Controller : MonoBehaviour
         else
         {
             target = null;
+        }        
         }
     }
     public void Shoot()
     {
+        if(!isDead){
         archer_anim.SetInteger("current_pos", 2); //Shoot Anim
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         ArrowController ArrowScript = go.GetComponent<ArrowController>();
         if(ArrowScript != null)
         {
-            ArrowScript.Seek(target);
+            ArrowScript.SeekTarget(target, Damage);
+        }
         }
     }
 
@@ -138,13 +150,11 @@ public class Archer_test_Controller : MonoBehaviour
         //print("Archer has died");
         gameObject.tag = "Untagged";
         selected = false;
-        Destroy(gameObject, 5.0f);
+        isDead = true;
+        archer_anim.SetInteger("current_pos", 3); //Dead Anim
+        Destroy(gameObject, 4.0f);
+        archer_anim.SetInteger("current_pos", 3); //Dead Anim
     }
-
-    
-
-        
-
     void OnDrawGizmosSelected(){
         //nur zur Übersicht/Darstellung
         Gizmos.color = Color.red;

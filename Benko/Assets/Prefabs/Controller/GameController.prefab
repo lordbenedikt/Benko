@@ -70,14 +70,14 @@ MonoBehaviour:
     type: 3}
   wallFillerObject: {fileID: 157022171694366204, guid: 445a789b4a02c5f45a5003dd7fb6c338,
     type: 3}
-  material: {fileID: -3033667219593020291, guid: 406d31294c4c37849acbf393b6362352,
+  material: {fileID: -2310514774154243031, guid: 8781fef31536a48448baf9e712a47dce,
     type: 3}
   colorOriginal: {r: 0.23858376, g: 0.5188679, b: 0, a: 0}
   colorSelected: {r: 0, g: 0.5128658, b: 1, a: 0}
   colorPath: {r: 1, g: 0.8837067, b: 0, a: 0}
   highlightObstacle: 0
   walls: []
-  controller: {fileID: 0}
+  controller: {fileID: 5110855421183745687}
   nodes: []
 --- !u!1 &5110855421858624693
 GameObject:
@@ -90,13 +90,14 @@ GameObject:
   - component: {fileID: 5110855421858624692}
   - component: {fileID: 5110855421858624586}
   - component: {fileID: 5110855421858624587}
+  - component: {fileID: 1538924781}
   m_Layer: 0
   m_Name: Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5110855421858624692
 Transform:
   m_ObjectHideFlags: 0
@@ -158,3 +159,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1538924781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110855421858624693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90f738a92dd3454e8506c0afdbcd7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
