@@ -81,7 +81,7 @@ public class ArrowController : MonoBehaviour
         GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,2,0), Quaternion.identity);
         TextMesh = go.GetComponent<TextMeshPro>();
         TextMesh.SetText(damage.ToString());
-        Destroy(go,2f);
+        Destroy(go,0.8f);
         Destroy(gameObject);
 
         GameObject _camera = GameObject.Find("_camera");
