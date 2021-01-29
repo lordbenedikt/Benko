@@ -49,7 +49,7 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
-        Die();
+        //Die();
         if(!dead){
         if(gameObject.GetComponent<Health>().Currenthealth <= 0){
             Die();
