@@ -97,7 +97,7 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
     public void Die(){
-        GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
+        //GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(10);
         gameObject.tag = "Untagged";
         enemy_main.SetBool("dead", true);   //Die
         dead = true;
