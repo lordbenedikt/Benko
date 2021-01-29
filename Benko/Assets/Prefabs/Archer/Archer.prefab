@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 8
-  walkSpeed: 2
+  walkSpeed: 3
   FireRate: 0.5
   FireCountdwon: 0
   Damage: 10

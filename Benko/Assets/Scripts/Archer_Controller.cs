@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class Archer_Controller : MonoBehaviour
 {
     private Transform target;
-
     [Header ("Basic Setup")]
     public float range;
     public float walkSpeed;
     public float FireRate;
     public float FireCountdwon = 0.0f;
-    public float Damage;
-
+    public float damage = 10;
     [Header("Unresponsable")]
     public GameObject Arrow;
     public Transform ArrowStartPoint;
@@ -134,17 +132,10 @@ public class Archer_Controller : MonoBehaviour
     {
         if(!isDead){
         archer_anim.SetInteger("current_pos", 2); //Shoot Anim
-        Arrow.GetComponent<ArrowController>().Seek(target, Damage);
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
-        //go.GetComponent<ArrowController>().SeekTarget(target, Damage);
-        // ArrowController ArrowScript = go.GetComponent<ArrowController>();
-        // if(ArrowScript != null)
-        // {
-        //     ArrowScript.SeekTarget(target, Damage);
-        // }
+        go.GetComponent<ArrowController>().Seek(target, damage);
         }
     }
-
     public void Die(){
         archer_anim.SetInteger("current_pos", 3); //Dead Anim
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
@@ -154,7 +145,7 @@ public class Archer_Controller : MonoBehaviour
         selected = false;
         isDead = true;
         archer_anim.SetInteger("current_pos", 3); //Dead Anim
-        Destroy(gameObject, 4.0f);
+        Destroy(gameObject, 2.5f);
         archer_anim.SetInteger("current_pos", 3); //Dead Anim
     }
     void OnDrawGizmosSelected(){

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,15 +9,9 @@ public class Health : MonoBehaviour
     public float MaxHealth;
     public float Currenthealth;
     public GameObject HealthBar;
-    //public GameObject _healthbar;
     public Image healthDisplay;
-    //public Image image;
-
     public float yOffset = 2;
     public float hpBarScale = 1;
-    void Awake(){
-        Currenthealth = MaxHealth;
-    }
     GameObject GetChildWithName(GameObject obj, string name) {
          Transform trans = obj.transform;
          Transform childTrans = trans. Find(name);
@@ -29,13 +23,13 @@ public class Health : MonoBehaviour
      }
     void Start()
     {
+        Currenthealth = MaxHealth;
         GameObject go = Instantiate(HealthBar, this.transform.position + new Vector3(0,yOffset,0), Quaternion.identity);
         Vector3 ls = go.transform.localScale;
         go.transform.localScale = new Vector3(ls.x*hpBarScale,ls.x*hpBarScale,ls.x*hpBarScale);
         go.transform.SetParent(this.transform);
         healthDisplay = go.GetComponent<HealthBar>().healthDisplay.GetComponent<Image>();
     }
-
     private void Update()
     {
         healthDisplay.fillAmount = Currenthealth/MaxHealth;

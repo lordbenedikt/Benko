@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ArrowController : MonoBehaviour
 {
@@ -8,16 +9,17 @@ public class ArrowController : MonoBehaviour
     public float speed;
     public Vector3 start;
     float damage;
+    public GameObject PopUpText;
+    private TextMeshPro TextMesh;
     void Start() {
         start = transform.position;
         setStartDir();
+        //TextMesh = GetComponent<TextMeshPro>();
     }
     public void Seek(Transform _target, float _damage)
     {
         target = _target;
         damage = _damage;
-        Debug.Log(damage);
-        Debug.Log(target.transform.position);
         if(target==null){
             Destroy(gameObject);
         }
@@ -60,7 +62,6 @@ public class ArrowController : MonoBehaviour
         // Vector3 rotation = lookRotation.eulerAngles;
         // transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
-
     void setStartDir() {
         if(target==null) return;
         Vector3 v = target.position - start;
@@ -69,11 +70,17 @@ public class ArrowController : MonoBehaviour
         v.y = 2;
         transform.rotation = Quaternion.LookRotation(v);
     }
-
     public void HitTarget()
     {
-        //Particle
+        //Particle Hit
         target.gameObject.GetComponent<Health>().Currenthealth -= damage;
+        GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,2,0), Quaternion.identity);
+        TextMesh = go.GetComponent<TextMeshPro>();
+        TextMesh.SetText(damage.ToString());
+        Destroy(go,0.9f);
         Destroy(gameObject);
-    }
+
+        GameObject _camera = GameObject.Find("_camera");
+        transform.rotation = _camera.transform.rotation;
+}
 }
