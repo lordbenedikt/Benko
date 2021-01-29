@@ -134,12 +134,14 @@ public class Archer_Controller : MonoBehaviour
     {
         if(!isDead){
         archer_anim.SetInteger("current_pos", 2); //Shoot Anim
+        Arrow.GetComponent<ArrowController>().Seek(target, Damage);
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
-        ArrowController ArrowScript = go.GetComponent<ArrowController>();
-        if(ArrowScript != null)
-        {
-            ArrowScript.SeekTarget(target, Damage);
-        }
+        //go.GetComponent<ArrowController>().SeekTarget(target, Damage);
+        // ArrowController ArrowScript = go.GetComponent<ArrowController>();
+        // if(ArrowScript != null)
+        // {
+        //     ArrowScript.SeekTarget(target, Damage);
+        // }
         }
     }
 
