@@ -11,23 +11,25 @@ public class Camera_Controller : MonoBehaviour
     Vector2 prevMousePos;
     float xRotation = 0;
     float yRotation = 0;
+    float scale = 15;
 
     public GameObject _camera;
 
     void Update()
     {
         float Current_y = transform.eulerAngles.y;
-        float MouseScrollInput = Input.mouseScrollDelta.y;
-            _camera.GetComponent<Camera>().orthographicSize = _camera.GetComponent<Camera>().orthographicSize - Input.mouseScrollDelta.y * 1;
+        scale = Mathf.Clamp(scale - Input.mouseScrollDelta.y,2,20);
+        _camera.GetComponent<Camera>().orthographicSize = scale;
+        print("scale: " + scale);
        
 
         if(Input.GetMouseButton(1)) {
-            xRotation += prevMousePos.y-Input.mousePosition.y;
-            yRotation += Input.mousePosition.x-prevMousePos.x;
+            xRotation += 0.5f*(prevMousePos.y-Input.mousePosition.y);
+            yRotation += 0.5f*(Input.mousePosition.x-prevMousePos.x);
             transform.rotation = Quaternion.Euler(new Vector3(xRotation,yRotation,0));
         }
         if(Input.GetMouseButton(2)) {
-            transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,yRotation,0) * new Vector3(0.03f*(prevMousePos.x-Input.mousePosition.x),0,0.03f*(prevMousePos.y-Input.mousePosition.y));
+            transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,yRotation,0) * new Vector3(0.01f*scale*(prevMousePos.x-Input.mousePosition.x),0,0.01f*scale*(prevMousePos.y-Input.mousePosition.y));
         }
 
         if (Input.GetKey("q") || Input.GetKey("e"))
