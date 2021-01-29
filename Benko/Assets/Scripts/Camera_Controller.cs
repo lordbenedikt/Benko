@@ -9,16 +9,21 @@ public class Camera_Controller : MonoBehaviour
     //public float maxLeft;
     //public float maxRight;
     Vector2 prevMousePos;
-    float xRotation = 0;
-    float yRotation = 0;
+    public float xRotation = 0;
+    public float yRotation = 0;
+    public float scale = 20;
 
     public GameObject _camera;
+
+    void Start() {
+        transform.rotation = Quaternion.Euler(new Vector3(xRotation *0.5f ,yRotation*0.5f,0));
+    }
 
     void Update()
     {
         float Current_y = transform.eulerAngles.y;
-        float MouseScrollInput = Input.mouseScrollDelta.y;
-            _camera.GetComponent<Camera>().fieldOfView = _camera.GetComponent<Camera>().fieldOfView - Input.mouseScrollDelta.y * 1;
+        scale -= Input.mouseScrollDelta.y;
+        _camera.GetComponent<Camera>().fieldOfView = scale;
        
 
         if(Input.GetMouseButton(1)) {
@@ -27,7 +32,7 @@ public class Camera_Controller : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(xRotation *0.5f ,yRotation*0.5f,0));
         }
         if(Input.GetMouseButton(2)) {
-            transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,yRotation,0) * new Vector3(0.03f*(prevMousePos.x-Input.mousePosition.x),0,0.03f*(prevMousePos.y-Input.mousePosition.y));
+            transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,0.5f*yRotation,0) * new Vector3(0.03f*(prevMousePos.x-Input.mousePosition.x),0,0.03f*(prevMousePos.y-Input.mousePosition.y));
         }
 
         // if (Input.GetKey("q") || Input.GetKey("e"))
