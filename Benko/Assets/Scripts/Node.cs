@@ -94,7 +94,7 @@ public class Node : MonoBehaviour
         // middle button
         if (Input.GetMouseButtonDown(2))
         {
-            GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
+            // GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }
 }
