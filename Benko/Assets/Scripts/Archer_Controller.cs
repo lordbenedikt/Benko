@@ -11,7 +11,8 @@ public class Archer_Controller : MonoBehaviour
     public float walkSpeed;
     public float FireRate;
     public float FireCountdwon = 0.0f;
-    public float damage = 10;
+    [HideInInspector]
+    public int damage;
     [Header("Unresponsable")]
     public GameObject Arrow;
     public Transform ArrowStartPoint;
@@ -30,10 +31,14 @@ public class Archer_Controller : MonoBehaviour
     void Update()
     {
         if(!isDead){
+            // if(Input.GetKey("g")){
+            //     archer_anim.SetBool("dead", true);
+            //     archer_anim.SetInteger("current_pos", 3); //Dead Anim
+            // }
         if(gameObject.GetComponent<Health>().Currenthealth <= 0){
            
             Die();
-            archer_anim.SetInteger("current_pos", 3); //Dead Anim
+            // archer_anim.SetInteger("current_pos", 3); //Dead Anim
             
             
         }
@@ -133,20 +138,18 @@ public class Archer_Controller : MonoBehaviour
         if(!isDead){
         archer_anim.SetInteger("current_pos", 2); //Shoot Anim
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
+        damage = (int)Random.Range(5f,15f);
         go.GetComponent<ArrowController>().Seek(target, damage);
         }
     }
     public void Die(){
-        archer_anim.SetInteger("current_pos", 3); //Dead Anim
+        archer_anim.SetBool("dead", true);
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go,1.0f);
-        //print("Archer has died");
         gameObject.tag = "Untagged";
         selected = false;
         isDead = true;
-        archer_anim.SetInteger("current_pos", 3); //Dead Anim
         Destroy(gameObject, 2.5f);
-        archer_anim.SetInteger("current_pos", 3); //Dead Anim
     }
     void OnDrawGizmosSelected(){
         //nur zur Übersicht/Darstellung

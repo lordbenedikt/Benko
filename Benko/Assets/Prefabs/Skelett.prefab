@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 291079356417880372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.2315395, y: 7.83062e-17, z: -3.5265977}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 786365100538116461}
   - {fileID: 4832816781028657946}
@@ -85,7 +85,7 @@ MonoBehaviour:
   HealthBar: {fileID: 6168797801274107170, guid: ce33097c81286124ab72957c8bde1eec,
     type: 3}
   healthDisplay: {fileID: 0}
-  yOffset: 2
+  yOffset: 3
   hpBarScale: 1
 --- !u!1 &562517212730839663
 GameObject:

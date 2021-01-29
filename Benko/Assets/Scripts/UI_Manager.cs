@@ -21,6 +21,8 @@ public class UI_Manager : MonoBehaviour
     public bool ActivateBuildMode;
     public TextMeshProUGUI GoldText;
     //public GameObject EnemySpawner;
+
+    public Archer_Controller Script;
    
     void Update()
     {
@@ -87,5 +89,15 @@ public class UI_Manager : MonoBehaviour
             Destroy(go, 5f);
             AddGold(-50);
         }
+    }
+
+    public void SetDamage(int _damage){
+        
+        //_damage = 
+        Script.damage = _damage;
+    }
+
+    public void CheatCode100Coins(){
+        AddGold(100);
     }
 }

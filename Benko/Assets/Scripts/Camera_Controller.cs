@@ -21,7 +21,7 @@ public class Camera_Controller : MonoBehaviour
         scale = Mathf.Clamp(scale - Input.mouseScrollDelta.y,2,20);
         _camera.GetComponent<Camera>().orthographicSize = scale;
         print("scale: " + scale);
-       
+
 
         if(Input.GetMouseButton(1)) {
             xRotation += 0.5f*(prevMousePos.y-Input.mousePosition.y);
@@ -32,19 +32,19 @@ public class Camera_Controller : MonoBehaviour
             transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,yRotation,0) * new Vector3(0.01f*scale*(prevMousePos.x-Input.mousePosition.x),0,0.01f*scale*(prevMousePos.y-Input.mousePosition.y));
         }
 
-        if (Input.GetKey("q") || Input.GetKey("e"))
-        {
-            if (Input.GetKey("q"))
-            {
-                //Debug.Log("q && y=="+Current_y);
-                if (Current_y < maxLeft || Current_y > 180) transform.Rotate(0, speed * Time.deltaTime, 0);
-            }
+        // if (Input.GetKey("q") || Input.GetKey("e"))
+        // {
+        //     if (Input.GetKey("q"))
+        //     {
+        //         //Debug.Log("q && y=="+Current_y);
+        //         if (Current_y < maxLeft || Current_y > 180) transform.Rotate(0, speed * Time.deltaTime, 0);
+        //     }
 
-            if (Input.GetKey("e"))
-            {
-                if (Current_y > maxRight || Current_y < 180)transform.Rotate(0, -speed * Time.deltaTime, 0);
-            }
-        }
+        //     if (Input.GetKey("e"))
+        //     {
+        //         if (Current_y > maxRight || Current_y < 180)transform.Rotate(0, -speed * Time.deltaTime, 0);
+        //     }
+        // }
         prevMousePos = Input.mousePosition;
     }
 }

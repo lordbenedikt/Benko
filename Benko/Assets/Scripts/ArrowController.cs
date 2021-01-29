@@ -11,6 +11,8 @@ public class ArrowController : MonoBehaviour
     float damage;
     public GameObject PopUpText;
     private TextMeshPro TextMesh;
+
+    public GameObject HitFx;
     void Start() {
         start = transform.position;
         setStartDir();
@@ -72,12 +74,14 @@ public class ArrowController : MonoBehaviour
     }
     public void HitTarget()
     {
-        //Particle Hit
+        GameObject fx = Instantiate(HitFx, target.transform.position, Quaternion.identity);
+        Destroy(fx,0.9f);
+
         target.gameObject.GetComponent<Health>().Currenthealth -= damage;
         GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,2,0), Quaternion.identity);
         TextMesh = go.GetComponent<TextMeshPro>();
         TextMesh.SetText(damage.ToString());
-        Destroy(go,0.9f);
+        Destroy(go,2f);
         Destroy(gameObject);
 
         GameObject _camera = GameObject.Find("_camera");
