@@ -1866,20 +1866,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7a7f1f9bd8855044b79cdf1d90b1b15, type: 3}
---- !u!1 &693467140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3908799315315541399, guid: b7a7f1f9bd8855044b79cdf1d90b1b15,
-    type: 3}
-  m_PrefabInstance: {fileID: 693467139}
-  m_PrefabAsset: {fileID: 0}
---- !u!33 &693467141
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693467140}
-  m_Mesh: {fileID: 0}
 --- !u!1001 &719579739
 PrefabInstance:
   m_ObjectHideFlags: 0
