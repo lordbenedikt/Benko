@@ -73,6 +73,7 @@ public class ArrowController : MonoBehaviour
         v = v.normalized;
         v.y = 2;
         transform.rotation = Quaternion.LookRotation(v);
+        transform.rotation = Quaternion.Euler(0,0,90);
     }
     public void HitTarget()
     {

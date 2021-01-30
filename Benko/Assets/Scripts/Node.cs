@@ -76,7 +76,7 @@ public class Node : MonoBehaviour
                 //     }
                 // }
                 // print("siize "+customGrid.pathMap.Count);
-                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(1);
+                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(5);
                 isWall = false;
                 isObstacle = false;
                 Destroy(cornerStone);

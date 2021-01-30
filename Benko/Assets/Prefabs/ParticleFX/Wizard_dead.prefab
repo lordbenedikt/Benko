@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3833446981846447492}
   - component: {fileID: 3833446981846447493}
   m_Layer: 0
-  m_Name: ArcherDeath
+  m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,7 +606,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4709,7 +4709,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8540f8fae9f101243b3b6e2839b35947, type: 2}
+  - {fileID: 2100000, guid: 182169482c7386149adecdf4b7b8bb04, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

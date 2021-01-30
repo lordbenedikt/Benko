@@ -17,6 +17,7 @@ public class UI_Manager : MonoBehaviour
     [Header ("Ignore")]
     public TextMeshProUGUI BuildModeText;
     public GameObject archerprefab;
+    public GameObject wizard_prefab;
     [HideInInspector]
     public bool ActivateBuildMode;
     public TextMeshProUGUI GoldText;
@@ -88,6 +89,17 @@ public class UI_Manager : MonoBehaviour
             GameObject go =Instantiate(Player_Spawn_PX, spawn_pos, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-50);
+        }
+    }
+
+    public void BuildWizard()
+    {
+        if(GoldAmount >= 100)
+        {
+            Instantiate(wizard_prefab, spawn_pos, Quaternion.identity);
+            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos, Quaternion.identity);
+            Destroy(go, 5f);
+            AddGold(-100);
         }
     }
 

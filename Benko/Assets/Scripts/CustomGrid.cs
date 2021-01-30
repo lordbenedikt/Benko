@@ -314,10 +314,11 @@ public class CustomGrid : MonoBehaviour
             // if click on player unit
             if(player!=null) {
                 foreach(GameObject p in Units) {
-                    p.GetComponent<Archer_Controller>().selected = false;
-                    }else{
-                        player.GetComponent<Archer_Controller>().selected = false;
+
+                    p.GetComponent<isSelected>().IsSelected = false;
                     }
+                    player.GetComponent<isSelected>().IsSelected = true;
+                    
                     
                 controller.selection.transform.position = player.transform.position;
                 controller.selection.SetActive(true);

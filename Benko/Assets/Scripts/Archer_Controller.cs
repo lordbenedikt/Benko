@@ -19,7 +19,9 @@ public class Archer_Controller : MonoBehaviour
     [Header("Unresponsable")]
     public GameObject Arrow;
     public Transform ArrowStartPoint;
-    public bool selected;
+
+    //public bool selected;
+    private isSelected IsSelected;
     Animator archer_anim;
     GameController gameController;
     public GameObject DiePX;
@@ -30,6 +32,7 @@ public class Archer_Controller : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         archer_anim = GetComponent<Animator>();
         isDead = false;
+        IsSelected = GetComponent<isSelected>();
     }
     void Update()
     {
@@ -47,7 +50,8 @@ public class Archer_Controller : MonoBehaviour
         }
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         Vector3 move = new Vector3(0,0,0);
-        if(selected) { 
+        if(IsSelected.IsSelected) { 
+            //print("should work");
             if(Input.GetKey("a")) {
                 move.x -= walkSpeed * Time.deltaTime; 
                 archer_anim.SetInteger("current_pos", 1);   //Run    
@@ -153,7 +157,7 @@ public class Archer_Controller : MonoBehaviour
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go,1.0f);
         gameObject.tag = "Untagged";
-        selected = false;
+        IsSelected.IsSelected = false;
         isDead = true;
         Destroy(gameObject, 2.5f);
     }

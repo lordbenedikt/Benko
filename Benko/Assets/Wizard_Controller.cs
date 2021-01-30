@@ -18,17 +18,19 @@ public class Wizard_Controller : MonoBehaviour
     [Header("Unresponsable")]
     public GameObject energy_ball;
     public Transform energy_start_pos;
-    public bool selected;
+    //public bool selected;
     Animator wizard_anim;
     GameController gameController;
     public GameObject DiePX;
     private bool isDead;
+    private isSelected IsSelected;
     void Start()
     {
         InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         wizard_anim = GetComponent<Animator>();
         isDead = false;
+        IsSelected = GetComponent<isSelected>();
     }
     void Update()
     {
@@ -46,7 +48,7 @@ public class Wizard_Controller : MonoBehaviour
         }
         Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         Vector3 move = new Vector3(0,0,0);
-        if(selected) { 
+        if(IsSelected.IsSelected) { 
             if(Input.GetKey("a")) {
                 move.x -= walkSpeed * Time.deltaTime; 
                 wizard_anim.SetInteger("current_pos", 1);   //Run    
@@ -152,7 +154,7 @@ public class Wizard_Controller : MonoBehaviour
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go,1.0f);
         gameObject.tag = "Untagged";
-        selected = false;
+        IsSelected.IsSelected = false;
         isDead = true;
         Destroy(gameObject, 2.5f);
     }

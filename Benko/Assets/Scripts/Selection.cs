@@ -11,8 +11,10 @@ public class Selection : MonoBehaviour
     {
         if(player!=null) {
             transform.position = player.transform.position;
+            //player.GetComponent<isSelected>().IsSelected = true;
         } else {
             gameObject.SetActive(false);
+            //player.GetComponent<isSelected>().IsSelected = false;
         }
     }
 }
