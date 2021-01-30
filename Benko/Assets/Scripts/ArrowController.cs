@@ -58,8 +58,11 @@ public class ArrowController : MonoBehaviour
         Vector3 face = new Vector3(transform.position.x-prevPos.x,transform.position.y-prevPos.y,transform.position.z-prevPos.z);
         if(face.sqrMagnitude != 0) {
             float damping = 50f;
-            var targetRotation = Quaternion.LookRotation(face);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping);
+            transform.rotation = Quaternion.LookRotation(face);
+            transform.Rotate(new Vector3(0,-90,0));
+            // transform.rotation = Quaternion.Euler(transform.rotation.x+90,transform.rotation.y+90,transform.rotation.z);
+            // var targetRotation = Quaternion.LookRotation(face);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping);
         }
         // Vector3 dir = target.position - transform.position;
         // Quaternion lookRotation = Quaternion.LookRotation(dir);
