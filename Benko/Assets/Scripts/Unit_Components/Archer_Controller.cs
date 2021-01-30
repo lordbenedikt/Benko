@@ -93,7 +93,7 @@ public class Archer_Controller : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
         } else {
         }
-        if(target == null && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false)
+        if(target == null && Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.S) == false && Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.W) == false)
         {
             archer_anim.SetInteger("current_pos", 0); //Idle Anim
         }
@@ -101,7 +101,7 @@ public class Archer_Controller : MonoBehaviour
         {
             return;
         }
-        if(Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false){
+        if(Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.S) == false && Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.W) == false){
             archer_anim.SetInteger("current_pos", 2); //Shoot Anim
             //Shoot();
             Vector3 dir = target.position - transform.position;
@@ -109,11 +109,11 @@ public class Archer_Controller : MonoBehaviour
             Vector3 rotation = lookRotation.eulerAngles;
             transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
-        if (FireCountdwon <= 1)
-        {
-            FireCountdwon = 1 / FireRate;
-            Shoot();
-        }
+        // if (FireCountdwon <= 1)
+        // {
+        //     // FireCountdwon = 1 / FireRate;
+        //     archer_anim.SetInteger("current_pos", 2); //Shoot Anim
+        // }
         FireCountdwon -= Time.deltaTime;
         }
     }
@@ -145,7 +145,6 @@ public class Archer_Controller : MonoBehaviour
     public void Shoot()
     {
         if(!isDead){
-        archer_anim.SetInteger("current_pos", 2); //Shoot Anim
         //print("shoot");
         GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
         damage = (int)Random.Range(MinDamage,MaxDamage);
