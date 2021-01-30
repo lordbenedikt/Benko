@@ -246,16 +246,16 @@ public class CustomGrid : MonoBehaviour
             if (controller.gridIndexFromPos(curPos.x,curPos.y) == -1) break;
             if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y)].GetComponent<Node>().isObstacle)
                 return false;
-            // if(halfThickness!=0) {
-            //     if(nodes[controller.gridIndexFromPos(curPos.x+halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
-            //     return false;
-            //     if(nodes[controller.gridIndexFromPos(curPos.x-halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
-            //     return false;
-            //     if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y+halfThickness)].GetComponent<Node>().isObstacle)
-            //     return false;
-            //     if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y-halfThickness)].GetComponent<Node>().isObstacle)
-            //     return false;
-            // }
+            if(halfThickness!=0) {
+                if(nodes[controller.gridIndexFromPos(curPos.x+halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
+                return false;
+                if(nodes[controller.gridIndexFromPos(curPos.x-halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
+                return false;
+                if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y+halfThickness)].GetComponent<Node>().isObstacle)
+                return false;
+                if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y-halfThickness)].GetComponent<Node>().isObstacle)
+                return false;
+            }
             curPos += v;
         }
         return true;
