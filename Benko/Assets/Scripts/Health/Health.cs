@@ -7,8 +7,10 @@ public class Health : MonoBehaviour
 {
     [Header ("Health")]
     public float MaxHealth;
+    [HideInInspector]
     public float Currenthealth;
     public GameObject HealthBar;
+    [HideInInspector]
     public Image healthDisplay;
     public float yOffset = 2;
     public float hpBarScale = 1;

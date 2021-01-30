@@ -14,7 +14,7 @@ public class ArrowController : MonoBehaviour
 
     public GameObject HitFx;
 
-    public Animator anim;
+    private Animator anim;
     void Start() {
         start = transform.position;
         setStartDir();
@@ -80,12 +80,12 @@ public class ArrowController : MonoBehaviour
         Destroy(fx,2f);
 
         target.gameObject.GetComponent<Health>().Currenthealth -= damage;
-        GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,2,0), Quaternion.identity);
+        GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,1.3f,0), Quaternion.identity);
         anim = go.GetComponent<Animator>();
         anim.SetBool("start", true);
 
         TextMesh = go.GetComponent<TextMeshPro>();
-        TextMesh.SetText(damage.ToString());
+        TextMesh.SetText("-" + damage.ToString());
         Destroy(go,0.8f);
         Destroy(gameObject);
 

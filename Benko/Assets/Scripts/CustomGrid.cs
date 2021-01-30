@@ -25,7 +25,7 @@ public class CustomGrid : MonoBehaviour
 
     public GameObject[] nodes;
     public SortedDictionary<long, List<GameObject>> pathMap = new SortedDictionary<long, List<GameObject>>();
-    GameObject[] players;
+    GameObject[] Units;
 
     UnityEvent buildWallEvent = new UnityEvent();
 
@@ -293,7 +293,7 @@ public class CustomGrid : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        players = GameObject.FindGameObjectsWithTag("Player");
+        Units = GameObject.FindGameObjectsWithTag("Unit");
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -302,7 +302,7 @@ public class CustomGrid : MonoBehaviour
             Vector2 clickPos = new Vector2(hit.point.x,hit.point.z);
             float maxDist = 1;
             GameObject player = null;
-            foreach(GameObject ply in players) {
+            foreach(GameObject ply in Units) {
                 Vector2 playerPos = new Vector2(ply.transform.position.x, ply.transform.position.z);
                 float distance = Vector2.Distance(playerPos, clickPos);
                 // print("distance: " + distance);
@@ -313,10 +313,12 @@ public class CustomGrid : MonoBehaviour
             }
             // if click on player unit
             if(player!=null) {
-                foreach(GameObject p in players) {
+                foreach(GameObject p in Units) {
                     p.GetComponent<Archer_Controller>().selected = false;
-                }
-                player.GetComponent<Archer_Controller>().selected = true;
+                    }else{
+                        player.GetComponent<Archer_Controller>().selected = false;
+                    }
+                    
                 controller.selection.transform.position = player.transform.position;
                 controller.selection.SetActive(true);
                 controller.selection.GetComponent<Selection>().player = player;

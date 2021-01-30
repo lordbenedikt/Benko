@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Archer_Controller : MonoBehaviour
+public class Wizard_Controller : MonoBehaviour
 {
     private Transform target;
     [Header ("Basic Setup")]
@@ -17,10 +16,10 @@ public class Archer_Controller : MonoBehaviour
     [HideInInspector]
     public int damage;
     [Header("Unresponsable")]
-    public GameObject Arrow;
-    public Transform ArrowStartPoint;
+    public GameObject energy_ball;
+    public Transform energy_start_pos;
     public bool selected;
-    Animator archer_anim;
+    Animator wizard_anim;
     GameController gameController;
     public GameObject DiePX;
     private bool isDead;
@@ -28,7 +27,7 @@ public class Archer_Controller : MonoBehaviour
     {
         InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        archer_anim = GetComponent<Animator>();
+        wizard_anim = GetComponent<Animator>();
         isDead = false;
     }
     void Update()
@@ -50,19 +49,19 @@ public class Archer_Controller : MonoBehaviour
         if(selected) { 
             if(Input.GetKey("a")) {
                 move.x -= walkSpeed * Time.deltaTime; 
-                archer_anim.SetInteger("current_pos", 1);   //Run    
+                wizard_anim.SetInteger("current_pos", 1);   //Run    
             }
             if(Input.GetKey("d")) {
                 move.x = walkSpeed* Time.deltaTime;
-                archer_anim.SetInteger("current_pos", 1);   //Run    
+                wizard_anim.SetInteger("current_pos", 1);   //Run    
             }
             if(Input.GetKey("w")) {
                 move.z = walkSpeed* Time.deltaTime;   
-                archer_anim.SetInteger("current_pos", 1);   //Run       
+                wizard_anim.SetInteger("current_pos", 1);   //Run       
             }
             if(Input.GetKey("s")) {
                 move.z = -walkSpeed* Time.deltaTime;     
-                archer_anim.SetInteger("current_pos", 1);   //Run      
+                wizard_anim.SetInteger("current_pos", 1);   //Run      
             }
         }
         Vector3 nextPos = transform.position;
@@ -91,14 +90,14 @@ public class Archer_Controller : MonoBehaviour
         }
         if(target == null && Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false)
         {
-            archer_anim.SetInteger("current_pos", 0); //Idle Anim
+            wizard_anim.SetInteger("current_pos", 0); //Idle Anim
         }
         if(target == null)
         {
             return;
         }
         if(Input.GetKey("a") == false && Input.GetKey("s") == false && Input.GetKey("d") == false && Input.GetKey("w") == false){
-            archer_anim.SetInteger("current_pos", 2); //Shoot Anim
+            wizard_anim.SetInteger("current_pos", 2); //Shoot Anim
             //Shoot();
             Vector3 dir = target.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
@@ -141,15 +140,15 @@ public class Archer_Controller : MonoBehaviour
     public void Shoot()
     {
         if(!isDead){
-        archer_anim.SetInteger("current_pos", 2); //Shoot Anim
+        wizard_anim.SetInteger("current_pos", 2); //Shoot Anim
         //print("shoot");
-        GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
+        GameObject go = Instantiate(energy_ball, energy_start_pos.position, energy_start_pos.rotation);
         damage = (int)Random.Range(MinDamage,MaxDamage);
         go.GetComponent<ArrowController>().Seek(target, damage);
         }
     }
     public void Die(){
-        archer_anim.SetBool("dead", true);
+        wizard_anim.SetBool("dead", true);
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go,1.0f);
         gameObject.tag = "Untagged";

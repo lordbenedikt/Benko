@@ -22,7 +22,7 @@ public class UI_Manager : MonoBehaviour
     public TextMeshProUGUI GoldText;
     //public GameObject EnemySpawner;
 
-    public Archer_Controller Script;
+    //public Archer_Controller Script;
    
     void Update()
     {
@@ -91,11 +91,11 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public void SetDamage(int _damage){
+    // public void SetDamage(int _damage){
         
-        //_damage = 
-        Script.damage = _damage;
-    }
+    //     //_damage = 
+    //     Script.damage = _damage;
+    // }
 
     public void CheatCode100Coins(){
         AddGold(100);
