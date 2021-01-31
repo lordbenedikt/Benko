@@ -40,4 +40,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("eig nicht gespawnt");
         }
     }
+
+
+    
 }

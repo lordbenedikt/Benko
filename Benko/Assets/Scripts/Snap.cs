@@ -18,11 +18,11 @@ public class Snap : MonoBehaviour
             customGrid.nodes[gridIndex].GetComponent<Node>().isObstacle = true;
 
         //print("update");
-        if(Input.GetKey(KeyCode.O)) {
-            print("create");
-            Object go = PrefabUtility.InstantiatePrefab(gameObject);
-            UnityEditor.Selection.activeObject = PrefabUtility.InstantiatePrefab(UnityEditor.Selection.activeObject as GameObject);
-        }
+        // if(Input.GetKey(KeyCode.O)) {
+        //     print("create");
+        //     Object go = PrefabUtility.InstantiatePrefab(gameObject);
+        //     UnityEditor.Selection.activeObject = PrefabUtility.InstantiatePrefab(UnityEditor.Selection.activeObject as GameObject);
+        // }
     }
     private void Start()
     {
