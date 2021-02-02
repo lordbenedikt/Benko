@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: 09ca12004569ed541b35277911a5feea
+guid: 99e612ef904e8aa409c52f69e28fdd72
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable:
-  - first:
-      74: -1422011007694221501
-    second: Armature|ArmatureAction.001
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -70,7 +67,7 @@ ModelImporter:
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 1
   referencedClips: []
   importAnimation: 1
   humanDescription:

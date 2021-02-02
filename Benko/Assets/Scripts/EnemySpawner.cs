@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,9 @@ public class EnemySpawner : MonoBehaviour
     private float MinZ;
     private float MaxZ;
     private Vector3 RandomVector;
+
+    private float nextspawntime;
+    public float respawnrate;
     
     private void Start()
     {
@@ -18,11 +21,18 @@ public class EnemySpawner : MonoBehaviour
         MaxX = transform.position.x + MaxRange;
         MinZ = transform.position.z - MaxRange;
         MaxZ = transform.position.z + MaxRange;
-        InvokeRepeating("OutputTime", 2f, 3f);  //1s delay, repeat every 1s
+        //InvokeRepeating("OutputTime", 2f, 3f);  //1s delay, repeat every 1s
     }
-    void OutputTime()
-    {
-        SpawnEnemy();
+    // void OutputTime()
+    // {
+    //     SpawnEnemy();
+    // }
+
+    private void Update() {
+        if(Time.time >= nextspawntime){
+            SpawnEnemy();
+            nextspawntime = Time.time + respawnrate;
+        }
     }
     public void GetRandomPos()
     {
