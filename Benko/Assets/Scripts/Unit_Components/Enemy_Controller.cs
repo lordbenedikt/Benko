@@ -13,14 +13,14 @@ public class Enemy_Controller : MonoBehaviour
     GameController controller;
     CustomGrid customGrid;
     GameObject nextNode;
-    Animator enemy_main;
+    //Animator enemy_main;
     private bool dead;
     public GameObject gold_coin;
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
         InvokeRepeating("findPath", 0f, 0.1f);
-        enemy_main = GetComponent<Animator>();
+        //enemy_main = GetComponent<Animator>();
         dead = false;
     }
 
@@ -75,7 +75,7 @@ public class Enemy_Controller : MonoBehaviour
         }
         if(nextNode != null) {
             transform.position += (nextNode.transform.position-transform.position).normalized*speed*Time.deltaTime;
-            enemy_main.SetInteger("Current_State", 0);   //Walking
+            GetComponent<UnitAnimator>().Run();
             //print("is currently walking");  
             if((nextNode.transform.position-transform.position).magnitude<0.1) {
                 nextNode = null;
@@ -99,10 +99,11 @@ public class Enemy_Controller : MonoBehaviour
     }
     public void Die(){
         gameObject.tag = "Untagged";
-        enemy_main.SetBool("dead", true);   //Die
         dead = true;
+        //GetComponent<UnitAnimator>().Death();
+        
         //Spawn Coin
-        int amount_of_dropped_coins = (int)Random.Range(1,3);
+        int amount_of_dropped_coins = (int)Random.Range(1,4);
         for (var i = 0; i < amount_of_dropped_coins; i++)
         {
             float RandomPosX = Random.Range(-1,1);

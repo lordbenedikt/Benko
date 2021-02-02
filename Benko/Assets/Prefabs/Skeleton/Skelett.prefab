@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 633730947804741812}
   - component: {fileID: 633730947804741810}
   - component: {fileID: 633730947804741809}
+  - component: {fileID: 920003720612832610}
   m_Layer: 0
   m_Name: Skelett
   m_TagString: Enemy
@@ -89,6 +90,18 @@ MonoBehaviour:
   healthDisplay: {fileID: 0}
   yOffset: 3
   hpBarScale: 1
+--- !u!114 &920003720612832610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291079356417880372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79183c58adea6b8478fa3ce380991591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &562517212730839663
 GameObject:
   m_ObjectHideFlags: 0

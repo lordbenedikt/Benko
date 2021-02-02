@@ -739,9 +739,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3986013120389357481}
   - component: {fileID: 3520566607911537561}
-  - component: {fileID: 3520566607911537575}
   - component: {fileID: 5870124015416066579}
   - component: {fileID: 3327937087957737429}
+  - component: {fileID: 5996436019721947955}
+  - component: {fileID: 3520566607911537575}
+  - component: {fileID: -8657362544626721794}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Unit
@@ -784,25 +786,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3520566607911537575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4331048306742052115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1127a64ba755247b77ab85eecd25d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 200
-  Currenthealth: 0
-  HealthBar: {fileID: 6168797801274107170, guid: ce33097c81286124ab72957c8bde1eec,
-    type: 3}
-  healthDisplay: {fileID: 0}
-  yOffset: 2
-  hpBarScale: 1
 --- !u!114 &5870124015416066579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,6 +822,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSelected: 0
+--- !u!114 &5996436019721947955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331048306742052115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79183c58adea6b8478fa3ce380991591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3520566607911537575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331048306742052115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1127a64ba755247b77ab85eecd25d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 200
+  Currenthealth: 0
+  HealthBar: {fileID: 6168797801274107170, guid: ce33097c81286124ab72957c8bde1eec,
+    type: 3}
+  healthDisplay: {fileID: 0}
+  yOffset: 2
+  hpBarScale: 1
+--- !u!114 &-8657362544626721794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331048306742052115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b0f52671117854f8b27df73e4fcaa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackrange: 8
+  walkspeed: 3
+  fireeate: 0.3
+  firecountdwon: 0
+  damage: 20
 --- !u!1 &4602274412166325832
 GameObject:
   m_ObjectHideFlags: 0

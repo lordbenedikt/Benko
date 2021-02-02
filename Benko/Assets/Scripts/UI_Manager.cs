@@ -21,12 +21,16 @@ public class UI_Manager : MonoBehaviour
     [HideInInspector]
     public bool ActivateBuildMode;
     public TextMeshProUGUI GoldText;
+
+    public TextMeshProUGUI MaxUnits;
+    public int unit_amount;
     //public GameObject EnemySpawner;
 
     //public Archer_Controller Script;
    
     void Update()
     {
+        SetInspector();
         ShowGold();
         if(Input.GetKeyDown(BuildModeShortcut)){
             BuildModeSet();
@@ -38,6 +42,11 @@ public class UI_Manager : MonoBehaviour
             //EnemySpawner.GetComponent<EnemySpawner>().SpawnEnemy();
             GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>().SpawnEnemy();
         }
+        GameObject[] Units = GameObject.FindGameObjectsWithTag("Unit");
+        unit_amount = Units.Length;
+
+        MaxUnits.SetText("Current Units  " + unit_amount);
+
     }
     public void StartGame(){
         SceneManager.LoadScene("Game_Scene");
@@ -103,13 +112,58 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    // public void SetDamage(int _damage){
-        
-    //     //_damage = 
-    //     Script.damage = _damage;
-    // }
-
     public void CheatCode100Coins(){
         AddGold(100);
+    }
+
+
+
+
+
+
+    public TextMeshProUGUI UpgradeDamageText;
+    public void UpgradeDamage(){
+        GetSelectedUnit();
+        selectedUnit.GetComponent<UnitAttributes>().damage ++;
+        UpgradeDamageText.SetText("Damage: " + selectedUnit.GetComponent<UnitAttributes>().damage);
+    }
+    public TextMeshProUGUI UpgradeSpeedText;
+    public void UpgradeSpeed(){
+        GetSelectedUnit();
+        selectedUnit.GetComponent<UnitAttributes>().walkspeed ++;
+        UpgradeSpeedText.SetText("Speed: " + selectedUnit.GetComponent<UnitAttributes>().walkspeed);
+    }
+
+    public void Heal(){
+        GetSelectedUnit();
+        selectedUnit.GetComponent<Health>().Currenthealth = selectedUnit.GetComponent<Health>().MaxHealth;
+        //UpgradeSpeedText.SetText("Speed: " + selectedUnit.GetComponent<UnitAttributes>().walkspeed);
+    }
+
+
+    public GameObject selectedUnit;
+    public void GetSelectedUnit(){
+        GameObject[] Units = GameObject.FindGameObjectsWithTag("Unit");
+        // unit_amount = Units.Length;
+        // MaxUnits.SetText("Current Units  " + unit_amount);
+        foreach(GameObject ply in Units) {
+            if(ply.GetComponent<isSelected>().IsSelected == true){
+                selectedUnit = ply;
+                //selectedUnit.GetComponent<UnitAttributes>().walkspeed ++;
+            }
+        }
+        if(selectedUnit==null) return;
+    }
+
+    public void SetInspector(){
+        if(selectedUnit != null){
+            GetSelectedUnit();
+            UpgradeDamageText.SetText("Damage: " + selectedUnit.GetComponent<UnitAttributes>().damage);
+            //UpgradeLifeText.SetText("maxdamage: " + selectedUnit.GetComponent<UnitAttributes>().damage);
+            UpgradeSpeedText.SetText("Speed: " + selectedUnit.GetComponent<UnitAttributes>().walkspeed);
+
+        }
+        
+        
     }
 }

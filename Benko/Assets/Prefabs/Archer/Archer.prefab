@@ -1212,8 +1212,10 @@ GameObject:
   - component: {fileID: 7147814361033448070}
   - component: {fileID: 7257720361083144409}
   - component: {fileID: 7257720361083144408}
-  - component: {fileID: 7257720361083144411}
   - component: {fileID: 377436494}
+  - component: {fileID: 774979095}
+  - component: {fileID: 7257720361083144411}
+  - component: {fileID: 3853841812860800774}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Unit
@@ -1268,16 +1270,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52f85ef339181d48b534b761444a04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 8
-  walkSpeed: 3
-  FireRate: 0.45
-  FireCountdwon: 0.44
-  MinDamage: 8
-  MaxDamage: 13
-  damage: 10
   Arrow: {fileID: 4386961721750857340, guid: f27a891c2bbd96e489a2fb867321525d, type: 3}
   ArrowStartPoint: {fileID: 9010918891068785317}
   DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
+--- !u!114 &377436494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528316425579380796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94918369104f75e469456e6b064b1d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSelected: 0
+--- !u!114 &774979095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528316425579380796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79183c58adea6b8478fa3ce380991591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7257720361083144411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,7 +1317,7 @@ MonoBehaviour:
   healthDisplay: {fileID: 0}
   yOffset: 3
   hpBarScale: 1
---- !u!114 &377436494
+--- !u!114 &3853841812860800774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1306,10 +1326,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7528316425579380796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94918369104f75e469456e6b064b1d6d, type: 3}
+  m_Script: {fileID: 11500000, guid: a4b0f52671117854f8b27df73e4fcaa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsSelected: 0
+  attackrange: 7
+  walkspeed: 4
+  fireeate: 0.5
+  firecountdwon: 0
+  damage: 5
 --- !u!1 &7698609781607552024
 GameObject:
   m_ObjectHideFlags: 0
