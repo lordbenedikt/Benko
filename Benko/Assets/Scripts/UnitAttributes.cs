@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnitAttributes : MonoBehaviour
 {
+    public float Level;
     public float attackrange;
     public float walkspeed;
     public float firerate;
