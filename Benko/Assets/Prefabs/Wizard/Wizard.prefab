@@ -798,14 +798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ad14199d4b85b4a9d147c677b6740a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  walkSpeed: 4
-  FireRate: 0.31
-  FireCountdwon: 0
-  MinDamage: 15
-  MaxDamage: 20
-  damage: 0
-  energy_ball: {fileID: 4386961721750857340, guid: f27a891c2bbd96e489a2fb867321525d,
+  energy_ball: {fileID: 1172881380313095253, guid: a01eefffd17b747449fcfb0a59588be9,
     type: 3}
   energy_start_pos: {fileID: 2985390017566476170}
   DiePX: {fileID: 3833446981846447490, guid: cb7e67be262d99249988b64dca08d977, type: 3}
@@ -867,7 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackrange: 8
   walkspeed: 3
-  fireeate: 0.3
+  firerate: 0.43
   firecountdwon: 0
   damage: 20
 --- !u!1 &4602274412166325832

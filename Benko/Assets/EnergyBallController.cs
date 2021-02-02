@@ -1,9 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
-public class ArrowController : MonoBehaviour
+public class EnergyBallController : MonoBehaviour
 {
     public Transform target;
     public float speed;
@@ -30,7 +29,7 @@ public class ArrowController : MonoBehaviour
     }
     void Update()
     {
-        Vector3 prevPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+        // Vector3 prevPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         if(target == null)
         {
             Destroy(gameObject);
@@ -46,23 +45,23 @@ public class ArrowController : MonoBehaviour
         float x = dir.normalized.x;
         float z = dir.normalized.z;
         transform.Translate(new Vector3(x, 0, z) * DistaceTime, Space.World);
-        float origTargetDistance = new Vector2(start.x-target.position.x, start.z-target.position.z).magnitude;
-        float travelledDistance = new Vector2(start.x-transform.position.x, start.z-transform.position.z).magnitude / new Vector2(start.x-target.position.x, start.z-target.position.z).magnitude;
-        if(travelledDistance > 1) {
-            Destroy(gameObject);
-            return;
-        }
-        float arrowHeight = origTargetDistance*0.3f;
-        transform.position = new Vector3(transform.position.x, -Mathf.Pow((travelledDistance*2-1),2)*arrowHeight + (arrowHeight) + target.position.y, transform.position.z);
-        Vector3 face = new Vector3(transform.position.x-prevPos.x,transform.position.y-prevPos.y,transform.position.z-prevPos.z);
-        if(face.sqrMagnitude != 0) {
-            //float damping = 50f;
-            transform.rotation = Quaternion.LookRotation(face);
-            transform.Rotate(new Vector3(0,-90,0));
-            // transform.rotation = Quaternion.Euler(transform.rotation.x+90,transform.rotation.y+90,transform.rotation.z);
-            // var targetRotation = Quaternion.LookRotation(face);
-            // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping);
-        }
+        // float origTargetDistance = new Vector2(start.x-target.position.x, start.z-target.position.z).magnitude;
+        // float travelledDistance = new Vector2(start.x-transform.position.x, start.z-transform.position.z).magnitude / new Vector2(start.x-target.position.x, start.z-target.position.z).magnitude;
+        // if(travelledDistance > 1) {
+        //     Destroy(gameObject);
+        //     return;
+        // }
+        // float arrowHeight = origTargetDistance*0.3f;
+        // transform.position = new Vector3(transform.position.x, -Mathf.Pow((travelledDistance*2-1),2)*arrowHeight + (arrowHeight) + target.position.y, transform.position.z);
+        // Vector3 face = new Vector3(transform.position.x-prevPos.x,transform.position.y-prevPos.y,transform.position.z-prevPos.z);
+        // if(face.sqrMagnitude != 0) {
+        //     //float damping = 50f;
+        //     transform.rotation = Quaternion.LookRotation(face);
+        //     transform.Rotate(new Vector3(0,-90,0));
+        //     // transform.rotation = Quaternion.Euler(transform.rotation.x+90,transform.rotation.y+90,transform.rotation.z);
+        //     // var targetRotation = Quaternion.LookRotation(face);
+        //     // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping);
+        // }
 
     }
     void setStartDir() {
@@ -72,7 +71,7 @@ public class ArrowController : MonoBehaviour
         v = v.normalized;
         v.y = 2;
         transform.rotation = Quaternion.LookRotation(v);
-        // transform.rotation = Quaternion.Euler(0,0,90);
+        transform.rotation = Quaternion.Euler(0,0,90);
     }
     public void HitTarget()
     {
@@ -91,5 +90,5 @@ public class ArrowController : MonoBehaviour
 
         GameObject _camera = GameObject.Find("_camera");
         transform.rotation = _camera.transform.rotation;
-}
+    }
 }

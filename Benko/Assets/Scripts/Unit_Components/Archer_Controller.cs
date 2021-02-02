@@ -76,12 +76,21 @@ public class Archer_Controller : MonoBehaviour
             if(target == null) return;
             if(Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.S) == false && Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.W) == false){
                 GetComponent<UnitAnimator>().Attack();
+                
                 Vector3 dir = target.position - transform.position;
                 Quaternion lookRotation = Quaternion.LookRotation(dir);
                 Vector3 rotation = lookRotation.eulerAngles;
                 transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+                //Shoot();
+                //print("shoot");
             }
             GetComponent<UnitAttributes>().firecountdwon -= Time.deltaTime;
+            if (GetComponent<UnitAttributes>().firecountdwon <= 1)
+            {
+                GetComponent<UnitAttributes>().firecountdwon = 1 / GetComponent<UnitAttributes>().firerate;
+                //print("Shoot");
+                //Shoot();
+            }
         }
     }
     void UpdateTarget()
@@ -109,9 +118,10 @@ public class Archer_Controller : MonoBehaviour
     public void Shoot()
     {
         if(!isDead){
-        GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
-        int damage = (int)GetComponent<UnitAttributes>().damage;
-        go.GetComponent<ArrowController>().Seek(target, damage);
+            GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
+            //print(go.transform.name);
+            int damage = (int)GetComponent<UnitAttributes>().damage;
+            go.GetComponent<ArrowController>().Seek(target, damage);
         }
     }
     public void Die(){

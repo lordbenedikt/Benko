@@ -1332,7 +1332,7 @@ MonoBehaviour:
     value: 0
   intensity:
     overrideState: 1
-    value: 2
+    value: 1
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -1359,7 +1359,7 @@ MonoBehaviour:
     value: 0.25
   quality:
     overrideState: 1
-    value: 3
+    value: 2
 --- !u!114 &-6176477159924924969
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1425,7 +1425,7 @@ MonoBehaviour:
     value: 20
   aperture:
     overrideState: 1
-    value: 4
+    value: 2.5
   focalLength:
     overrideState: 1
     value: 100

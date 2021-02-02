@@ -84,15 +84,13 @@ public class Wizard_Controller : MonoBehaviour
                 Vector3 rotation = lookRotation.eulerAngles;
                 transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
             }
-            GetComponent<UnitAttributes>().firecountdwon -= Time.deltaTime;
 
-            // if (GetComponent<UnitAttributes>().firecountdwon <= 1)
-            // {
-            //     GetComponent<UnitAttributes>().firecountdwon = 1 / GetComponent<UnitAttributes>().firerate;
-            //     Shoot();
-            // }
-            // GetComponent<UnitAttributes>().firecountdwon -= Time.deltaTime;
-            // }
+            GetComponent<UnitAttributes>().firecountdwon -= Time.deltaTime;
+            if (GetComponent<UnitAttributes>().firecountdwon <= 1)
+            {
+                GetComponent<UnitAttributes>().firecountdwon = 1 / GetComponent<UnitAttributes>().firerate;
+                Shoot();
+            }
         }
     }
     void UpdateTarget()
@@ -121,10 +119,9 @@ public class Wizard_Controller : MonoBehaviour
     {
         if(!isDead){
             GetComponent<UnitAnimator>().Attack();
-            //print("shoot");
             GameObject go = Instantiate(energy_ball, energy_start_pos.position, energy_start_pos.rotation);
             int damage = (int)GetComponent<UnitAttributes>().damage;
-            go.GetComponent<ArrowController>().Seek(target, damage);
+            go.GetComponent<EnergyBallController>().Seek(target, damage);
         }
     }
     public void Die(){
@@ -137,7 +134,6 @@ public class Wizard_Controller : MonoBehaviour
         Destroy(gameObject, 2.5f);
     }
     void OnDrawGizmosSelected(){
-        //nur zur Übersicht/Darstellung
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, GetComponent<UnitAttributes>().attackrange);
     }
