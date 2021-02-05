@@ -62,15 +62,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 1
-  cols: 30
-  rows: 20
+  cols: 50
+  rows: 40
   nodeObject: {fileID: 2601504244140333137, guid: 83a5df35142ad5847a69957b1a7e39eb,
     type: 3}
   wallObject: {fileID: 2427924800882001508, guid: 98647d82f2b084b4b93efa6e0d3c1ceb,
     type: 3}
   wallFillerObject: {fileID: 157022171694366204, guid: 445a789b4a02c5f45a5003dd7fb6c338,
     type: 3}
-  material: {fileID: -2310514774154243031, guid: 8781fef31536a48448baf9e712a47dce,
+  material: {fileID: -586455949896470375, guid: dbcdf249ee3d2bc489816b67275ed5fb,
     type: 3}
   colorOriginal: {r: 0.23858376, g: 0.5188679, b: 0, a: 0}
   colorSelected: {r: 0, g: 0.5128658, b: 1, a: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5110855421858624692
 Transform:
   m_ObjectHideFlags: 0

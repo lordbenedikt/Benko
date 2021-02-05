@@ -28,6 +28,7 @@ public class CustomGrid : MonoBehaviour
     GameObject[] Units;
 
     UnityEvent buildWallEvent = new UnityEvent();
+    public GameObject Enemy;
 
     void Awake() {
         controller = gameObject.GetComponent<GameController>();
@@ -111,6 +112,18 @@ public class CustomGrid : MonoBehaviour
     {
         if(Input.GetMouseButton(0)) {
             getMousePosOnGround();
+        }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            //print("3");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                //Vector2 clickPos = new Vector2(hit.point.x, hit.point.z);
+                Instantiate(Enemy, new Vector3(hit.point.x, 0, hit.point.z), Quaternion.identity);
+            }
         }
 
         foreach (GameObject wall in walls) {

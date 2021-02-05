@@ -15,7 +15,7 @@ public class Enemy_Controller : MonoBehaviour
     GameObject nextNode;
     //Animator enemy_main;
     private bool dead;
-    public GameObject gold_coin;
+    //public GameObject gold_coin;
     void Start() {
         controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
@@ -98,19 +98,20 @@ public class Enemy_Controller : MonoBehaviour
         }
     }
     public void Die(){
-        gameObject.tag = "Untagged";
         dead = true;
-        //GetComponent<UnitAnimator>().Death();
+        gameObject.tag = "Untagged";
+        
+        GetComponent<UnitAnimator>().Death();
         
         //Spawn Coin
-        int amount_of_dropped_coins = (int)Random.Range(1,4);
-        for (var i = 0; i < amount_of_dropped_coins; i++)
-        {
-            float RandomPosX = Random.Range(-1,1);
-            float RandomPosZ = Random.Range(-1,1);
+        //int amount_of_dropped_coins = (int)Random.Range(1,4);
+        //for (var i = 0; i < amount_of_dropped_coins; i++)
+        //{
+        //    float RandomPosX = Random.Range(-1,1);
+        //    float RandomPosZ = Random.Range(-1,1);
 
-            Instantiate(gold_coin, new Vector3(transform.position.x + RandomPosX,transform.position.y,transform.position.z + RandomPosZ) + new Vector3(0,1.2f,0), Quaternion.identity);
-        }
+        //    //Instantiate(gold_coin, new Vector3(transform.position.x + RandomPosX,transform.position.y,transform.position.z + RandomPosZ) + new Vector3(0,1.2f,0), Quaternion.identity);
+        //}
         
         Destroy(gameObject,3.0f);
     }
