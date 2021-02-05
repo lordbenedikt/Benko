@@ -1302,6 +1302,7 @@ GameObject:
   - component: {fileID: 774979095}
   - component: {fileID: 7257720361083144411}
   - component: {fileID: 3853841812860800774}
+  - component: {fileID: 3004578133242432934}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Unit
@@ -1422,6 +1423,21 @@ MonoBehaviour:
   firerate: 0.57
   firecountdwon: 0
   damage: 5
+--- !u!114 &3004578133242432934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528316425579380796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447d7f834dddd5444a79de96211e05b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snapX: 1
+  snapY: 0
+  snapZ: 1
 --- !u!1 &7698609781607552024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,15 +1715,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7791808647416232475, guid: b33d48d0b6d67b34e8c4a34419c5d913, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b33d48d0b6d67b34e8c4a34419c5d913, type: 3}
---- !u!1 &1605766767249624201 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6658056339875564216, guid: b33d48d0b6d67b34e8c4a34419c5d913,
-    type: 3}
-  m_PrefabInstance: {fileID: 5345489817639093809}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5436529977911356007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 98113394903854166, guid: b33d48d0b6d67b34e8c4a34419c5d913,
+    type: 3}
+  m_PrefabInstance: {fileID: 5345489817639093809}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1605766767249624201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6658056339875564216, guid: b33d48d0b6d67b34e8c4a34419c5d913,
     type: 3}
   m_PrefabInstance: {fileID: 5345489817639093809}
   m_PrefabAsset: {fileID: 0}

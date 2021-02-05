@@ -10,77 +10,181 @@ public class Archer_Controller : MonoBehaviour
     public Transform ArrowStartPoint;
     private isSelected IsSelected;
     GameController gameController;
+    CustomGrid customGrid;
+    Vector3 lastMove = new Vector3(0, 0, 0);
+    Snap snap;
     public GameObject DiePX;
     private bool isDead;
     void Start()
     {
         InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        customGrid = gameController.GetComponent<CustomGrid>();
+        snap = gameObject.GetComponent<Snap>();
         isDead = false;
         IsSelected = GetComponent<isSelected>();
     }
     void Update()
     {
-        if(!isDead){
-            if(gameObject.GetComponent<Health>().Currenthealth <= 0){
+        if (!isDead)
+        {
+            if (gameObject.GetComponent<Health>().Currenthealth <= 0)
+            {
                 Die();
             }
-            Vector3 prevPos3d = new Vector3(transform.position.x,transform.position.y,transform.position.z);
-            Vector3 move = new Vector3(0,0,0);
-            if(IsSelected.IsSelected) { 
-                if(Input.GetKey("a")) {
-                    move.x -= GetComponent<UnitAttributes>().walkspeed * Time.deltaTime; 
+
+            Vector3 move = new Vector3(0, 0, 0);
+
+            if (IsSelected.IsSelected)
+            {
+                Vector3 vSnap = snap.vectorToClosestSnapPoint();
+
+                // Node nodeToLeft = null;
+                // Node nodeToRight = null;
+                // Node nodeAbove = null;
+                // Node nodeBelow = null;
+                bool leftIsFree = false;
+                bool rightIsFree = false;
+                bool aboveIsFree = false;
+                bool belowIsFree = false;
+                try
+                {
+                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[3].GetComponent<Node>();
+                    if (!n.isObstacle)
+                        leftIsFree = true;
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[1].GetComponent<Node>();
+                    if (!n.isObstacle)
+                        rightIsFree = true;
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[0].GetComponent<Node>();
+                    if (!n.isObstacle)
+                        aboveIsFree = true;
+                }
+                catch (System.NullReferenceException) { }
+                try
+                {
+                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[2].GetComponent<Node>();
+                    if (!n.isObstacle)
+                        belowIsFree = true;
+                }
+                catch (System.NullReferenceException) { }
+
+
+                // print("lastMove: " +lastMove);
+                // print("vSnap: " +vSnap);
+
+                if ((leftIsFree && ((Input.GetKey("a") && (lastMove.z == 0 || vSnap == Vector3.zero)))
+                    || (lastMove.x < 0 && vSnap != Vector3.zero)))
+                {
+                    move.x -= GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
+
                 }
-                if(Input.GetKey("d")) {
-                    move.x = GetComponent<UnitAttributes>().walkspeed* Time.deltaTime;
-                    GetComponent<UnitAnimator>().Run();   
+                else if ((rightIsFree && Input.GetKey("d") && (lastMove.z == 0 || vSnap == Vector3.zero))
+                    || (lastMove.x > 0 && vSnap != Vector3.zero))
+                {
+                    move.x = GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
+                    GetComponent<UnitAnimator>().Run();
+
                 }
-                if(Input.GetKey("w")) {
-                    move.z = GetComponent<UnitAttributes>().walkspeed* Time.deltaTime;   
-                    GetComponent<UnitAnimator>().Run();      
+                else if ((aboveIsFree && Input.GetKey("w") && (lastMove.x == 0 || vSnap == Vector3.zero))
+                    || (lastMove.z > 0 && vSnap != Vector3.zero))
+                {
+                    move.z = GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
+                    GetComponent<UnitAnimator>().Run();
+
                 }
-                if(Input.GetKey("s")) {
-                    move.z = -GetComponent<UnitAttributes>().walkspeed* Time.deltaTime;     
-                    GetComponent<UnitAnimator>().Run();    
+                else if ((belowIsFree && Input.GetKey("s") && (lastMove.x == 0 || vSnap == Vector3.zero))
+                    || (lastMove.z < 0 && vSnap != Vector3.zero))
+                {
+                    move.z = -GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
+                    GetComponent<UnitAnimator>().Run();
+
+                }
+                if ((!Input.GetKey("d") || (vSnap.x <= move.x && !rightIsFree)) && lastMove.x > 0 && vSnap.x >= 0 && vSnap.x <= move.x)
+                {
+                    move.x = vSnap.x;
+
+                }
+                else if ((!Input.GetKey("a") || (vSnap.x >= move.x && !leftIsFree)) && lastMove.x < 0 && vSnap.x <= 0 && vSnap.x >= move.x)
+                {
+                    move.x = vSnap.x;
+
+                }
+                else if ((!Input.GetKey("w") || (vSnap.z <= move.z && !aboveIsFree)) && lastMove.z > 0 && vSnap.z >= 0 && vSnap.z <= move.z)
+                {
+                    move.z = vSnap.z;
+
+                }
+                else if ((!Input.GetKey("s") || (vSnap.z >= move.z && !belowIsFree)) && lastMove.z < 0 && vSnap.z <= 0 && vSnap.z >= move.z)
+                {
+                    move.z = vSnap.z;
                 }
             }
+
             Vector3 nextPos = transform.position;
-            int posIndex = gameController.gridIndexFromPos(nextPos.x+move.x, nextPos.z);
-            if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
+            int posIndex = gameController.gridIndexFromPos(nextPos.x + move.x, nextPos.z);
+            if (posIndex != -1 && posIndex < gameController.gameObject.GetComponent<CustomGrid>().nodes.Length)
+            {
                 GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
-                if (!currentNode.GetComponent<Node>().isObstacle) {
+                if (!currentNode.GetComponent<Node>().isObstacle)
+                {
                     nextPos.x += move.x;
                 }
             }
-            posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z+move.z);
-            if(posIndex != -1 && posIndex<gameController.gameObject.GetComponent<CustomGrid>().nodes.Length) {
+            posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z + move.z);
+            if (posIndex != -1 && posIndex < gameController.gameObject.GetComponent<CustomGrid>().nodes.Length)
+            {
                 GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
-                if (!currentNode.GetComponent<Node>().isObstacle) {
+                if (!currentNode.GetComponent<Node>().isObstacle)
+                {
                     nextPos.z += move.z;
                 }
             }
+
+            // if(nextPos.x - transform.position.x != 0) {
+            //     nextPos.z = transform.position.z;
+            // }
+            // if(nextPos.z - transform.position.z != 0) {
+            //     nextPos.x = transform.position.x;
+            // }
+
+            lastMove = nextPos - transform.position;
+
             transform.position = nextPos;
-            Vector3 face = new Vector3(transform.position.x-prevPos3d.x,transform.position.y-prevPos3d.y,transform.position.z-prevPos3d.z);
-            if(face.sqrMagnitude != 0) {
-                float damping = 20f;
+            Vector3 face = new Vector3(lastMove.x, lastMove.y, lastMove.z);
+            if (face.sqrMagnitude != 0)
+            {
+                float damping = 10f;
                 face.y = 0;
                 var targetRotation = Quaternion.LookRotation(face);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping); 
-            } else {
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * damping);
             }
-            if(target == null && Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.S) == false && Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.W) == false)
+            else
             {
-                GetComponent<UnitAnimator>().Idle();   
             }
-            if(target == null) return;
-            if(Input.GetKey(KeyCode.A) == false && Input.GetKey(KeyCode.S) == false && Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.W) == false){
+            if (target == null && lastMove == Vector3.zero)
+            {
+                GetComponent<UnitAnimator>().Idle();
+            }
+            if (target == null) return;
+            if (lastMove == Vector3.zero)
+            {
                 GetComponent<UnitAnimator>().Attack();
-                
+
                 Vector3 dir = target.position - transform.position;
                 Quaternion lookRotation = Quaternion.LookRotation(dir);
-                Vector3 rotation = lookRotation.eulerAngles;
-                transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+                float damping = 10f;
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * damping);
+                // Vector3 rotation = lookRotation.eulerAngles;
+                // transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
                 //Shoot();
                 //print("shoot");
             }
@@ -95,45 +199,49 @@ public class Archer_Controller : MonoBehaviour
     }
     void UpdateTarget()
     {
-        if(!isDead){
+        if (!isDead)
+        {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             float ShortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
-            foreach(GameObject enemy in enemies)
+            foreach (GameObject enemy in enemies)
             {
                 float DistanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if(DistanceToEnemy < ShortestDistance)
+                if (DistanceToEnemy < ShortestDistance)
                 {
                     ShortestDistance = DistanceToEnemy;
                     nearestEnemy = enemy;
                 }
             }
-            if(nearestEnemy != null && ShortestDistance <= GetComponent<UnitAttributes>().attackrange)
+            if (nearestEnemy != null && ShortestDistance <= GetComponent<UnitAttributes>().attackrange)
             {
                 target = nearestEnemy.transform;
             }
-            else target = null;    
+            else target = null;
         }
     }
     public void Shoot()
     {
-        if(!isDead){
+        if (!isDead)
+        {
             GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
             //print(go.transform.name);
             int damage = (int)GetComponent<UnitAttributes>().damage;
             go.GetComponent<ArrowController>().Seek(target, damage);
         }
     }
-    public void Die(){
+    public void Die()
+    {
         GetComponent<UnitAnimator>().Death();
-        GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
-        Destroy(go,1.0f);
+        GameObject go = Instantiate(DiePX, new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z), Quaternion.identity); //instanciate Die Particle
+        Destroy(go, 1.0f);
         gameObject.tag = "Untagged";
         IsSelected.IsSelected = false;
         isDead = true;
         Destroy(gameObject, 2.5f);
     }
-    void OnDrawGizmosSelected(){
+    void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, GetComponent<UnitAttributes>().attackrange);
     }

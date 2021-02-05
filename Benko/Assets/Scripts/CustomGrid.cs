@@ -62,14 +62,14 @@ public class CustomGrid : MonoBehaviour
         {
             Node node = nodes[i].GetComponent<Node>();
 
-            if (i / cols == 0)
+            if (i / cols == rows - 1)
             {
                 // node.isObstacle = true;
                 node.adjacents[0] = null;
             }
             else
             {
-                node.adjacents[0] = nodes[i - cols];
+                node.adjacents[0] = nodes[i + cols];
             }
             if ((i+1) % cols == 0)
             {
@@ -80,14 +80,14 @@ public class CustomGrid : MonoBehaviour
             {
                 node.adjacents[1] = nodes[i + 1];
             }
-            if (i / cols == rows - 1)
+            if (i / cols == 0)
             {
                 // node.isObstacle = true;
                 node.adjacents[2] = null;
             }
             else
             {
-                node.adjacents[2] = nodes[i + cols];
+                node.adjacents[2] = nodes[i - cols];
             }
             if (i % cols == 0)
             {
