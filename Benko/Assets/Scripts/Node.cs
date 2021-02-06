@@ -50,26 +50,38 @@ public class Node : MonoBehaviour
         // left button
         if (Input.GetMouseButton(0))
         {
-            if (!isOccupied && !isObstacle &&!isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
+            if (!isOccupied && !isObstacle && !isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
-                foreach (long key in customGrid.pathMap.Keys.ToArray())
+                bool enemyTooClose = false;
+                foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
                 {
-                    if (customGrid.pathMap[key].Contains(gameObject))
-                    {
-                        customGrid.pathMap.Remove(key);
-                    }
+                    if (Vector3.Distance(transform.position, enemy.transform.position) < 1.5f)
+                        enemyTooClose = true;
                 }
-                // print("siize "+customGrid.pathMap.Count);
-                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
-                isWall = true;
-                isObstacle = true;
+                if (!enemyTooClose)
+                {
+                    // should be optimized
+                    customGrid.pathMap.Clear();
+                    // foreach (long key in customGrid.pathMap.Keys.ToArray())
+                    // {
+                    //     if (customGrid.pathMap[key].Contains(gameObject))
+                    //     {
+                    //         customGrid.pathMap.Remove(key);
+                    //     }
+                    // }
 
-                // connect walls
-                foreach (GameObject wall in customGrid.walls)
-                {
-                    Destroy(wall);
+                    // print("siize "+customGrid.pathMap.Count);
+                    GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
+                    isWall = true;
+                    isObstacle = true;
+
+                    // connect walls
+                    foreach (GameObject wall in customGrid.walls)
+                    {
+                        Destroy(wall);
+                    }
+                    customGrid.buildWall();
                 }
-                customGrid.buildWall();
             }
         }
         // right button
