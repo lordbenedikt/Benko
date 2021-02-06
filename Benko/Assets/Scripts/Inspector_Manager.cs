@@ -15,7 +15,7 @@ public class Inspector_Manager : MonoBehaviour
     }
     public void UpgradeDamage(){
         GetSelectedUnit();
-        selectedUnit.GetComponent<UnitAttributes>().damage ++;
+        selectedUnit.GetComponent<UnitAttributes>().damage = selectedUnit.GetComponent<UnitAttributes>().damage + 5;
         UpgradeDamageText.SetText("Damage: " + selectedUnit.GetComponent<UnitAttributes>().damage);
     }
     public void UpgradeSpeed(){

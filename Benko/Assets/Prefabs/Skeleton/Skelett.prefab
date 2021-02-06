@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   showPath: 0
-  collideWithOtherEnemies: 0
+  collideWithOtherEnemies: 1
 --- !u!114 &633730947804741809
 MonoBehaviour:
   m_ObjectHideFlags: 0

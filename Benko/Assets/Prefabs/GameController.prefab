@@ -65,8 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 1
-  cols: 50
-  rows: 40
+  cols: 30
+  rows: 20
   nodeObject: {fileID: 2601504244140333137, guid: 83a5df35142ad5847a69957b1a7e39eb,
     type: 3}
   wallObject: {fileID: 2427924800882001508, guid: 98647d82f2b084b4b93efa6e0d3c1ceb,

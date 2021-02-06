@@ -802,7 +802,7 @@ MonoBehaviour:
   energy_ball: {fileID: 1172881380313095253, guid: a01eefffd17b747449fcfb0a59588be9,
     type: 3}
   energy_start_pos: {fileID: 2985390017566476170}
-  DiePX: {fileID: 3833446981846447490, guid: cb7e67be262d99249988b64dca08d977, type: 3}
+  DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
 --- !u!114 &3327937087957737429
 MonoBehaviour:
   m_ObjectHideFlags: 0
