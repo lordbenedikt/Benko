@@ -27,6 +27,7 @@ public class Wizard_Controller : MonoBehaviour
         currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
         lastNode = currentNode;
         currentNode.isOccupied = true;
+        snap.SnapToGrid();
     }
     void Update()
     {
