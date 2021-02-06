@@ -70,6 +70,7 @@ MonoBehaviour:
   speed: 1
   showPath: 0
   collideWithOtherEnemies: 0
+  enemyPrefab: {fileID: 291079356417880372}
 --- !u!114 &633730947804741809
 MonoBehaviour:
   m_ObjectHideFlags: 0

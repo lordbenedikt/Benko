@@ -10,6 +10,7 @@ public class Enemy_Controller : MonoBehaviour
     public float speed;
     public bool showPath = false;
     public bool collideWithOtherEnemies;
+    public int prefabSetIndex;
     List<GameObject> path = new List<GameObject>();
     GameController controller;
     CustomGrid customGrid;
@@ -23,6 +24,7 @@ public class Enemy_Controller : MonoBehaviour
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
         InvokeRepeating("findPath", 0f, 1f);
         //enemy_main = GetComponent<Animator>();
+        controller.enemySpawnHistory.Add(new EnemySpawnData(Time.frameCount, prefabSetIndex, transform.position));
     }
 
     void findPath()
@@ -60,7 +62,6 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
-        print("Health = "+gameObject.GetComponent<Health>().Currenthealth);
         if (!dead)
         {
             if (gameObject.GetComponent<Health>().Currenthealth <= 0)
