@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [Header ("Health")]
-    public float MaxHealth;
+    public float MaxHealth = 100;
     [HideInInspector]
-    public float Currenthealth;
+    public float Currenthealth = 100;
     public GameObject HealthBar;
     [HideInInspector]
     public Image healthDisplay;
@@ -23,9 +23,11 @@ public class Health : MonoBehaviour
              return null;
          }
      }
+    void Awake() {
+       Currenthealth = MaxHealth;
+    }
     void Start()
     {
-        Currenthealth = MaxHealth;
         GameObject go = Instantiate(HealthBar, this.transform.position + new Vector3(0,yOffset,0), Quaternion.identity);
         Vector3 ls = go.transform.localScale;
         go.transform.localScale = new Vector3(ls.x*hpBarScale,ls.x*hpBarScale,ls.x*hpBarScale);
