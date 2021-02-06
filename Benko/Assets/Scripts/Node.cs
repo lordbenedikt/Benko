@@ -148,9 +148,9 @@ public class Node : MonoBehaviour
 
         }
         // middle button
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetKeyDown(KeyCode.U)
         {
-            // GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
+            GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
         }
     }
 }
