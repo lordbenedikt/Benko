@@ -7,13 +7,15 @@ public class Wizard_Controller : MonoBehaviour
     private Transform target;
     public GameObject energy_ball;
     public Transform energy_start_pos;
+    private Node currentNode;
+    private Node lastNode;
     GameController gameController;
     CustomGrid customGrid;
     Snap snap;
     public GameObject DiePX;
     private bool isDead;
     private isSelected IsSelected;
-    private Vector3 lastMove = new Vector3(0,0,0);
+    private Vector3 lastMove = new Vector3(0, 0, 0);
     void Start()
     {
         InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
@@ -22,6 +24,9 @@ public class Wizard_Controller : MonoBehaviour
         snap = gameObject.GetComponent<Snap>();
         isDead = false;
         IsSelected = GetComponent<isSelected>();
+        currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
+        lastNode = currentNode;
+        currentNode.isOccupied = true;
     }
     void Update()
     {
@@ -45,28 +50,28 @@ public class Wizard_Controller : MonoBehaviour
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[3].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         leftIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[1].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         rightIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[0].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         aboveIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[2].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         belowIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
@@ -143,6 +148,15 @@ public class Wizard_Controller : MonoBehaviour
             lastMove = nextPos - transform.position;
 
             transform.position = nextPos;
+
+            Node _lastNode = currentNode;
+            currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
+            if(currentNode != lastNode) {
+                lastNode.isOccupied = false;
+                currentNode.isOccupied = true;
+            }
+            lastNode = _lastNode;
+
             Vector3 face = new Vector3(lastMove.x, lastMove.y, lastMove.z);
             if (face.sqrMagnitude != 0)
             {
@@ -160,7 +174,8 @@ public class Wizard_Controller : MonoBehaviour
             }
             if (target == null) return;
 
-            if(lastMove == Vector3.zero){
+            if (lastMove == Vector3.zero)
+            {
                 GetComponent<UnitAnimator>().Attack();
                 //Shoot();
                 Vector3 dir = target.position - transform.position;
@@ -179,20 +194,21 @@ public class Wizard_Controller : MonoBehaviour
     }
     void UpdateTarget()
     {
-        if(!isDead){
+        if (!isDead)
+        {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             float ShortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
-            foreach(GameObject enemy in enemies)
+            foreach (GameObject enemy in enemies)
             {
                 float DistanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if(DistanceToEnemy < ShortestDistance)
+                if (DistanceToEnemy < ShortestDistance)
                 {
                     ShortestDistance = DistanceToEnemy;
                     nearestEnemy = enemy;
                 }
             }
-            if(nearestEnemy != null && ShortestDistance <= GetComponent<UnitAttributes>().attackrange)
+            if (nearestEnemy != null && ShortestDistance <= GetComponent<UnitAttributes>().attackrange)
             {
                 target = nearestEnemy.transform;
             }
@@ -201,23 +217,27 @@ public class Wizard_Controller : MonoBehaviour
     }
     public void Shoot()
     {
-        if(!isDead){
+        if (!isDead)
+        {
             GetComponent<UnitAnimator>().Attack();
             GameObject go = Instantiate(energy_ball, energy_start_pos.position, energy_start_pos.rotation);
             int damage = (int)GetComponent<UnitAttributes>().damage;
             go.GetComponent<EnergyBallController>().Seek(target, damage);
         }
     }
-    public void Die(){
+    public void Die()
+    {
         GetComponent<UnitAnimator>().Death();
-        GameObject go = Instantiate(DiePX, new Vector3(transform.position.x,transform.position.y+0.8f,transform.position.z), Quaternion.identity); //instanciate Die Particle
-        Destroy(go,1.0f);
+        GameObject go = Instantiate(DiePX, new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z), Quaternion.identity); //instanciate Die Particle
+        Destroy(go, 1.0f);
         gameObject.tag = "Untagged";
         IsSelected.IsSelected = false;
         isDead = true;
         Destroy(gameObject, 2.5f);
+        currentNode.isOccupied = false;
     }
-    void OnDrawGizmosSelected(){
+    void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, GetComponent<UnitAttributes>().attackrange);
     }

@@ -9,6 +9,8 @@ public class Archer_Controller : MonoBehaviour
     public GameObject Arrow;
     public Transform ArrowStartPoint;
     private isSelected IsSelected;
+    private Node currentNode;
+    private Node lastNode;
     GameController gameController;
     CustomGrid customGrid;
     Vector3 lastMove = new Vector3(0, 0, 0);
@@ -23,6 +25,10 @@ public class Archer_Controller : MonoBehaviour
         snap = gameObject.GetComponent<Snap>();
         isDead = false;
         IsSelected = GetComponent<isSelected>();
+
+        currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
+        lastNode = currentNode;
+        currentNode.isOccupied = true;
     }
     void Update()
     {
@@ -50,28 +56,28 @@ public class Archer_Controller : MonoBehaviour
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[3].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         leftIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[1].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         rightIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[0].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         aboveIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
                     Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[2].GetComponent<Node>();
-                    if (!n.isObstacle)
+                    if (!n.isObstacle && !n.isOccupied)
                         belowIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
@@ -146,8 +152,16 @@ public class Archer_Controller : MonoBehaviour
             }
 
             lastMove = nextPos - transform.position;
-
             transform.position = nextPos;
+
+            Node _lastNode = currentNode;
+            currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
+            if(currentNode != lastNode) {
+                lastNode.isOccupied = false;
+                currentNode.isOccupied = true;
+            }
+            lastNode = _lastNode;
+
             Vector3 face = new Vector3(lastMove.x, lastMove.y, lastMove.z);
             if (face.sqrMagnitude != 0)
             {
@@ -228,6 +242,7 @@ public class Archer_Controller : MonoBehaviour
         IsSelected.IsSelected = false;
         isDead = true;
         Destroy(gameObject, 2.5f);
+        currentNode.isOccupied = false;
     }
     void OnDrawGizmosSelected()
     {

@@ -17,6 +17,7 @@ public class Node : MonoBehaviour
     public bool isObstacle = false;
     public bool isWall = false;
     public bool inPath = false;
+    public bool isOccupied = false;
 
     GameController gameController;
     CustomGrid customGrid;
@@ -49,7 +50,7 @@ public class Node : MonoBehaviour
         // left button
         if (Input.GetMouseButton(0))
         {
-            if (!isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
+            if (!isOccupied && !isObstacle &&!isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
                 foreach (long key in customGrid.pathMap.Keys.ToArray())
                 {
@@ -89,7 +90,7 @@ public class Node : MonoBehaviour
                 isWall = false;
                 isObstacle = false;
                 Destroy(cornerStone);
-                
+
                 // connect walls
                 foreach (GameObject wall in customGrid.walls)
                 {
