@@ -25,6 +25,7 @@ public class UI_Manager : MonoBehaviour
     public TextMeshProUGUI MaxUnits;
 
     public int unit_amount;
+    public GameObject Build_Mode_Shade;
 
     void Update()
     {
@@ -52,10 +53,12 @@ public class UI_Manager : MonoBehaviour
         {
             ActivateBuildMode = false;
             BuildModeText.SetText("BuildMode: OFF (R)");
+            Build_Mode_Shade.SetActive(false);
             return;
         }
         ActivateBuildMode = true;
         BuildModeText.SetText("BuildMode: ON (R)");
+        Build_Mode_Shade.SetActive(true);
     }
 
     public void SetGold(int _amount)
