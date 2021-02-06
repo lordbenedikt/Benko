@@ -60,7 +60,7 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
-        print("Health = "+gameObject.GetComponent<Health>().Currenthealth);
+        //print("Health = "+gameObject.GetComponent<Health>().Currenthealth);
         if (!dead)
         {
             if (gameObject.GetComponent<Health>().Currenthealth <= 0)
