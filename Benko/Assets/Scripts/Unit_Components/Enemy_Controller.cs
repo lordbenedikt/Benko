@@ -85,11 +85,7 @@ public class Enemy_Controller : MonoBehaviour
             // is only for testing
             if (new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z).magnitude < 0.8)
             {
-                //archer_anim.SetInteger("Current_State", 2);   //Death
-                //print("Death");
-                Destroy(gameObject, 5.0f);
-                gameObject.tag = "Untagged";
-                player.GetComponent<Health>().Currenthealth -= 3;
+                player.GetComponent<Health>().Currenthealth -= 2f;
                 return;
             }
             if (nextNode != null)
