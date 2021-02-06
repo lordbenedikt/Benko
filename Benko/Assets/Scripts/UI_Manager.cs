@@ -11,7 +11,8 @@ public class UI_Manager : MonoBehaviour
     public string BuildArcherShortcut;
     public string BuildEnemyShortcut;
     public int GoldAmount;
-    public Vector3 spawn_pos;
+    //public Vector3 spawn_pos;
+    public GameObject spawn_pos;
     public GameObject Player_Spawn_PX;
     
     [Header ("Ignore")]
@@ -75,9 +76,9 @@ public class UI_Manager : MonoBehaviour
     {
         if(GoldAmount >= 50)
         {
-            GameObject Archer = Instantiate(archerprefab, spawn_pos, Quaternion.identity);
+            GameObject Archer = Instantiate(archerprefab, spawn_pos.transform.position, Quaternion.identity);
             Archer.transform.name = "Archer";
-            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos, Quaternion.identity);
+            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos.transform.position, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-50);
         }
@@ -87,9 +88,9 @@ public class UI_Manager : MonoBehaviour
     {
         if(GoldAmount >= 100)
         {
-            GameObject wizard = Instantiate(wizard_prefab, spawn_pos, Quaternion.identity);
+            GameObject wizard = Instantiate(wizard_prefab, spawn_pos.transform.position, Quaternion.identity);
             wizard.transform.name = "Wizard";
-            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos, Quaternion.identity);
+            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos.transform.position, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-100);
         }
