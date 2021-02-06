@@ -116,14 +116,14 @@ public class CustomGrid : MonoBehaviour
 
         if (Input.GetMouseButtonDown(2))
         {
-            //print("3");
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                //Vector2 clickPos = new Vector2(hit.point.x, hit.point.z);
-                Instantiate(Enemy, new Vector3(hit.point.x, 0, hit.point.z), Quaternion.identity);
-            }
+            // Spawn enemy at mouse position
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // RaycastHit hit;
+            // if (Physics.Raycast(ray, out hit))
+            // {
+            //     //Vector2 clickPos = new Vector2(hit.point.x, hit.point.z);
+            //     Instantiate(Enemy, new Vector3(hit.point.x, 0, hit.point.z), Quaternion.identity);
+            // }
         }
 
         foreach (GameObject wall in walls) {

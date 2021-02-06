@@ -13,7 +13,7 @@ public class Node : MonoBehaviour
     [HideInInspector]
     public bool selected = false;
     [HideInInspector]
-    public GameObject[] adjacents;
+    public GameObject[] adjacents = null;
     public bool isObstacle = false;
     public bool isWall = false;
     public bool inPath = false;

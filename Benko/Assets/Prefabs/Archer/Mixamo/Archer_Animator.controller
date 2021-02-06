@@ -252,7 +252,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -2593673927693283656}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -336,9 +336,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.7580645
+  m_TransitionDuration: 0.087195516
+  m_TransitionOffset: 0.00000012772432
+  m_ExitTime: 0.9408931
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
