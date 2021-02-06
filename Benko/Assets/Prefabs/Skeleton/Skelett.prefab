@@ -69,8 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   showPath: 0
-  gold_coin: {fileID: 169433714921618277, guid: 6fc724eb5a9666a40b6727d6e4bee23d,
-    type: 3}
+  collideWithOtherEnemies: 0
 --- !u!114 &633730947804741809
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -60,11 +60,16 @@ public class Node : MonoBehaviour
             if (!enemyTooClose)
             {
                 gameController.wallPreview.SetActive(true);
-                gameController.wallPreview.transform.position = new Vector3(transform.position.x,gameController.wallPreview.transform.position.y,transform.position.z);
+                gameController.wallPreview.transform.position = new Vector3(transform.position.x, gameController.wallPreview.transform.position.y, transform.position.z);
             }
-            else {
+            else
+            {
                 gameController.wallPreview.SetActive(false);
             }
+        }
+        else
+        {
+            gameController.wallPreview.SetActive(false);
         }
 
 

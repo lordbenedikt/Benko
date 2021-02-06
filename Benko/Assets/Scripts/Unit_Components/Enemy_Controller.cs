@@ -9,6 +9,7 @@ public class Enemy_Controller : MonoBehaviour
     [Header("Basic Setup")]
     public float speed;
     public bool showPath = false;
+    public bool collideWithOtherEnemies;
     List<GameObject> path = new List<GameObject>();
     GameController controller;
     CustomGrid customGrid;
@@ -114,6 +115,24 @@ public class Enemy_Controller : MonoBehaviour
             // Debug.DrawRay(transform.position, newDirection, Color.red);
             // // Calculate a rotation a step closer to the target and applies rotation to this object
             // transform.rotation = Quaternion.LookRotation(newDirection);
+        }
+        float minDist = 1;
+        foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
+            if(Vector3.Distance(transform.position, enemy.transform.position) < minDist) {
+                Vector3 diff = enemy.transform.position-transform.position;
+                Vector3 correction = -0.5f*(minDist - diff.magnitude)*diff.normalized;
+                transform.position += correction;
+                enemy.transform.position -= correction;
+            }
+        }
+        minDist = 1;
+        foreach(GameObject tile in customGrid.nodes) {
+            Node node = tile.GetComponent<Node>();
+            if (node.isObstacle && Vector3.Distance(transform.position, tile.transform.position)<minDist) {
+                Vector3 diff = tile.transform.position-transform.position;
+                Vector3 correction = -(minDist - diff.magnitude)*diff.normalized;
+                transform.position += correction;
+            }
         }
     }
     public void Die()
