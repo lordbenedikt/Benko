@@ -51,7 +51,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -65,12 +65,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2556144b4e517540819381b8b9c035f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   speed: 1
   showPath: 0
-  collideWithOtherEnemies: 0
-  enemyPrefab: {fileID: 291079356417880372}
+  collideWithOtherEnemies: 1
 --- !u!114 &633730947804741809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,8 +80,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf1127a64ba755247b77ab85eecd25d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   MaxHealth: 30
   Currenthealth: 0
   HealthBar: {fileID: 6168797801274107170, guid: ce33097c81286124ab72957c8bde1eec,
@@ -100,8 +99,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79183c58adea6b8478fa3ce380991591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &562517212730839663
 GameObject:
   m_ObjectHideFlags: 0

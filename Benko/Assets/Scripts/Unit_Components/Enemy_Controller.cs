@@ -85,8 +85,8 @@ public class Enemy_Controller : MonoBehaviour
             // is only for testing
             if (new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z).magnitude < 0.8)
             {
-                //archer_anim.SetInteger("Current_State", 2);   //Death  
-                //print("Death");  
+                //archer_anim.SetInteger("Current_State", 2);   //Death
+                //print("Death");
                 Destroy(gameObject, 5.0f);
                 gameObject.tag = "Untagged";
                 player.GetComponent<Health>().Currenthealth -= 3;
@@ -96,7 +96,7 @@ public class Enemy_Controller : MonoBehaviour
             {
                 transform.position += (nextNode.transform.position - transform.position).normalized * speed * Time.deltaTime;
                 GetComponent<UnitAnimator>().Run();
-                //print("is currently walking");  
+                //print("is currently walking");
                 if ((nextNode.transform.position - transform.position).magnitude < 0.1)
                 {
                     nextNode = null;
@@ -152,4 +152,3 @@ public class Enemy_Controller : MonoBehaviour
         Destroy(gameObject, 3.0f);
     }
 }
-
