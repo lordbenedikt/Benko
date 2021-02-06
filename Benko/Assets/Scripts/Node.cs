@@ -47,6 +47,27 @@ public class Node : MonoBehaviour
     }
     void OnMouseOver()
     {
+        // preview before building wall
+        // should be optimized
+        if (!isOccupied && !isObstacle && !isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
+        {
+            bool enemyTooClose = false;
+            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                if (Vector3.Distance(transform.position, enemy.transform.position) < 1.5f)
+                    enemyTooClose = true;
+            }
+            if (!enemyTooClose)
+            {
+                gameController.wallPreview.SetActive(true);
+                gameController.wallPreview.transform.position = new Vector3(transform.position.x,gameController.wallPreview.transform.position.y,transform.position.z);
+            }
+            else {
+                gameController.wallPreview.SetActive(false);
+            }
+        }
+
+
         // left button
         if (Input.GetMouseButton(0))
         {
@@ -80,6 +101,7 @@ public class Node : MonoBehaviour
                     {
                         Destroy(wall);
                     }
+                    gameController.wallPreview.SetActive(false);
                     customGrid.buildWall();
                 }
             }

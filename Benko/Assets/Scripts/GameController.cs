@@ -7,11 +7,15 @@ public class GameController : MonoBehaviour
 
     public Canvas canvas;
     public GameObject selection;
+    public GameObject wallPreviewPrefab;
 
     [HideInInspector]
     public UI_Manager UI;
     [HideInInspector]
     public CustomGrid customGrid;
+    
+    [HideInInspector]
+    public GameObject wallPreview;
 
     void Awake()
     {
@@ -19,6 +23,8 @@ public class GameController : MonoBehaviour
         customGrid = gameObject.GetComponent<CustomGrid>();
         // print(customGrid);
         selection.SetActive(false);
+        wallPreview = GameObject.Instantiate(wallPreviewPrefab, transform.position, Quaternion.Euler(0,0,0));
+        wallPreview.SetActive(false);
     }
 
     void Update()
