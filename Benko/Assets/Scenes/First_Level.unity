@@ -1818,6 +1818,7 @@ GameObject:
   - component: {fileID: 615767330}
   - component: {fileID: 615767329}
   - component: {fileID: 615767328}
+  - component: {fileID: 615767332}
   m_Layer: 0
   m_Name: _camera
   m_TagString: MainCamera
@@ -1918,7 +1919,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 297.67
-  field of view: 40
+  field of view: 36.4
   orthographic: 0
   orthographic size: 10.06
   m_Depth: 100
@@ -1950,6 +1951,26 @@ Transform:
   m_Father: {fileID: 1447265732}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &615767332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615767327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce32c619ccdbdd418b23d9c09547bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  targetss: []
+  offset: {x: 0, y: 20, z: -20}
+  smoothTime: 0.5
+  minZoom: 60
+  maxZoom: 25
+  zoomlimiter: 60
+  cam: {fileID: 615767330}
 --- !u!1 &617166508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,12 +2878,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
-    - target: {fileID: 5110855421183745684, guid: ce542dbcd22ba214594b07fa887dbd59,
-        type: 3}
-      propertyPath: Enemy
-      value: 
-      objectReference: {fileID: 291079356417880372, guid: 9c0b1516cbbab754b8bea3ec56da0416,
-        type: 3}
     - target: {fileID: 5110855421183745685, guid: ce542dbcd22ba214594b07fa887dbd59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3544,7 +3559,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447265730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e189221691e1a99408526d4814fe9a8f, type: 3}
   m_Name: 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_Controller : MonoBehaviour
+public class Camera_Controller_FreeStyle : MonoBehaviour
 {
     //public float MouseValue;
     //public float speed;
