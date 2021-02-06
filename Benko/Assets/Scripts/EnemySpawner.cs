@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
         GetRandomPos();
         if (MaxRange <= RandomVector.magnitude)
         {
-            GameObject go =Instantiate(enemy_prefab, RandomVector, Quaternion.identity);
+            GameObject go = Instantiate(enemy_prefab, RandomVector, Quaternion.identity);
         }else{
             Debug.Log("eig nicht gespawnt");
         }

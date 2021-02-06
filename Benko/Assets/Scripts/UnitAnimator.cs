@@ -18,6 +18,7 @@ public class UnitAnimator : MonoBehaviour
         Animation.SetInteger("current_pos", 2); //Shoot Anim
     }
     public void Death(){
+        Animation = GetComponent<Animator>();
         Animation.SetBool("dead", true);
     }
     

@@ -88,6 +88,7 @@ MonoBehaviour:
   isObstacle: 0
   isWall: 0
   inPath: 0
+  isOccupied: 0
 --- !u!23 &8898098031309722631
 MeshRenderer:
   m_ObjectHideFlags: 0

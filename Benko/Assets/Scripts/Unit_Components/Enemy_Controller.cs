@@ -15,7 +15,7 @@ public class Enemy_Controller : MonoBehaviour
     CustomGrid customGrid;
     GameObject nextNode;
     //Animator enemy_main;
-    private bool dead;
+    private bool dead = false;
     //public GameObject gold_coin;
     void Start()
     {
@@ -23,7 +23,6 @@ public class Enemy_Controller : MonoBehaviour
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
         InvokeRepeating("findPath", 0f, 1f);
         //enemy_main = GetComponent<Animator>();
-        dead = false;
     }
 
     void findPath()
@@ -61,6 +60,7 @@ public class Enemy_Controller : MonoBehaviour
 
     void Update()
     {
+        print("Health = "+gameObject.GetComponent<Health>().Currenthealth);
         if (!dead)
         {
             if (gameObject.GetComponent<Health>().Currenthealth <= 0)
@@ -81,6 +81,7 @@ public class Enemy_Controller : MonoBehaviour
             }
             if (player == null) return;
             // if hit Player
+            // is only for testing
             if (new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z).magnitude < 0.8)
             {
                 //archer_anim.SetInteger("Current_State", 2);   //Death  
