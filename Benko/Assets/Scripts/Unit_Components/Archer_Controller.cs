@@ -76,10 +76,6 @@ public class Archer_Controller : MonoBehaviour
                 }
                 catch (System.NullReferenceException) { }
 
-
-                // print("lastMove: " +lastMove);
-                // print("vSnap: " +vSnap);
-
                 if ((leftIsFree && ((Input.GetKey("a") && (lastMove.z == 0 || vSnap == Vector3.zero)))
                     || (lastMove.x < 0 && vSnap != Vector3.zero)))
                 {
@@ -148,13 +144,6 @@ public class Archer_Controller : MonoBehaviour
                     nextPos.z += move.z;
                 }
             }
-
-            // if(nextPos.x - transform.position.x != 0) {
-            //     nextPos.z = transform.position.z;
-            // }
-            // if(nextPos.z - transform.position.z != 0) {
-            //     nextPos.x = transform.position.x;
-            // }
 
             lastMove = nextPos - transform.position;
 

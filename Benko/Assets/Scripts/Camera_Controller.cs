@@ -35,11 +35,11 @@ public class Camera_Controller : MonoBehaviour
             transform.position = new Vector3(transform.position.x,0,transform.position.z) + Quaternion.Euler(0,0.5f*yRotation,0) * new Vector3(0.03f*(prevMousePos.x-Input.mousePosition.x),0,0.03f*(prevMousePos.y-Input.mousePosition.y));
         }
 
+        // Kamerasteuerung mit Q und E
         // if (Input.GetKey("q") || Input.GetKey("e"))
         // {
         //     if (Input.GetKey("q"))
         //     {
-        //         //Debug.Log("q && y=="+Current_y);
         //         if (Current_y < maxLeft || Current_y > 180) transform.Rotate(0, speed * Time.deltaTime, 0);
         //     }
 
@@ -48,6 +48,7 @@ public class Camera_Controller : MonoBehaviour
         //         if (Current_y > maxRight || Current_y < 180)transform.Rotate(0, -speed * Time.deltaTime, 0);
         //     }
         // }
+
         prevMousePos = Input.mousePosition;
     }
 }

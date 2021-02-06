@@ -125,14 +125,9 @@ public class CustomGrid : MonoBehaviour
             //     Instantiate(Enemy, new Vector3(hit.point.x, 0, hit.point.z), Quaternion.identity);
             // }
         }
-
-        foreach (GameObject wall in walls) {
-            Destroy(wall);
-        }
-        buildWall();
     }
 
-    void buildWall() {
+    public void buildWall() {
         walls.Clear();
         for(int i = 0; i<nodes.Length; i++) {
             GameObject n = nodes[i];

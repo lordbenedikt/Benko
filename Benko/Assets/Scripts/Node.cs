@@ -51,8 +51,10 @@ public class Node : MonoBehaviour
         {
             if (!isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
             {
-                foreach(long key in customGrid.pathMap.Keys.ToArray()) {
-                    if (customGrid.pathMap[key].Contains(gameObject)) {
+                foreach (long key in customGrid.pathMap.Keys.ToArray())
+                {
+                    if (customGrid.pathMap[key].Contains(gameObject))
+                    {
                         customGrid.pathMap.Remove(key);
                     }
                 }
@@ -60,6 +62,13 @@ public class Node : MonoBehaviour
                 GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
                 isWall = true;
                 isObstacle = true;
+
+                // connect walls
+                foreach (GameObject wall in customGrid.walls)
+                {
+                    Destroy(wall);
+                }
+                customGrid.buildWall();
             }
         }
         // right button
@@ -80,6 +89,13 @@ public class Node : MonoBehaviour
                 isWall = false;
                 isObstacle = false;
                 Destroy(cornerStone);
+                
+                // connect walls
+                foreach (GameObject wall in customGrid.walls)
+                {
+                    Destroy(wall);
+                }
+                customGrid.buildWall();
             }
             else
             {
