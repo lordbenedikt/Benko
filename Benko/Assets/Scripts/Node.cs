@@ -148,7 +148,7 @@ public class Node : MonoBehaviour
 
         }
         // middle button
-        if (Input.GetKeyDown(KeyCode.U)
+        if (Input.GetKeyDown(KeyCode.U))
         {
             GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
         }
