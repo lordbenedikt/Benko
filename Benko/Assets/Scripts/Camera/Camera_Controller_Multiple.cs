@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
+//[RequireComponent(typeof(Camera))]
 public class Camera_Controller_Multiple : MonoBehaviour
 {
     public List<Transform> targets;
@@ -15,11 +15,12 @@ public class Camera_Controller_Multiple : MonoBehaviour
     public float minZoom = 40f;
     public float maxZoom = 10f;
     public float zoomlimiter = 50f;
-    public Camera cam;
+    public GameObject _camera;
+    private Camera cam;
 
     private void Start()
     {
-        cam = GetComponent<Camera>();
+        cam = _camera.GetComponent<Camera>();
     }
 
     private void LateUpdate()
