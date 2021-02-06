@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5110855421183745685}
   - component: {fileID: 5110855421183745687}
   - component: {fileID: 5110855421183745684}
-  - component: {fileID: 1027867823}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -50,8 +49,10 @@ MonoBehaviour:
   selection: {fileID: 5110855421858624693}
   wallPreviewPrefab: {fileID: 2427924800882001508, guid: c3e6529cb5cc6cd4fbacf3795dbe2d18,
     type: 3}
+  timelinePath: 
   UI: {fileID: 0}
   customGrid: {fileID: 0}
+  LoadablePrefabSet: []
   wallPreview: {fileID: 0}
 --- !u!114 &5110855421183745684
 MonoBehaviour:
@@ -84,26 +85,6 @@ MonoBehaviour:
   controller: {fileID: 5110855421183745687}
   nodes: []
   Enemy: {fileID: 291079356417880372, guid: 9c0b1516cbbab754b8bea3ec56da0416, type: 3}
---- !u!114 &1027867823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110855421183745680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e557d4ed8719f6c4a914fb342d0d0a6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waves:
-  - name: WaveSkeleton
-    enemy: {fileID: 1099387990465899406, guid: 9c0b1516cbbab754b8bea3ec56da0416, type: 3}
-    count: 1
-    rate: 5
-  spawnPoints:
-  - {fileID: 0}
-  timeBetweenWaves: 5
 --- !u!1 &5110855421858624693
 GameObject:
   m_ObjectHideFlags: 0

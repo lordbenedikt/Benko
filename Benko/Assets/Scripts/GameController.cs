@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public Canvas canvas;
     public GameObject selection;
     public GameObject wallPreviewPrefab;
-    public string timelinePath = null;
+    public string timelinePath = "";
 
     [HideInInspector]
     public UI_Manager UI;
@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         selection.SetActive(false);
         wallPreview = GameObject.Instantiate(wallPreviewPrefab, transform.position, Quaternion.Euler(0, 0, 0));
         wallPreview.SetActive(false);
-        if (timelinePath != null) {
+        if (timelinePath != "") {
             ReadStringToTimeline(timelinePath);
         }
     }

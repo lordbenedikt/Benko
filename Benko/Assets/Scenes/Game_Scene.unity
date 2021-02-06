@@ -8868,6 +8868,7 @@ MonoBehaviour:
   GoldText: {fileID: 1917503840}
   MaxUnits: {fileID: 142234216}
   unit_amount: 0
+  Build_Mode_Shade: {fileID: 0}
 --- !u!114 &964992052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11431,7 +11432,6 @@ GameObject:
   - component: {fileID: 1509389085}
   - component: {fileID: 1509389084}
   - component: {fileID: 1509389083}
-  - component: {fileID: 1509389087}
   m_Layer: 0
   m_Name: Control
   m_TagString: Untagged
@@ -11490,19 +11490,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1509389087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1509389082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed85308f6a3e3c24d8cc74a4d568945d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Gold: {fileID: 0}
 --- !u!4 &1518068396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5564484219249583950, guid: fb54b847505587b459d3b6b1a48948ab,
