@@ -9,7 +9,6 @@ public class UI_Manager : MonoBehaviour
     [Header ("Setup")]
     public string BuildModeShortcut;
     public string BuildArcherShortcut;
-    public string BuildEnemyShortcut;
     public int GoldAmount;
     //public Vector3 spawn_pos;
     public GameObject spawn_pos;
@@ -37,10 +36,6 @@ public class UI_Manager : MonoBehaviour
         }
         if(Input.GetKeyDown(BuildArcherShortcut)){
             BuildArcher();
-        }
-        if(Input.GetKeyDown(BuildEnemyShortcut)){
-            //EnemySpawner.GetComponent<EnemySpawner>().SpawnEnemy();
-            GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>().SpawnEnemy();
         }
         GameObject[] Units = GameObject.FindGameObjectsWithTag("Unit");
         unit_amount = Units.Length;

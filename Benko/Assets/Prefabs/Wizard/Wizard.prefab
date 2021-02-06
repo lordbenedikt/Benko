@@ -877,9 +877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447d7f834dddd5444a79de96211e05b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snapX: 1
+  snapX: 0
   snapY: 0
-  snapZ: 1
+  snapZ: 0
 --- !u!1 &4602274412166325832
 GameObject:
   m_ObjectHideFlags: 0
