@@ -121,17 +121,23 @@ public class Enemy_Controller : MonoBehaviour
             if(Vector3.Distance(transform.position, enemy.transform.position) < minDist) {
                 Vector3 diff = enemy.transform.position-transform.position;
                 Vector3 correction = -0.5f*(minDist - diff.magnitude)*diff.normalized;
-                transform.position += correction;
-                enemy.transform.position -= correction;
+                Vector3 newPos = transform.position + correction;
+                if(customGrid.gridIndexFromPos(newPos.x,newPos.z)!=-1)
+                    transform.position = newPos;
+                newPos = enemy.transform.position - correction;
+                if(customGrid.gridIndexFromPos(newPos.x,newPos.z)!=-1)
+                    enemy.transform.position = newPos;
             }
         }
-        minDist = 1;
+        minDist = 0.5f;
         foreach(GameObject tile in customGrid.nodes) {
             Node node = tile.GetComponent<Node>();
             if (node.isObstacle && Vector3.Distance(transform.position, tile.transform.position)<minDist) {
                 Vector3 diff = tile.transform.position-transform.position;
                 Vector3 correction = -(minDist - diff.magnitude)*diff.normalized;
-                transform.position += correction;
+                Vector3 newPos = transform.position + correction;
+                if(customGrid.gridIndexFromPos(newPos.x,newPos.z)!=-1)
+                    transform.position += correction;
             }
         }
     }
