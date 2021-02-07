@@ -1303,6 +1303,7 @@ GameObject:
   - component: {fileID: 7257720361083144411}
   - component: {fileID: 3853841812860800774}
   - component: {fileID: 3004578133242432934}
+  - component: {fileID: 1362826433}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Unit
@@ -1438,6 +1439,24 @@ MonoBehaviour:
   snapX: 0
   snapY: 0
   snapZ: 0
+--- !u!114 &1362826433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528316425579380796}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.39607847, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7698609781607552024
 GameObject:
   m_ObjectHideFlags: 0
