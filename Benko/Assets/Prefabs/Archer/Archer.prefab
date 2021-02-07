@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Arrow: {fileID: 4386961721750857340, guid: f27a891c2bbd96e489a2fb867321525d, type: 3}
-  ArrowStartPoint: {fileID: 9010918891068785317}
+  ArrowStartPoint: {fileID: 6546504338235356321}
   DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
 --- !u!114 &377436494
 MonoBehaviour:

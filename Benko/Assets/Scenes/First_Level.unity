@@ -1803,7 +1803,7 @@ PrefabInstance:
     - target: {fileID: 7147814361033448070, guid: 5aada6410c335cd4bbd33a0cb479f019,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.61
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 7147814361033448070, guid: 5aada6410c335cd4bbd33a0cb479f019,
         type: 3}
@@ -6037,7 +6037,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildModeShortcut: r
   BuildArcherShortcut: t
-  BuildEnemyShortcut: z
   GoldAmount: 500
   spawn_pos: {fileID: 193458416}
   Player_Spawn_PX: {fileID: 5287795864728159164, guid: 683b4a24b4388aa488a35272c7e17cb1,

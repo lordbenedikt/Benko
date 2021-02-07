@@ -7,7 +7,7 @@ public class Archer_Controller : MonoBehaviour
 {
     private Transform target;
     public GameObject Arrow;
-    public Transform ArrowStartPoint;
+    public GameObject ArrowStartPoint;
     private isSelected IsSelected;
     private Node currentNode;
     private Node lastNode;
@@ -228,7 +228,7 @@ public class Archer_Controller : MonoBehaviour
     {
         if (!isDead)
         {
-            GameObject go = Instantiate(Arrow, ArrowStartPoint.position, ArrowStartPoint.rotation);
+            GameObject go = Instantiate(Arrow, ArrowStartPoint.transform.position, ArrowStartPoint.transform.rotation);
             //print(go.transform.name);
             int damage = (int)GetComponent<UnitAttributes>().damage;
             go.GetComponent<ArrowController>().Seek(target, damage);

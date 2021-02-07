@@ -739,7 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3986013120389357481}
   - component: {fileID: 3520566607911537561}
-  - component: {fileID: 5870124015416066579}
+  - component: {fileID: -4383532173342871018}
   - component: {fileID: 3327937087957737429}
   - component: {fileID: 5996436019721947955}
   - component: {fileID: 3520566607911537575}
@@ -787,7 +787,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5870124015416066579
+--- !u!114 &-4383532173342871018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -796,12 +796,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4331048306742052115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ad14199d4b85b4a9d147c677b6740a, type: 3}
+  m_Script: {fileID: 11500000, guid: d52f85ef339181d48b534b761444a04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy_ball: {fileID: 1172881380313095253, guid: a01eefffd17b747449fcfb0a59588be9,
-    type: 3}
-  energy_start_pos: {fileID: 2985390017566476170}
+  Arrow: {fileID: 1172881380313095253, guid: a01eefffd17b747449fcfb0a59588be9, type: 3}
+  ArrowStartPoint: {fileID: 3529421038771123899}
   DiePX: {fileID: 3833446981846447490, guid: 42a09a0cd35cf8447846ede946913b2b, type: 3}
 --- !u!114 &3327937087957737429
 MonoBehaviour:
