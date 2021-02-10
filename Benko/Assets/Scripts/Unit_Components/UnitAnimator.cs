@@ -5,8 +5,9 @@ using UnityEngine;
 public class UnitAnimator : MonoBehaviour
 {
     Animator Animation;
+    public GameObject child;
     private void Start() {
-        Animation = GetComponent<Animator>();
+        Animation = child.GetComponent<Animator>();
     }
     public void Idle(){
         Animation.SetInteger("current_pos", 0); //Idle Anim

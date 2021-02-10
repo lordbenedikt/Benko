@@ -197,7 +197,7 @@ public class Archer_Controller : MonoBehaviour
             {
                 GetComponent<UnitAttributes>().firecountdwon = 1 / GetComponent<UnitAttributes>().firerate;
                 //print("Shoot");
-                //Shoot();
+                Shoot();
             }
         }
     }
@@ -228,10 +228,11 @@ public class Archer_Controller : MonoBehaviour
     {
         if (!isDead)
         {
+            print("yay");
             GameObject go = Instantiate(Arrow, ArrowStartPoint.transform.position, ArrowStartPoint.transform.rotation);
             //print(go.transform.name);
             int damage = (int)GetComponent<UnitAttributes>().damage;
-            go.GetComponent<ArrowController>().Seek(target, damage);
+            go.GetComponent<EnergyBallController>().Seek(target, damage);
         }
     }
     public void Die()

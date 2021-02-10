@@ -145,6 +145,6 @@ public class Enemy_Controller : MonoBehaviour
         //    //Instantiate(gold_coin, new Vector3(transform.position.x + RandomPosX,transform.position.y,transform.position.z + RandomPosZ) + new Vector3(0,1.2f,0), Quaternion.identity);
         //}
 
-        Destroy(gameObject, 3.0f);
+        Destroy(gameObject, 0.0f);
     }
 }

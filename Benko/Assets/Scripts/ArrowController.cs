@@ -76,9 +76,10 @@ public class ArrowController : MonoBehaviour
     }
     public void HitTarget()
     {
+        if (target == null) Destroy(gameObject);
         GameObject fx = Instantiate(HitFx, target.transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
         Destroy(fx,2f);
-
+        if(target == null) Destroy(gameObject);
         target.gameObject.GetComponent<Health>().Currenthealth -= damage;
         GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,1.3f,0), Quaternion.identity);
         anim = go.GetComponent<Animator>();
