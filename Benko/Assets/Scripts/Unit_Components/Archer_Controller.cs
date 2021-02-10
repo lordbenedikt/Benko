@@ -232,7 +232,8 @@ public class Archer_Controller : MonoBehaviour
             GameObject go = Instantiate(Arrow, ArrowStartPoint.transform.position, ArrowStartPoint.transform.rotation);
             //print(go.transform.name);
             int damage = (int)GetComponent<UnitAttributes>().damage;
-            go.GetComponent<EnergyBallController>().Seek(target, damage);
+            go.GetComponent<ArrowController>().Seek(target, damage);
+           
         }
     }
     public void Die()
