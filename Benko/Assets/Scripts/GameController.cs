@@ -6,6 +6,7 @@ using System.IO;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController instance;
 
     public Canvas canvas;
     public GameObject selection;
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         UI = canvas.GetComponent<UI_Manager>();
         customGrid = gameObject.GetComponent<CustomGrid>();
         // print(customGrid);

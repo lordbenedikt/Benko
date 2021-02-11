@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8107842997796989182}
   - component: {fileID: 8464838805903316229}
   - component: {fileID: 5538410783345833534}
-  - component: {fileID: 5196874574891722078}
+  - component: {fileID: -7341526201895041667}
   m_Layer: 0
   m_Name: energy_ball
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5196874574891722078
+--- !u!114 &-7341526201895041667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,11 +89,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172881380313095253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 155c97ad1ae186948af34cd4760db4e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 005370b2cb88eaf4b8ca701a67b25727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 60
+  speed: 50
   start: {x: 0, y: 0, z: 0}
   PopUpText: {fileID: 3908799315315541399, guid: 6118943e9beef2047b5f0d5918f8f1bb,
     type: 3}

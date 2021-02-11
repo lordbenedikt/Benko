@@ -1,6 +1,11 @@
-{"frameCount":24,"enemyPrefab":0,"position":{"x":10.5,"y":0.0,"z":7.5}}
-{"frameCount":171,"enemyPrefab":0,"position":{"x":5.190000057220459,"y":0.0,"z":6.570000171661377}}
-{"frameCount":307,"enemyPrefab":0,"position":{"x":-9.5,"y":0.0,"z":5.5}}
-{"frameCount":406,"enemyPrefab":0,"position":{"x":-7.527099609375,"y":0.0,"z":3.4646847248077394}}
-{"frameCount":794,"enemyPrefab":0,"position":{"x":-8.5,"y":0.0,"z":-5.5}}
-{"frameCount":799,"enemyPrefab":0,"position":{"x":-9.5,"y":0.0,"z":-5.5}}
+{"frameCount":393,"enemyPrefab":0,"position":{"x":9.029999732971192,"y":0.0,"z":-0.800000011920929}}
+{"frameCount":802,"enemyPrefab":0,"position":{"x":8.5,"y":0.0,"z":-2.5}}
+{"frameCount":1761,"enemyPrefab":0,"position":{"x":9.029999732971192,"y":0.0,"z":-0.800000011920929}}
+{"frameCount":2575,"enemyPrefab":0,"position":{"x":9.029999732971192,"y":0.0,"z":-0.800000011920929}}
+{"frameCount":3253,"enemyPrefab":0,"position":{"x":9.029999732971192,"y":0.0,"z":-0.800000011920929}}
+{"frameCount":4012,"enemyPrefab":0,"position":{"x":9.029999732971192,"y":0.0,"z":-0.800000011920929}}
+{"frameCount":4656,"enemyPrefab":0,"position":{"x":9.029999732971192,"y":0.0,"z":-0.800000011920929}}
+{"frameCount":5186,"enemyPrefab":0,"position":{"x":9.5,"y":0.0,"z":-2.5}}
+{"frameCount":5214,"enemyPrefab":0,"position":{"x":8.5,"y":0.0,"z":-0.5}}
+{"frameCount":5227,"enemyPrefab":0,"position":{"x":8.725390434265137,"y":0.0,"z":-0.16191574931144715}}
+{"frameCount":5241,"enemyPrefab":0,"position":{"x":8.262211799621582,"y":0.0,"z":-2.290074586868286}}

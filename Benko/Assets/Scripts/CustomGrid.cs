@@ -325,12 +325,15 @@ public class CustomGrid : MonoBehaviour
                 foreach(GameObject p in Units) {
 
                     p.GetComponent<isSelected>().IsSelected = false;
-                    }
+                    p.GetComponent<Outline>().enabled = false;
+                }
                     player.GetComponent<isSelected>().IsSelected = true;
-                    
-                    
+                    player.GetComponent<Outline>().enabled = true;
+
+
                 controller.selection.transform.position = player.transform.position;
                 controller.selection.SetActive(true);
+                player.GetComponent<Outline>().enabled = true;
                 controller.selection.GetComponent<Selection>().player = player;
             }
         }
