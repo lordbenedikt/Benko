@@ -56,14 +56,14 @@ public class Archer_Controller : MonoBehaviour
                 bool belowIsFree = false;
                 try
                 {
-                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[3].GetComponent<Node>();
+                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[1].GetComponent<Node>();
                     if (!n.isObstacle && !n.isOccupied)
                         leftIsFree = true;
                 }
                 catch (System.NullReferenceException) { }
                 try
                 {
-                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[1].GetComponent<Node>();
+                    Node n = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>().adjacents[3].GetComponent<Node>();
                     if (!n.isObstacle && !n.isOccupied)
                         rightIsFree = true;
                 }
