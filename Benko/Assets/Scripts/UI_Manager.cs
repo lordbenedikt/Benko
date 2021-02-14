@@ -27,6 +27,16 @@ public class UI_Manager : MonoBehaviour
     public int unit_amount;
     public GameObject Build_Mode_Shade;
 
+    public GameObject mouseprefab;
+
+    public string escape_key;
+    private bool iscurrentlyon;
+    public GameObject Menu;
+    void Start()
+    {
+        iscurrentlyon = false;
+    }
+
     void Update()
     {
         GoldText.SetText("Gold: " + GoldAmount); //ShowGold
@@ -42,6 +52,21 @@ public class UI_Manager : MonoBehaviour
 
         MaxUnits.SetText("Current Units  " + unit_amount);
 
+        if (Input.GetKeyDown(escape_key))
+        {
+
+            if (iscurrentlyon == true)
+            {
+                Menu.gameObject.SetActive(false);
+                iscurrentlyon = false;
+                print("iscurrentlyon = false");
+                return;
+            }
+            Menu.gameObject.SetActive(true);
+            iscurrentlyon = true;
+            print("iscurrentlyon = false");
+            return;
+        }
     }
     public void BuildModeSet()
     {
@@ -50,11 +75,13 @@ public class UI_Manager : MonoBehaviour
             ActivateBuildMode = false;
             BuildModeText.SetText("BuildMode: OFF (R)");
             Build_Mode_Shade.SetActive(false);
+            MouseText("BuildMode: OFF");
             return;
         }
         ActivateBuildMode = true;
         BuildModeText.SetText("BuildMode: ON (R)");
         Build_Mode_Shade.SetActive(true);
+        MouseText("BuildMode: ON");
     }
 
     public void SetGold(int _amount)
@@ -76,7 +103,9 @@ public class UI_Manager : MonoBehaviour
             GameObject go =Instantiate(Player_Spawn_PX, spawn_pos.transform.position, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-50);
+            MouseText("Archer Builded");
         }
+
     }
 
     public void BuildWizard()
@@ -88,10 +117,24 @@ public class UI_Manager : MonoBehaviour
             GameObject go =Instantiate(Player_Spawn_PX, spawn_pos.transform.position, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-100);
+            MouseText("Wizard Builded");
         }
     }
 
     public void CheatCode100Coins(){
         AddGold(100);
+        MouseText("You just cheated 100 coins");
+    }
+
+    public void MouseText(string _mousetext)
+    {
+        print("mousetext has to be shown");
+        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        GameObject go = Instantiate(mouseprefab, mousePos, Quaternion.identity);
+        go.transform.SetParent(GameObject.Find("Canvas").transform);
+        //go.transform.parent = GameObject.Find("Canvas").transform;
+        GameObject ChildGameObject1 = go.transform.GetChild(1).gameObject;
+        ChildGameObject1.GetComponent<TextMeshProUGUI>().SetText(_mousetext);
+        Destroy(go, 1.0f);
     }
 }
