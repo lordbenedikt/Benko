@@ -40,6 +40,9 @@ public class Archer_Controller : MonoBehaviour
                 Die();
             }
 
+            snap.snapX = true;
+            snap.snapZ = true;
+
             Vector3 move = new Vector3(0, 0, 0);
 
             if (IsSelected.IsSelected)
@@ -88,6 +91,7 @@ public class Archer_Controller : MonoBehaviour
                 {
                     move.x -= GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
+                    snap.snapX = false;
 
                 }
                 else if ((rightIsFree && Input.GetKey("d") && (lastMove.z == 0 || vSnap == Vector3.zero))
@@ -95,6 +99,7 @@ public class Archer_Controller : MonoBehaviour
                 {
                     move.x = GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
+                    snap.snapX = false;
 
                 }
                 else if ((aboveIsFree && Input.GetKey("w") && (lastMove.x == 0 || vSnap == Vector3.zero))
@@ -102,6 +107,7 @@ public class Archer_Controller : MonoBehaviour
                 {
                     move.z = GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
+                    snap.snapZ = false;
 
                 }
                 else if ((belowIsFree && Input.GetKey("s") && (lastMove.x == 0 || vSnap == Vector3.zero))
@@ -109,6 +115,7 @@ public class Archer_Controller : MonoBehaviour
                 {
                     move.z = -GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
+                    snap.snapZ = false;
 
                 }
                 if ((!Input.GetKey("d") || (vSnap.x <= move.x && !rightIsFree)) && lastMove.x > 0 && vSnap.x >= 0 && vSnap.x <= move.x)
