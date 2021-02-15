@@ -259,7 +259,7 @@ public class Archer_Controller : MonoBehaviour
     }
     public void Die()
     {
-        GetComponent<UnitAnimator>().Death();
+        //GetComponent<UnitAnimator>().Death();
         GameObject go = Instantiate(DiePX, new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z), Quaternion.identity); //instanciate Die Particle
         Destroy(go, 1.0f);
         gameObject.tag = "Untagged";
