@@ -5,7 +5,7 @@ using TMPro;
 
 public class ArrowController : MonoBehaviour
 {
-    public Transform target;
+    public GameObject target;
     public float speed;
     [HideInInspector]
     public Vector3 start;
@@ -16,17 +16,15 @@ public class ArrowController : MonoBehaviour
     private Animator anim;
     void Start() {
         start = transform.position;
-        setStartDir();
+        SetStartDir();
     }
-    public void Seek(Transform _target, float _damage)
+    public void Seek(GameObject _target, float _damage)
     {
-        
         target = _target;
         damage = _damage;
         if(target==null){
             Destroy(gameObject);
         }
-
     }
     void Update()
     {
@@ -36,7 +34,7 @@ public class ArrowController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = target.transform.position - transform.position;
         float DistaceTime = speed * Time.deltaTime;
         if(dir.magnitude <= DistaceTime)
         {
@@ -46,14 +44,14 @@ public class ArrowController : MonoBehaviour
         float x = dir.normalized.x;
         float z = dir.normalized.z;
         transform.Translate(new Vector3(x, 0, z) * DistaceTime, Space.World);
-        float origTargetDistance = new Vector2(start.x-target.position.x, start.z-target.position.z).magnitude;
-        float travelledDistance = new Vector2(start.x-transform.position.x, start.z-transform.position.z).magnitude / new Vector2(start.x-target.position.x, start.z-target.position.z).magnitude;
+        float origTargetDistance = new Vector2(start.x-target.transform.position.x, start.z-target.transform.position.z).magnitude;
+        float travelledDistance = new Vector2(start.x-transform.position.x, start.z-transform.position.z).magnitude / new Vector2(start.x-target.transform.position.x, start.z-target.transform.position.z).magnitude;
         if(travelledDistance > 1) {
             Destroy(gameObject);
             return;
         }
         float arrowHeight = origTargetDistance*0.3f;
-        transform.position = new Vector3(transform.position.x, -Mathf.Pow((travelledDistance*2-1),2)*arrowHeight + (arrowHeight) + target.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x, -Mathf.Pow((travelledDistance*2-1),2)*arrowHeight + (arrowHeight) + target.transform.position.y, transform.position.z);
         Vector3 face = new Vector3(transform.position.x-prevPos.x,transform.position.y-prevPos.y,transform.position.z-prevPos.z);
         if(face.sqrMagnitude != 0) {
             //float damping = 50f;
@@ -65,9 +63,9 @@ public class ArrowController : MonoBehaviour
         }
 
     }
-    void setStartDir() {
+    void SetStartDir() {
         if(target==null) return;
-        Vector3 v = target.position - start;
+        Vector3 v = target.transform.position - start;
         v.y = 0;
         v = v.normalized;
         v.y = 2;
@@ -79,8 +77,17 @@ public class ArrowController : MonoBehaviour
         if (target == null) Destroy(gameObject);
         GameObject fx = Instantiate(HitFx, target.transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
         Destroy(fx,2f);
-        if(target == null) Destroy(gameObject);
-        target.gameObject.GetComponent<Health>().Currenthealth -= damage;
+        if (target == null)
+        {
+            print("target == null");
+            target.GetComponent<Health>().Currenthealth -= damage;
+        }
+        if (target != null)
+        {
+            print("target != null");
+            target.GetComponent<Health>().Currenthealth -= damage;
+        }
+        
         GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,1.3f,0), Quaternion.identity);
         anim = go.GetComponent<Animator>();
         anim.SetBool("start", true);

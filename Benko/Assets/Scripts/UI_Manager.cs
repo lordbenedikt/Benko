@@ -91,7 +91,7 @@ public class UI_Manager : MonoBehaviour
 
     public void AddGold(int _amount)
     {
-        GoldAmount = GoldAmount + _amount;
+        GoldAmount += _amount;
     }
 
     public void BuildArcher()

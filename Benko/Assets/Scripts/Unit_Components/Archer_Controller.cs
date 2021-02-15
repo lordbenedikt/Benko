@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Archer_Controller : MonoBehaviour
 {
-    private Transform target;
+    private GameObject target;
     public GameObject Arrow;
     public GameObject ArrowStartPoint;
     private isSelected IsSelected;
@@ -183,7 +183,7 @@ public class Archer_Controller : MonoBehaviour
             {
                 GetComponent<UnitAnimator>().Attack();
 
-                Vector3 dir = target.position - transform.position;
+                Vector3 dir = target.transform.position - transform.position;
                 Quaternion lookRotation = Quaternion.LookRotation(dir);
                 float damping = 10f;
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * damping);
@@ -219,7 +219,7 @@ public class Archer_Controller : MonoBehaviour
             }
             if (nearestEnemy != null && ShortestDistance <= GetComponent<UnitAttributes>().attackrange)
             {
-                target = nearestEnemy.transform;
+                target = nearestEnemy;
             }
             else target = null;
         }
@@ -228,9 +228,9 @@ public class Archer_Controller : MonoBehaviour
     {
         if (!isDead)
         {
-            print("yay");
+            //print("yay");
+            UpdateTarget();
             GameObject go = Instantiate(Arrow, ArrowStartPoint.transform.position, ArrowStartPoint.transform.rotation);
-            //print(go.transform.name);
             int damage = (int)GetComponent<UnitAttributes>().damage;
             go.GetComponent<ArrowController>().Seek(target, damage);
            
