@@ -19,7 +19,7 @@ public class Archer_Controller : MonoBehaviour
     private bool isDead;
     void Start()
     {
-        InvokeRepeating("UpdateTarget", 1f, 0.5f); //0f, 0.01f
+        InvokeRepeating(nameof(UpdateTarget), 1f, 0.5f); //0f, 0.01f
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         customGrid = gameController.GetComponent<CustomGrid>();
         snap = gameObject.GetComponent<Snap>();
@@ -44,7 +44,7 @@ public class Archer_Controller : MonoBehaviour
 
             if (IsSelected.IsSelected)
             {
-                Vector3 vSnap = snap.vectorToClosestSnapPoint();
+                Vector3 vSnap = snap.VectorToClosestSnapPoint();
 
                 // Node nodeToLeft = null;
                 // Node nodeToRight = null;

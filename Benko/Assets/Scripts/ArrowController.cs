@@ -77,17 +77,9 @@ public class ArrowController : MonoBehaviour
         if (target == null) Destroy(gameObject);
         GameObject fx = Instantiate(HitFx, target.transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
         Destroy(fx,2f);
-        if (target == null)
-        {
-            print("target == null");
-            target.GetComponent<Health>().Currenthealth -= damage;
-        }
-        if (target != null)
-        {
-            print("target != null");
-            target.GetComponent<Health>().Currenthealth -= damage;
-        }
-        
+        if (target == null) Destroy(gameObject);
+        target.gameObject.GetComponent<Health>().Currenthealth -= damage;
+
         GameObject go = Instantiate(PopUpText, target.transform.position + new Vector3(0,1.3f,0), Quaternion.identity);
         anim = go.GetComponent<Animator>();
         anim.SetBool("start", true);

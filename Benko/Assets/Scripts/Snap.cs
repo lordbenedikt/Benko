@@ -10,19 +10,15 @@ public class Snap : MonoBehaviour
     public bool snapY = true;
     public bool snapZ = true;
 
-    GameObject gameController;
-    CustomGrid customGrid;
+    //GameObject gameController;
+    //CustomGrid customGrid;
 
-    private void Update()
-    {
-
-    }
-    private void Start()
-    {
-        gameController = GameObject.Find("GameController");
-        customGrid = gameController.GetComponent<CustomGrid>();
-    }
-    public void markAsObstacle() {
+    //private void Start()
+    //{
+    //    gameController = GameObject.Find("GameController");
+    //    customGrid = gameController.GetComponent<CustomGrid>();
+    //}
+    public void MarkAsObstacle() {
         //print(customGrid);
         //int gridIndex = customGrid.gridIndexFromPos(transform.position.x, transform.position.z);   //changed
         //if(gridIndex!=-1)
@@ -53,7 +49,7 @@ public class Snap : MonoBehaviour
 
         transform.position = position;
     }
-    public Vector3 vectorToClosestSnapPoint() {
+    public Vector3 VectorToClosestSnapPoint() {
         var snapPoint = new Vector3(
             snapX ? (Mathf.RoundToInt(gameObject.transform.position.x - 0.5f) + 0.5f) : gameObject.transform.position.x,
             snapY ? (Mathf.RoundToInt(gameObject.transform.position.y - 0.5f) + 0.5f) : gameObject.transform.position.y,
@@ -62,14 +58,14 @@ public class Snap : MonoBehaviour
 
         return snapPoint - transform.position;
     }
-    private void SnapToGrid2()
-    {
-        var position = new Vector3(
-            Mathf.RoundToInt(gameObject.transform.position.x / customGrid.gridSize) * customGrid.gridSize + customGrid.gridSize*0.5f,
-            Mathf.RoundToInt(gameObject.transform.position.y / customGrid.gridSize) * customGrid.gridSize + customGrid.gridSize * 0.5f,
-            Mathf.RoundToInt(gameObject.transform.position.z / customGrid.gridSize) * customGrid.gridSize + customGrid.gridSize * 0.5f
-        );
+    //private void SnapToGrid2()
+    //{
+    //    var position = new Vector3(
+    //        Mathf.RoundToInt(gameObject.transform.position.x / customGrid.gridSize) * customGrid.gridSize + customGrid.gridSize*0.5f,
+    //        Mathf.RoundToInt(gameObject.transform.position.y / customGrid.gridSize) * customGrid.gridSize + customGrid.gridSize * 0.5f,
+    //        Mathf.RoundToInt(gameObject.transform.position.z / customGrid.gridSize) * customGrid.gridSize + customGrid.gridSize * 0.5f
+    //    );
 
-        gameObject.transform.position = position;
-    }
+    //    gameObject.transform.position = position;
+    //}
 }

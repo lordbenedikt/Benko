@@ -103,7 +103,7 @@ public class CustomGrid : MonoBehaviour
         }
         buildWall();
         foreach(Snap snap in FindObjectsOfType<Snap>()) {
-            snap.markAsObstacle();
+            snap.MarkAsObstacle();
         }
     }
 

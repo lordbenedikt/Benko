@@ -128,7 +128,7 @@ public class UI_Manager : MonoBehaviour
 
     public void MouseText(string _mousetext)
     {
-        print("mousetext has to be shown");
+        //print("mousetext has to be shown");
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         GameObject go = Instantiate(mouseprefab, mousePos, Quaternion.identity);
         go.transform.SetParent(GameObject.Find("Canvas").transform);

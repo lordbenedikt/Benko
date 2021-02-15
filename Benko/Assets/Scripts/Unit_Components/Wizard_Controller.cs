@@ -42,7 +42,7 @@ public class Wizard_Controller : MonoBehaviour
 
             if (IsSelected.IsSelected)
             {
-                Vector3 vSnap = snap.vectorToClosestSnapPoint();
+                Vector3 vSnap = snap.VectorToClosestSnapPoint();
 
                 bool leftIsFree = false;
                 bool rightIsFree = false;
