@@ -45,8 +45,8 @@ public class Enemy_Controller : MonoBehaviour
                 }
             }
             if (player == null) return;
-            int start = controller.gridIndexFromPos(transform.position.x, transform.position.z);
-            int ziel = controller.gridIndexFromPos(player.transform.position.x, player.transform.position.z);
+            int start = controller.GridIndexFromPos(transform.position.x, transform.position.z);
+            int ziel = controller.GridIndexFromPos(player.transform.position.x, player.transform.position.z);
             if (start == -1 || ziel == -1) return;
             customGrid.aStar(start, ziel, path);
             if (path.Count > 1)

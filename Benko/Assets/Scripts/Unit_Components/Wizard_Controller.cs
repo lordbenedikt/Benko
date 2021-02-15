@@ -127,7 +127,7 @@ public class Wizard_Controller : MonoBehaviour
             }
 
             Vector3 nextPos = transform.position;
-            int posIndex = gameController.gridIndexFromPos(nextPos.x + move.x, nextPos.z);
+            int posIndex = gameController.GridIndexFromPos(nextPos.x + move.x, nextPos.z);
             if (posIndex != -1 && posIndex < gameController.gameObject.GetComponent<CustomGrid>().nodes.Length)
             {
                 GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
@@ -136,7 +136,7 @@ public class Wizard_Controller : MonoBehaviour
                     nextPos.x += move.x;
                 }
             }
-            posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z + move.z);
+            posIndex = gameController.GridIndexFromPos(nextPos.x, nextPos.z + move.z);
             if (posIndex != -1 && posIndex < gameController.gameObject.GetComponent<CustomGrid>().nodes.Length)
             {
                 GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];

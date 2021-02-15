@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
         while(spawnCounter<enemySpawns.Count) {
             EnemySpawnData data = enemySpawns[spawnCounter];
             if(data.frameCount < Time.frameCount) {
-                GameObject go = Instantiate(LoadablePrefabSet[data.enemyPrefab], data.position, Quaternion.identity);
+                Instantiate(LoadablePrefabSet[data.enemyPrefab], data.position, Quaternion.identity);
                 spawnCounter++;
                 continue;
             }
@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public int gridIndexFromPos(float x, float z)
+    public int GridIndexFromPos(float x, float z)
     {
         // print(customGrid);
         if (customGrid != null)

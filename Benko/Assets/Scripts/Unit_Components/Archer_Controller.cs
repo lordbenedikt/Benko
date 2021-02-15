@@ -33,18 +33,15 @@ public class Archer_Controller : MonoBehaviour
     }
     void Update()
     {
+        snap.snapX = true;
+        snap.snapZ = true;
         if (!isDead)
         {
             if (gameObject.GetComponent<Health>().Currenthealth <= 0)
             {
                 Die();
             }
-
-            snap.snapX = true;
-            snap.snapZ = true;
-
             Vector3 move = new Vector3(0, 0, 0);
-
             if (IsSelected.IsSelected)
             {
                 Vector3 vSnap = snap.VectorToClosestSnapPoint();
@@ -139,8 +136,10 @@ public class Archer_Controller : MonoBehaviour
                 }
             }
 
+            
+
             Vector3 nextPos = transform.position;
-            int posIndex = gameController.gridIndexFromPos(nextPos.x + move.x, nextPos.z);
+            int posIndex = gameController.GridIndexFromPos(nextPos.x + move.x, nextPos.z);
             if (posIndex != -1 && posIndex < gameController.gameObject.GetComponent<CustomGrid>().nodes.Length)
             {
                 GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];
@@ -149,7 +148,7 @@ public class Archer_Controller : MonoBehaviour
                     nextPos.x += move.x;
                 }
             }
-            posIndex = gameController.gridIndexFromPos(nextPos.x, nextPos.z + move.z);
+            posIndex = gameController.GridIndexFromPos(nextPos.x, nextPos.z + move.z);
             if (posIndex != -1 && posIndex < gameController.gameObject.GetComponent<CustomGrid>().nodes.Length)
             {
                 GameObject currentNode = gameController.gameObject.GetComponent<CustomGrid>().nodes[posIndex];

@@ -107,7 +107,7 @@ public class Node : MonoBehaviour
                         Destroy(wall);
                     }
                     gameController.wallPreview.SetActive(false);
-                    customGrid.buildWall();
+                    customGrid.BuildWall();
                 }
             }
         }
@@ -135,7 +135,7 @@ public class Node : MonoBehaviour
                 {
                     Destroy(wall);
                 }
-                customGrid.buildWall();
+                customGrid.BuildWall();
             }
             else
             {

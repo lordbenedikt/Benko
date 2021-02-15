@@ -43,7 +43,7 @@ public class CustomGrid : MonoBehaviour
         // hoho[5f] = 7;
         // print(hoho[5f]);
 
-        buildWallEvent.AddListener(buildWall);
+        buildWallEvent.AddListener(BuildWall);
 
         walls = new List<GameObject>();
         nodes = new GameObject[cols * rows];
@@ -101,7 +101,7 @@ public class CustomGrid : MonoBehaviour
             }
 
         }
-        buildWall();
+        BuildWall();
         foreach(Snap snap in FindObjectsOfType<Snap>()) {
             snap.MarkAsObstacle();
         }
@@ -127,7 +127,7 @@ public class CustomGrid : MonoBehaviour
         }
     }
 
-    public void buildWall() {
+    public void BuildWall() {
         walls.Clear();
         for(int i = 0; i<nodes.Length; i++) {
             GameObject n = nodes[i];
@@ -251,17 +251,17 @@ public class CustomGrid : MonoBehaviour
         Vector2 v = (target-ownPos).normalized*0.2f;
         Vector2 curPos = ownPos;
         while(Vector2.Distance(curPos,target) > 0.5f) {
-            if (controller.gridIndexFromPos(curPos.x,curPos.y) == -1) break;
-            if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y)].GetComponent<Node>().isObstacle)
+            if (controller.GridIndexFromPos(curPos.x,curPos.y) == -1) break;
+            if(nodes[controller.GridIndexFromPos(curPos.x,curPos.y)].GetComponent<Node>().isObstacle)
                 return false;
             if(halfThickness!=0) {
-                if(nodes[controller.gridIndexFromPos(curPos.x+halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
+                if(nodes[controller.GridIndexFromPos(curPos.x+halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
                 return false;
-                if(nodes[controller.gridIndexFromPos(curPos.x-halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
+                if(nodes[controller.GridIndexFromPos(curPos.x-halfThickness,curPos.y)].GetComponent<Node>().isObstacle)
                 return false;
-                if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y+halfThickness)].GetComponent<Node>().isObstacle)
+                if(nodes[controller.GridIndexFromPos(curPos.x,curPos.y+halfThickness)].GetComponent<Node>().isObstacle)
                 return false;
-                if(nodes[controller.gridIndexFromPos(curPos.x,curPos.y-halfThickness)].GetComponent<Node>().isObstacle)
+                if(nodes[controller.GridIndexFromPos(curPos.x,curPos.y-halfThickness)].GetComponent<Node>().isObstacle)
                 return false;
             }
             curPos += v;
