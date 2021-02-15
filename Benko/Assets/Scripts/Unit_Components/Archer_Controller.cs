@@ -17,6 +17,7 @@ public class Archer_Controller : MonoBehaviour
     Snap snap;
     public GameObject DiePX;
     private bool isDead;
+    private bool isWalking;
     void Start()
     {
         InvokeRepeating(nameof(UpdateTarget), 1f, 0.5f); //0f, 0.01f
@@ -25,16 +26,21 @@ public class Archer_Controller : MonoBehaviour
         snap = gameObject.GetComponent<Snap>();
         isDead = false;
         IsSelected = GetComponent<isSelected>();
-
-        currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
-        lastNode = currentNode;
-        currentNode.isOccupied = true;
         snap.SnapToGrid();
+        
+        
+        //currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
+        //lastNode = currentNode;
+        
+        
+        //currentNode.isOccupied = true;
+        
     }
     void Update()
     {
         snap.snapX = true;
         snap.snapZ = true;
+        isWalking = false;
         if (!isDead)
         {
             if (gameObject.GetComponent<Health>().Currenthealth <= 0)
@@ -89,6 +95,7 @@ public class Archer_Controller : MonoBehaviour
                     move.x -= GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
                     snap.snapX = false;
+                    isWalking = true;
 
                 }
                 else if ((rightIsFree && Input.GetKey("d") && (lastMove.z == 0 || vSnap == Vector3.zero))
@@ -97,6 +104,7 @@ public class Archer_Controller : MonoBehaviour
                     move.x = GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
                     snap.snapX = false;
+                    isWalking = true;
 
                 }
                 else if ((aboveIsFree && Input.GetKey("w") && (lastMove.x == 0 || vSnap == Vector3.zero))
@@ -105,6 +113,7 @@ public class Archer_Controller : MonoBehaviour
                     move.z = GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
                     snap.snapZ = false;
+                    isWalking = true;
 
                 }
                 else if ((belowIsFree && Input.GetKey("s") && (lastMove.x == 0 || vSnap == Vector3.zero))
@@ -113,6 +122,7 @@ public class Archer_Controller : MonoBehaviour
                     move.z = -GetComponent<UnitAttributes>().walkspeed * Time.deltaTime;
                     GetComponent<UnitAnimator>().Run();
                     snap.snapZ = false;
+                    isWalking = true;
 
                 }
                 if ((!Input.GetKey("d") || (vSnap.x <= move.x && !rightIsFree)) && lastMove.x > 0 && vSnap.x >= 0 && vSnap.x <= move.x)
@@ -163,7 +173,11 @@ public class Archer_Controller : MonoBehaviour
 
             Node _lastNode = currentNode;
             currentNode = customGrid.nodes[customGrid.gridIndexFromPos(transform.position.x, transform.position.z)].GetComponent<Node>();
-            if(currentNode != lastNode) {
+            if (lastNode == null)
+            {
+                lastNode = currentNode;
+            }
+            if (currentNode != lastNode) {
                 lastNode.isOccupied = false;
                 currentNode.isOccupied = true;
             }
@@ -232,8 +246,9 @@ public class Archer_Controller : MonoBehaviour
     }
     public void Shoot()
     {
-        if (!isDead)
+        if (!isDead && isWalking == false)
         {
+            //isWalking = true;
             //print("yay");
             UpdateTarget();
             GameObject go = Instantiate(Arrow, ArrowStartPoint.transform.position, ArrowStartPoint.transform.rotation);
