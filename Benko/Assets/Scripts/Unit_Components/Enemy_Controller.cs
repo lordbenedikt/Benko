@@ -24,7 +24,6 @@ public class Enemy_Controller : MonoBehaviour
         customGrid = controller.gameObject.GetComponent<CustomGrid>();
         InvokeRepeating("findPath", 0f, 1f);
         //enemy_main = GetComponent<Animator>();
-        controller.enemySpawnHistory.Add(new EnemySpawnData(Time.frameCount, prefabSetIndex, transform.position));
     }
 
     void findPath()

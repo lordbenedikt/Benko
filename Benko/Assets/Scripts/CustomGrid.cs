@@ -310,31 +310,30 @@ public class CustomGrid : MonoBehaviour
             
             Vector2 clickPos = new Vector2(hit.point.x,hit.point.z);
             float maxDist = 1;
-            GameObject player = null;
-            foreach(GameObject ply in Units) {
-                Vector2 playerPos = new Vector2(ply.transform.position.x, ply.transform.position.z);
+            GameObject selectedUnit = null;
+            foreach(GameObject unit in Units) {
+                Vector2 playerPos = new Vector2(unit.transform.position.x, unit.transform.position.z);
                 float distance = Vector2.Distance(playerPos, clickPos);
                 // print("distance: " + distance);
                 if(distance<maxDist) {
                     maxDist = distance;
-                    player = ply;
+                    selectedUnit = unit;
                 }
             }
             // if click on player unit
-            if(player!=null) {
+            if(selectedUnit!=null) {
                 foreach(GameObject p in Units) {
 
                     p.GetComponent<isSelected>().IsSelected = false;
                     p.GetComponent<Outline>().enabled = false;
                 }
-                    player.GetComponent<isSelected>().IsSelected = true;
-                    player.GetComponent<Outline>().enabled = true;
+                    selectedUnit.GetComponent<isSelected>().IsSelected = true;
+                    selectedUnit.GetComponent<Outline>().enabled = true;
 
-
-                controller.selection.transform.position = player.transform.position;
-                controller.selection.SetActive(true);
-                player.GetComponent<Outline>().enabled = true;
-                controller.selection.GetComponent<Selection>().player = player;
+                selectedUnit.GetComponent<Outline>().enabled = true;
+                controller.SelectionIndicator.transform.position = selectedUnit.transform.position;
+                controller.SelectionIndicator.SetActive(true);
+                controller.SelectionIndicator.GetComponent<Selection>().player = selectedUnit;
             }
         }
 

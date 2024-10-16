@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class Node : MonoBehaviour
 {
@@ -47,36 +48,12 @@ public class Node : MonoBehaviour
     }
     void OnMouseOver()
     {
-        // preview before building wall
-        // should be optimized
-        if (!isOccupied && !isObstacle && !isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
-        {
-            bool enemyTooClose = false;
-            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-            {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < 1.5f)
-                    enemyTooClose = true;
-            }
-            if (!enemyTooClose)
-            {
-                gameController.wallPreview.SetActive(true);
-                gameController.wallPreview.transform.position = new Vector3(transform.position.x, gameController.wallPreview.transform.position.y, transform.position.z);
-            }
-            else
-            {
-                gameController.wallPreview.SetActive(false);
-            }
-        }
-        else
-        {
-            gameController.wallPreview.SetActive(false);
-        }
-
+        WallPreview();
 
         // left button
         if (Input.GetMouseButton(0))
         {
-            if (!isOccupied && !isObstacle && !isWall && gameController.UI.ActivateBuildMode && GameObject.Find("Canvas").GetComponent<UI_Manager>().GoldAmount >= 10)
+            if (!isOccupied && !isObstacle && !isWall && gameController.UiManager.BuildModeIsActive && gameController.UiManager.GoldAmount >= 10)
             {
                 bool enemyTooClose = false;
                 foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
@@ -97,7 +74,7 @@ public class Node : MonoBehaviour
                     // }
 
                     // print("siize "+customGrid.pathMap.Count);
-                    GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(-10);
+                    gameController.UiManager.AddGold(-10);
                     isWall = true;
                     isObstacle = true;
 
@@ -106,7 +83,7 @@ public class Node : MonoBehaviour
                     {
                         Destroy(wall);
                     }
-                    gameController.wallPreview.SetActive(false);
+                    gameController.WallPreview.SetActive(false);
                     customGrid.BuildWall();
                 }
             }
@@ -114,7 +91,7 @@ public class Node : MonoBehaviour
         // right button
         if (Input.GetMouseButton(1))
         {
-            if (isWall && gameController.UI.ActivateBuildMode)
+            if (isWall && gameController.UiManager.BuildModeIsActive)
             {
                 customGrid.pathMap.Clear();
                 // foreach(long key in customGrid.pathMap.Keys.ToArray()) {
@@ -125,7 +102,7 @@ public class Node : MonoBehaviour
                 //     }
                 // }
                 // print("siize "+customGrid.pathMap.Count);
-                GameObject.Find("Canvas").GetComponent<UI_Manager>().AddGold(5);
+                gameController.UiManager.AddGold(5);
                 isWall = false;
                 isObstacle = false;
                 Destroy(cornerStone);
@@ -151,6 +128,31 @@ public class Node : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U))
         {
             GameObject go = Instantiate(enemy, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void WallPreview()
+    {
+        Debug.Log(gameController.UiManager);
+        if (isOccupied || isObstacle || isWall || !gameController.UiManager.BuildModeIsActive || gameController.UiManager.GoldAmount < 10) {
+            gameController.WallPreview.SetActive(false);
+            return;
+        }
+    
+        bool enemyTooClose = false;
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (Vector3.Distance(transform.position, enemy.transform.position) < 1.5f)
+                enemyTooClose = true;
+        }
+        if (!enemyTooClose)
+        {
+            gameController.WallPreview.SetActive(true);
+            gameController.WallPreview.transform.position = new Vector3(transform.position.x, gameController.WallPreview.transform.position.y, transform.position.z);
+        }
+        else
+        {
+            gameController.WallPreview.SetActive(false);
         }
     }
 }

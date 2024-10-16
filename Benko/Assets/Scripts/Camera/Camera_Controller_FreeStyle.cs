@@ -16,14 +16,15 @@ public class Camera_Controller_FreeStyle : MonoBehaviour
     public GameObject _camera;
 
     void Start() {
+        xRotation = transform.rotation.eulerAngles.x;
+        yRotation = transform.rotation.eulerAngles.y;
         transform.rotation = Quaternion.Euler(new Vector3(xRotation *0.5f ,yRotation*0.5f,0));
     }
 
     void Update()
     {
         float Current_y = transform.eulerAngles.y;
-        scale -= Input.mouseScrollDelta.y;
-        _camera.GetComponent<Camera>().fieldOfView = scale;
+        _camera.GetComponent<Camera>().fieldOfView -= Input.mouseScrollDelta.y;
        
 
         if(Input.GetMouseButton(1)) {

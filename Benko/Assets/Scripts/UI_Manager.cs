@@ -10,28 +10,30 @@ public class UI_Manager : MonoBehaviour
     public string BuildModeShortcut;
     public string BuildArcherShortcut;
     public int GoldAmount;
-    //public Vector3 spawn_pos;
-    public GameObject spawn_pos;
-    public GameObject Player_Spawn_PX;
+    public GameObject PlayerSpawnParticleEffect;
     
     [Header ("Ignore")]
     public TextMeshProUGUI BuildModeText;
     public GameObject archerprefab;
     public GameObject wizard_prefab;
-    [HideInInspector]
-    public bool ActivateBuildMode;
     public TextMeshProUGUI GoldText;
-
     public TextMeshProUGUI MaxUnits;
-
     public int unit_amount;
-    public GameObject Build_Mode_Shade;
-
+    public GameObject BuildModeShade;
     public GameObject mouseprefab;
-
-    public string escape_key;
-    private bool iscurrentlyon;
+    public KeyCode EscapeKey = KeyCode.Escape;
     public GameObject Menu;
+    [HideInInspector] public bool BuildModeIsActive;
+
+
+    private bool iscurrentlyon;
+    private GameController gameController;
+    
+    void Awake() 
+    {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    }
+
     void Start()
     {
         iscurrentlyon = false;
@@ -52,7 +54,7 @@ public class UI_Manager : MonoBehaviour
 
         MaxUnits.SetText("Current Units  " + unit_amount);
 
-        if (Input.GetKeyDown(escape_key))
+        if (Input.GetKeyDown(EscapeKey))
         {
 
             if (iscurrentlyon == true)
@@ -70,17 +72,17 @@ public class UI_Manager : MonoBehaviour
     }
     public void BuildModeSet()
     {
-        if(ActivateBuildMode)
+        if(BuildModeIsActive)
         {
-            ActivateBuildMode = false;
+            BuildModeIsActive = false;
             BuildModeText.SetText("BuildMode: OFF (R)");
-            Build_Mode_Shade.SetActive(false);
+            BuildModeShade.SetActive(false);
             MouseText("BuildMode: OFF");
             return;
         }
-        ActivateBuildMode = true;
+        BuildModeIsActive = true;
         BuildModeText.SetText("BuildMode: ON (R)");
-        Build_Mode_Shade.SetActive(true);
+        BuildModeShade.SetActive(true);
         MouseText("BuildMode: ON");
     }
 
@@ -98,9 +100,9 @@ public class UI_Manager : MonoBehaviour
     {
         if(GoldAmount >= 50)
         {
-            GameObject Archer = Instantiate(archerprefab, spawn_pos.transform.position, Quaternion.identity);
+            GameObject Archer = Instantiate(archerprefab, gameController.UnitsSpawnPoint.transform.position, Quaternion.identity);
             Archer.transform.name = "Archer";
-            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos.transform.position, Quaternion.identity);
+            GameObject go = Instantiate(PlayerSpawnParticleEffect, gameController.UnitsSpawnPoint.transform.position, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-50);
             MouseText("Archer Builded");
@@ -112,9 +114,9 @@ public class UI_Manager : MonoBehaviour
     {
         if(GoldAmount >= 100)
         {
-            GameObject wizard = Instantiate(wizard_prefab, spawn_pos.transform.position, Quaternion.identity);
+            GameObject wizard = Instantiate(wizard_prefab, gameController.UnitsSpawnPoint.transform.position, Quaternion.identity);
             wizard.transform.name = "Wizard";
-            GameObject go =Instantiate(Player_Spawn_PX, spawn_pos.transform.position, Quaternion.identity);
+            GameObject go =Instantiate(PlayerSpawnParticleEffect, gameController.UnitsSpawnPoint.transform.position, Quaternion.identity);
             Destroy(go, 5f);
             AddGold(-100);
             MouseText("Wizard Builded");

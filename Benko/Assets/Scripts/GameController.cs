@@ -1,56 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController instance;
 
-    public Canvas canvas;
-    public GameObject selection;
-    public GameObject wallPreviewPrefab;
-    public string timelinePath = "";
+    #region Fields
 
-    [HideInInspector]
-    public UI_Manager UI;
-    [HideInInspector]
-    public CustomGrid customGrid;
+    // References
+    public GameObject InGameUiPrefab;
+    public GameObject WallPreviewPrefab;
+    public Transform UnitsSpawnPoint;    
+    public GameObject SelectionIndicatorPrefab;
+
+    // Enemy Spawning (via timeline)
+    public string EnemySpawnTimelinePath = "Assets/Resources/enemy_spawn_timeline.json";
     public List<GameObject> LoadablePrefabSet;
-    [HideInInspector]
-    public GameObject wallPreview;
-    [HideInInspector]
-    public List<EnemySpawnData> enemySpawns = new List<EnemySpawnData>();
-    [HideInInspector]
-    public List<EnemySpawnData> enemySpawnHistory = new List<EnemySpawnData>();
+
+    // Properties
+    public Canvas InGameUi {get; private set;}
+    public UI_Manager UiManager { get; private set; }
+    public GameObject WallPreview { get; private set; }
+    public List<EnemySpawnData> EnemySpawns { get; } = new List<EnemySpawnData>();
+    public GameObject SelectionIndicator { get; private set; }
+
+
+    // Private fields
+    private CustomGrid customGrid;
+    private List<EnemySpawnData> enemySpawnHistory = new List<EnemySpawnData>();
     private int spawnCounter = 0;
+
+
+    #endregion
+
+    #region Built-in Methods
 
     void Awake()
     {
-        instance = this;
-        UI = canvas.GetComponent<UI_Manager>();
+        InGameUi = Instantiate(InGameUiPrefab, transform.position, Quaternion.Euler(0, 0, 0)).GetComponent<Canvas>();
+        UiManager = InGameUi.GetComponent<UI_Manager>();
         customGrid = gameObject.GetComponent<CustomGrid>();
-        // print(customGrid);
-        selection.SetActive(false);
-        wallPreview = GameObject.Instantiate(wallPreviewPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-        wallPreview.SetActive(false);
-        if (timelinePath != "") {
-            ReadStringToTimeline(timelinePath);
-        }
+        WallPreview = Instantiate(WallPreviewPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+        WallPreview.SetActive(false);
+        SelectionIndicator = Instantiate(SelectionIndicatorPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+
+        ReadStringToTimeline(EnemySpawnTimelinePath);
     }
 
     void Update()
     {
-        while(spawnCounter<enemySpawns.Count) {
-            EnemySpawnData data = enemySpawns[spawnCounter];
-            if(data.frameCount < Time.frameCount) {
-                Instantiate(LoadablePrefabSet[data.enemyPrefab], data.position, Quaternion.identity);
-                spawnCounter++;
-                continue;
-            }
-            break;
-        }
+        SpawnEnemies();
         if (Input.GetKeyDown(KeyCode.P))
         {
             string json = "";
@@ -60,7 +60,30 @@ public class GameController : MonoBehaviour
             }
             WriteString(json);
         }
+
+        //controller.enemySpawnHistory.Add(new EnemySpawnData(Time.frameCount, prefabSetIndex, transform.position));
+
     }
+
+    #endregion
+
+    #region Custom Methods
+
+    void SpawnEnemies()
+    {
+        while (spawnCounter < EnemySpawns.Count)
+        {
+            EnemySpawnData data = EnemySpawns[spawnCounter];
+            if (data.frameCount < Time.frameCount)
+            {
+                Instantiate(LoadablePrefabSet[data.enemyPrefab], data.position, Quaternion.identity);
+                spawnCounter++;
+                continue;
+            }
+            break;
+        }
+    }
+
 
     public int GridIndexFromPos(float x, float z)
     {
@@ -86,17 +109,26 @@ public class GameController : MonoBehaviour
         //Print the text from the file
         Debug.Log(asset.text);
     }
+
+    /// <summary>
+    ///     Reads enemy spawn data from file at <paramref name="path"/> and stores it in <see cref="EnemySpawns"/>.
+    /// </summary>
+    /// <param name="path"></param>
     void ReadStringToTimeline(string path)
     {
+        if (EnemySpawnTimelinePath is null || EnemySpawnTimelinePath.Trim().Length == 0)
+            return;
+
         //Read the text from directly from the test.txt file
         StreamReader reader = new StreamReader(path);
-
-        enemySpawns.Clear();
+        EnemySpawns.Clear();
         while (!reader.EndOfStream)
         {
             string line = reader.ReadLine();
-            enemySpawns.Add(JsonUtility.FromJson<EnemySpawnData>(line));
+            EnemySpawns.Add(JsonUtility.FromJson<EnemySpawnData>(line));
         }
         reader.Close();
     }
+
+    #endregion
 }
